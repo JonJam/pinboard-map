@@ -1,4 +1,4 @@
-package com.jonjam.pinboardmap;
+package com.jonjam.pinboard.service.location;
 
 import org.glassfish.jersey.jackson.JacksonFeature;
 import org.glassfish.jersey.server.ResourceConfig;

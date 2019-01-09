@@ -1,4 +1,4 @@
-package com.jonjam.pinboardmap;
+package com.jonjam.pinboard.service.location;
 
 import javax.inject.Inject;
 import javax.ws.rs.GET;

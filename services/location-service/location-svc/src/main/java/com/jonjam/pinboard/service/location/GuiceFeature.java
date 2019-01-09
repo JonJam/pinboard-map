@@ -1,4 +1,4 @@
-package com.jonjam.pinboardmap;
+package com.jonjam.pinboard.service.location;
 
 import com.google.inject.AbstractModule;
 import com.google.inject.Guice;

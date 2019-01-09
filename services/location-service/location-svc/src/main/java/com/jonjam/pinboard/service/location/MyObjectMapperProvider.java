@@ -1,4 +1,4 @@
-package com.jonjam.pinboardmap;
+package com.jonjam.pinboard.service.location;
 
 import javax.ws.rs.ext.ContextResolver;
 import javax.ws.rs.ext.Provider;

@@ -4,3 +4,57 @@
  * This is a general purpose Gradle build.
  * Learn how to create Gradle builds at https://guides.gradle.org/creating-new-gradle-builds/
  */
+
+// Enabling dependency locking. See https://docs.gradle.org/current/userguide/dependency_locking.html.
+allprojects {
+    repositories {
+        jcenter()
+    }
+
+    // Locking for configurations. See https://docs.gradle.org/current/userguide/dependency_locking.html.
+    dependencyLocking {
+        lockAllConfigurations()
+    }
+
+    buildscript {
+        dependencyLocking {
+            lockAllConfigurations()
+        }
+    }
+}
+
+subprojects {
+    // TODO Refactor below as and when to only be common stuff.
+    apply(plugin = "java")
+
+    // Use dependency constraints. See https://docs.gradle.org/current/userguide/declaring_dependencies.html#declaring_a_dependency_without_version
+    dependencies {
+        constraints {
+            "implementation"("org.glassfish.jersey.containers:jersey-container-grizzly2-http:2.+")
+            "implementation"("org.glassfish.jersey.inject:jersey-hk2:2.+")
+            "implementation"("org.glassfish.jersey.media:jersey-media-json-jackson:2.+")
+            "implementation"("org.glassfish.hk2:guice-bridge:2.+")
+            "testImplementation"("org.junit.jupiter:junit-jupiter-api:5.+")
+            "testImplementation"("org.junit.jupiter:junit-jupiter-params:5.+")
+            "testRuntimeOnly"("org.junit.jupiter:junit-jupiter-engine:5.+")
+        }
+    }
+
+    // Performance suggestions for Java projects. See https://guides.gradle.org/performance/#suggestions_for_java_projects
+    tasks.withType<JavaCompile> {
+        options.isFork = true
+    }
+
+    tasks.withType<Test> {
+        maxParallelForks = (Runtime.getRuntime().availableProcessors() / 2).takeIf { it > 0 } ?: 1
+    }
+
+    tasks.withType<Test> {
+        setForkEvery(100)
+    }
+
+    tasks.withType<Test> {
+        reports.html.isEnabled = false
+        reports.junitXml.isEnabled = false
+    }
+}

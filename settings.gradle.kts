@@ -5,4 +5,4 @@ rootProject.name = "pinboard-map"
 include("services:location-service:location-api")
 include("services:location-service:location-schema")
 include("services:location-service:location-svc")
-include("services:pinboardmap-web")
+include("services:pinboard-map-web")

@@ -29,6 +29,7 @@ allprojects {
 subprojects {
     // TODO Refactor below as and when to only be common stuff.
     apply(plugin = "java")
+    apply(plugin = "checkstyle")
 
     // Use dependency constraints. See https://docs.gradle.org/current/userguide/declaring_dependencies.html#declaring_a_dependency_without_version
     dependencies {

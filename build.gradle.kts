@@ -21,6 +21,9 @@ allprojects {
             lockAllConfigurations()
         }
     }
+
+    // Declare version. See https://docs.gradle.org/current/userguide/building_java_projects.html#introduction
+    version = "0.0.1"
 }
 
 subprojects {
@@ -40,6 +43,12 @@ subprojects {
         }
     }
 
+    // Set compatibility. See https://docs.gradle.org/current/userguide/building_java_projects.html#introduction
+    configure<JavaPluginConvention> {
+        sourceCompatibility = JavaVersion.VERSION_11
+        targetCompatibility = JavaVersion.VERSION_11
+    }
+
     // Performance suggestions for Java projects. See https://guides.gradle.org/performance/#suggestions_for_java_projects
     tasks.withType<JavaCompile> {
         options.isFork = true
@@ -47,13 +56,9 @@ subprojects {
 
     tasks.withType<Test> {
         maxParallelForks = (Runtime.getRuntime().availableProcessors() / 2).takeIf { it > 0 } ?: 1
-    }
 
-    tasks.withType<Test> {
         setForkEvery(100)
-    }
 
-    tasks.withType<Test> {
         reports.html.isEnabled = false
         reports.junitXml.isEnabled = false
     }

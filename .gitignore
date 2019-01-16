@@ -1,4 +1,12 @@
-# Below from: https://github.com/github/gitignore/blob/master/Java.gitignore
+## Gradle generated
+# Ignore Gradle project-specific cache directory
+.gradle
+
+# Ignore Gradle build output directory
+build
+
+
+## Below from: https://github.com/github/gitignore/blob/master/Java.gitignore
 # Compiled class file
 *.class
 

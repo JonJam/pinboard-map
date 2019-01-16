@@ -1,1 +1,1 @@
-# pinboardmap-api
+# pinboard-map

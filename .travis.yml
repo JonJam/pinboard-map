@@ -1,3 +1,7 @@
+# Created by following these resources:
+# - https://docs.travis-ci.com/user/languages/java/
+# - https://docs.travis-ci.com/user/sonarcloud/
+# - https://github.com/SonarSource/sq-com_example_java-gradle-travis
 language: java
 jdk:
   - oraclejdk11

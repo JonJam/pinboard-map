@@ -5,6 +5,10 @@
  * Learn how to create Gradle builds at https://guides.gradle.org/creating-new-gradle-builds/
  */
 
+plugins {
+    id("org.sonarqube") version "2.7"
+}
+
 // Enabling dependency locking. See https://docs.gradle.org/current/userguide/dependency_locking.html.
 allprojects {
     repositories {
@@ -30,6 +34,7 @@ subprojects {
     // TODO Refactor below as and when to only be common stuff.
     apply(plugin = "java")
     apply(plugin = "checkstyle")
+    apply(plugin = "org.sonarqube")
 
     // Use dependency constraints. See https://docs.gradle.org/current/userguide/declaring_dependencies.html#declaring_a_dependency_without_version
     dependencies {

@@ -25,5 +25,3 @@ jobs:
       script:
         - ./gradlew check
         - ./gradlew sonarqube
-
-# TODO Best practises.

@@ -5,6 +5,10 @@
  * Learn how to create Gradle builds at https://guides.gradle.org/creating-new-gradle-builds/
  */
 
+plugins {
+    id("org.sonarqube") version "2.7"
+}
+
 // Enabling dependency locking. See https://docs.gradle.org/current/userguide/dependency_locking.html.
 allprojects {
     repositories {

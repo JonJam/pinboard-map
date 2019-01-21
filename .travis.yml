@@ -1,0 +1,31 @@
+# Created by following these resources:
+# - https://docs.travis-ci.com/user/languages/java/
+# - https://docs.travis-ci.com/user/sonarcloud/
+# - https://github.com/SonarSource/sq-com_example_java-gradle-travis
+language: java
+jdk:
+  - oraclejdk11
+
+addons:
+  sonarcloud:
+    organization: "jonjam-github"
+    token:
+      secure: $SONAR_TOKEN
+
+before_cache:
+  - rm -f  $HOME/.gradle/caches/modules-2/modules-2.lock
+  - rm -fr $HOME/.gradle/caches/*/plugin-resolution/
+cache:
+  directories:
+    - $HOME/.gradle/caches/
+    - $HOME/.gradle/wrapper/
+
+stages:
+  - build
+
+jobs:
+  include:
+    - stage: build
+      script:
+        - ./gradlew check
+        - ./gradlew sonarqube

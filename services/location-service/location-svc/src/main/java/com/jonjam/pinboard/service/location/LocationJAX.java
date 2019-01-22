@@ -1,25 +1,28 @@
 package com.jonjam.pinboard.service.location;
 
-import org.glassfish.jersey.jackson.JacksonFeature;
+// TODO Re-enable jackson
+//import org.glassfish.jersey.jackson.JacksonFeature;
 import org.glassfish.jersey.server.ResourceConfig;
 
-public class MyApplication extends ResourceConfig {
+public class LocationJAX extends ResourceConfig {
 
   /**
    * Example resource config.
    */
-  public MyApplication() {
+  public LocationJAX() {
     super(
         // Resources
-        MyResource.class,
+        MyResource.class
+        //,
 
         // TODO Re-enable Guice
         // Register Guice
 //        GuiceFeature.class,
 
+        // TODO Re-enable jackson
         // Register Jackson
-        MyObjectMapperProvider.class,
-        JacksonFeature.class
+//        MyObjectMapperProvider.class,
+//        JacksonFeature.class
     );
   }
 }

@@ -33,15 +33,18 @@ allprojects {
 subprojects {
     // TODO Refactor below as and when to only be common stuff.
     apply(plugin = "java")
+    apply(plugin = "war")
     apply(plugin = "checkstyle")
 
     // Use dependency constraints. See https://docs.gradle.org/current/userguide/declaring_dependencies.html#declaring_a_dependency_without_version
     dependencies {
         constraints {
-            "implementation"("org.glassfish.jersey.containers:jersey-container-grizzly2-http:2.+")
-            "implementation"("org.glassfish.jersey.inject:jersey-hk2:2.+")
-            "implementation"("org.glassfish.jersey.media:jersey-media-json-jackson:2.+")
-            // TODO Renable Guice
+            "implementation"("org.glassfish.jersey.containers:jersey-container-servlet:2.27+")
+            // "implementation"("org.glassfish.jersey.containers:jersey-container-grizzly2-http:2.+")
+            // "implementation"("org.glassfish.jersey.inject:jersey-hk2:2.+")
+            // TODO Re-enable Jackson
+            // "implementation"("org.glassfish.jersey.media:jersey-media-json-jackson:2.+")
+            // TODO Re-enable Guice
             // "implementation"("org.glassfish.hk2:guice-bridge:2.+")
             "testImplementation"("org.junit.jupiter:junit-jupiter-api:5.+")
             "testImplementation"("org.junit.jupiter:junit-jupiter-params:5.+")

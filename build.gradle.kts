@@ -41,7 +41,8 @@ subprojects {
             "implementation"("org.glassfish.jersey.containers:jersey-container-grizzly2-http:2.+")
             "implementation"("org.glassfish.jersey.inject:jersey-hk2:2.+")
             "implementation"("org.glassfish.jersey.media:jersey-media-json-jackson:2.+")
-            "implementation"("org.glassfish.hk2:guice-bridge:2.+")
+            // TODO Renable Guice
+            // "implementation"("org.glassfish.hk2:guice-bridge:2.+")
             "testImplementation"("org.junit.jupiter:junit-jupiter-api:5.+")
             "testImplementation"("org.junit.jupiter:junit-jupiter-params:5.+")
             "testRuntimeOnly"("org.junit.jupiter:junit-jupiter-engine:5.+")

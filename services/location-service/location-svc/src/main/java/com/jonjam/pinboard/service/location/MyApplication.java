@@ -13,8 +13,9 @@ public class MyApplication extends ResourceConfig {
         // Resources
         MyResource.class,
 
+        // TODO Re-enable Guice
         // Register Guice
-        GuiceFeature.class,
+//        GuiceFeature.class,
 
         // Register Jackson
         MyObjectMapperProvider.class,

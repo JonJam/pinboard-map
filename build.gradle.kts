@@ -46,8 +46,13 @@ subprojects {
     dependencies {
         constraints {
             "implementation"("org.glassfish.jersey.containers:jersey-container-servlet:2.27+")
-            // "implementation"("org.glassfish.jersey.containers:jersey-container-grizzly2-http:2.+")
+            // javax.xml.bind:jaxb-api and javax.activation:activation are needed to prevent errors. See https://www.jeffryhouser.com/index.cfm/2017/12/21/Why-wont-Jersey-work-on-JDK-9
+            "implementation"("javax.xml.bind:jaxb-api:2.3+")
+            "implementation"("javax.activation:activation:1.1+")
+
+            // TODO Remove this and swap to Guice
             "implementation"("org.glassfish.jersey.inject:jersey-hk2:2.27+")
+
             // TODO Re-enable Jackson
             // "implementation"("org.glassfish.jersey.media:jersey-media-json-jackson:2.+")
             // TODO Re-enable Guice

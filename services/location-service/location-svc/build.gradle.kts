@@ -1,6 +1,8 @@
 dependencies {
     implementation("org.glassfish.jersey.containers:jersey-container-servlet")
-    //implementation("org.glassfish.jersey.containers:jersey-container-grizzly2-http")
+    implementation("javax.xml.bind:jaxb-api:2.3+")
+    implementation("javax.activation:activation:1.1+")
+
     implementation("org.glassfish.jersey.inject:jersey-hk2")
     //implementation("org.glassfish.jersey.media:jersey-media-json-jackson")
     //implementation("org.glassfish.hk2:guice-bridge")

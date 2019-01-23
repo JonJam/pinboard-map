@@ -1,10 +1,13 @@
 # This is a Gradle generated file for dependency locking.
 # Manual edits can break the build and are not advised.
 # This file is expected to be part of source control.
+javax.activation:activation:1.1.1
+javax.activation:javax.activation-api:1.2.0
 javax.annotation:javax.annotation-api:1.2
 javax.inject:javax.inject:1
 javax.validation:validation-api:1.1.0.Final
 javax.ws.rs:javax.ws.rs-api:2.1
+javax.xml.bind:jaxb-api:2.3.1
 org.apiguardian:apiguardian-api:1.0.0
 org.glassfish.hk2.external:aopalliance-repackaged:2.5.0-b42
 org.glassfish.hk2.external:javax.inject:2.5.0-b42

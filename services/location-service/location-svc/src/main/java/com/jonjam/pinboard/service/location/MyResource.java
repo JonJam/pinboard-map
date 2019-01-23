@@ -1,6 +1,7 @@
 package com.jonjam.pinboard.service.location;
 
 //import javax.inject.Inject;
+
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
@@ -12,8 +13,8 @@ import javax.ws.rs.core.MediaType;
 @Path("myresource")
 public class MyResource {
 
-//  @Inject
-//  private IInjectedService service;
+  //  @Inject
+  //  private IInjectedService service;
 
   /**
    * Method handling HTTP GET requests. The returned object will be sent
@@ -25,8 +26,7 @@ public class MyResource {
   @Produces(MediaType.APPLICATION_JSON)
   public String getIt() {
     // TODO Re-enable Guice
-//    return service.test();
-
+    // return service.test();
     return "Hi";
   }
 }

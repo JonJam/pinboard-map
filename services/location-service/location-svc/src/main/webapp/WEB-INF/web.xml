@@ -7,12 +7,12 @@
     <display-name>Location Service</display-name>
 
     <servlet>
-        <servlet-name>com.jonjam.pinboard.service.location.LocationJAX</servlet-name>
+        <servlet-name>com.jonjam.pinboard.service.location.LocationApplication</servlet-name>
         <load-on-startup>1</load-on-startup>
     </servlet>
 
     <servlet-mapping>
-        <servlet-name>com.jonjam.pinboard.service.location.LocationJAX</servlet-name>
+        <servlet-name>com.jonjam.pinboard.service.location.LocationApplication</servlet-name>
         <url-pattern>/*</url-pattern>
     </servlet-mapping>
 </web-app>

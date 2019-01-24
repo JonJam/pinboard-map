@@ -1,4 +1,4 @@
-package com.jonjam.pinboard.service.location;
+package com.jonjam.pinboard.service.location.svc.config;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;

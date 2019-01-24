@@ -47,18 +47,18 @@ subprojects {
         constraints {
             // Jersey
             "implementation"("org.glassfish.jersey.containers:jersey-container-servlet:2.27+")
+            "implementation"("org.glassfish.jersey.inject:jersey-hk2:2.27+")
             // javax.xml.bind:jaxb-api and javax.activation:activation are needed to prevent errors. See https://www.jeffryhouser.com/index.cfm/2017/12/21/Why-wont-Jersey-work-on-JDK-9
             "implementation"("javax.xml.bind:jaxb-api:2.3+")
             "implementation"("javax.activation:activation:1.1+")
 
             // Jackson
-            "implementation"("org.glassfish.jersey.media:jersey-media-json-jackson:2.+")
+            "implementation"("org.glassfish.jersey.media:jersey-media-json-jackson:2.27+")
 
-            // TODO Remove this and swap to Guice
-            "implementation"("org.glassfish.jersey.inject:jersey-hk2:2.27+")
+            // Guice
+            "implementation"("com.google.inject.extensions:guice-servlet:4.2+")
+            "implementation"("org.glassfish.hk2:guice-bridge:2.5+")
 
-            // TODO Re-enable Guice
-            // "implementation"("org.glassfish.hk2:guice-bridge:2.+")
             "testImplementation"("org.junit.jupiter:junit-jupiter-api:5.+")
             "testImplementation"("org.junit.jupiter:junit-jupiter-params:5.+")
             "testRuntimeOnly"("org.junit.jupiter:junit-jupiter-engine:5.+")

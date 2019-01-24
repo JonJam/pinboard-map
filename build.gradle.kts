@@ -45,16 +45,18 @@ subprojects {
     // Use dependency constraints. See https://docs.gradle.org/current/userguide/declaring_dependencies.html#declaring_a_dependency_without_version
     dependencies {
         constraints {
+            // Jersey
             "implementation"("org.glassfish.jersey.containers:jersey-container-servlet:2.27+")
             // javax.xml.bind:jaxb-api and javax.activation:activation are needed to prevent errors. See https://www.jeffryhouser.com/index.cfm/2017/12/21/Why-wont-Jersey-work-on-JDK-9
             "implementation"("javax.xml.bind:jaxb-api:2.3+")
             "implementation"("javax.activation:activation:1.1+")
 
+            // Jackson
+            "implementation"("org.glassfish.jersey.media:jersey-media-json-jackson:2.+")
+
             // TODO Remove this and swap to Guice
             "implementation"("org.glassfish.jersey.inject:jersey-hk2:2.27+")
 
-            // TODO Re-enable Jackson
-            // "implementation"("org.glassfish.jersey.media:jersey-media-json-jackson:2.+")
             // TODO Re-enable Guice
             // "implementation"("org.glassfish.hk2:guice-bridge:2.+")
             "testImplementation"("org.junit.jupiter:junit-jupiter-api:5.+")

@@ -24,9 +24,30 @@ public class MyResource {
    */
   @GET
   @Produces(MediaType.APPLICATION_JSON)
-  public String getIt() {
+  public Test getIt() {
     // TODO Re-enable Guice
     // return service.test();
-    return "Hi";
+    return new Test("hi");
+  }
+
+  private class Test {
+
+    private String prop;
+
+    public Test() {
+
+    }
+
+    public Test(String prop) {
+      this.prop = prop;
+    }
+
+    public void setProp(String prop) {
+      this.prop = prop;
+    }
+
+    public String getProp() {
+      return this.prop;
+    }
   }
 }

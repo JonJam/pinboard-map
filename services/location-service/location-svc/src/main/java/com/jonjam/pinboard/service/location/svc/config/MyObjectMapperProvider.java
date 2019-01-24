@@ -1,4 +1,4 @@
-package com.jonjam.pinboard.service.location;
+package com.jonjam.pinboard.service.location.svc.config;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
@@ -7,6 +7,7 @@ import javax.ws.rs.ext.Provider;
 
 /**
  * Based off: https://github.com/jersey/jersey/blob/2.27/examples/json-jackson/src/main/java/org/glassfish/jersey/examples/jackson/MyObjectMapperProvider.java
+ *
  * @author Jakub Podlesak (jakub.podlesak at oracle.com)
  */
 @Provider

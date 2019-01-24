@@ -1,8 +1,17 @@
 dependencies {
-    implementation("org.glassfish.jersey.containers:jersey-container-grizzly2-http")
+    // Jersey
+    implementation("org.glassfish.jersey.containers:jersey-container-servlet")
     implementation("org.glassfish.jersey.inject:jersey-hk2")
+    implementation("javax.xml.bind:jaxb-api")
+    implementation("javax.activation:activation")
+
+    // Jackson
     implementation("org.glassfish.jersey.media:jersey-media-json-jackson")
+
+    // Guice
+    implementation("com.google.inject.extensions:guice-servlet")
     implementation("org.glassfish.hk2:guice-bridge")
+
     testImplementation("org.junit.jupiter:junit-jupiter-api")
     testImplementation("org.junit.jupiter:junit-jupiter-params")
     testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine")

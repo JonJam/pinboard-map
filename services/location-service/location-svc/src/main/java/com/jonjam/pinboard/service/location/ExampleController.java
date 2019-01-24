@@ -9,8 +9,8 @@ import javax.ws.rs.core.MediaType;
 /**
  * Root resource (exposed at "myresource" path).
  */
-@Path("myresource")
-public class MyResource {
+@Path("example")
+public class ExampleController {
 
   @Inject
   private IInjectedService service;
@@ -23,7 +23,7 @@ public class MyResource {
    */
   @GET
   @Produces(MediaType.APPLICATION_JSON)
-  public String getIt() {
+  public Test getIt() {
     return service.test();
   }
 }

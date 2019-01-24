@@ -1,8 +1,8 @@
-package com.jonjam.pinboard.service.location;
+package com.jonjam.pinboard.service.location.svc.config;
 
-import com.google.inject.AbstractModule;
 import com.google.inject.Guice;
 import com.google.inject.Injector;
+import com.google.inject.Module;
 import javax.ws.rs.core.Feature;
 import javax.ws.rs.core.FeatureContext;
 import org.glassfish.hk2.api.ServiceLocator;
@@ -13,6 +13,12 @@ import org.jvnet.hk2.guice.bridge.api.GuiceIntoHK2Bridge;
 
 public class GuiceFeature implements Feature {
 
+  private final Module[] modules;
+
+  public GuiceFeature(Module... modules) {
+    this.modules = modules;
+  }
+
   @Override
   public boolean configure(FeatureContext context) {
     InjectionManager injectionManager = InjectionManagerProvider.getInjectionManager(context);
@@ -22,12 +28,8 @@ public class GuiceFeature implements Feature {
     GuiceBridge.getGuiceBridge().initializeGuiceBridge(serviceLocator);
     GuiceIntoHK2Bridge guiceBridge = serviceLocator.getService(GuiceIntoHK2Bridge.class);
 
-    Injector injector = Guice.createInjector(new AbstractModule() {
-      @Override
-      protected void configure() {
-        bind(IInjectedService.class).to(InjectedService.class);
-      }
-    });
+    // TODO Set stage
+    Injector injector = Guice.createInjector(modules);
 
     guiceBridge.bridgeGuiceInjector(injector);
 

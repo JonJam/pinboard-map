@@ -2,10 +2,9 @@ package com.jonjam.pinboard.service.location;
 
 import java.util.List;
 import java.util.Set;
-import org.immutables.value.Value;
 
 // TODO Remove.
-@Value.Immutable
+@Immutable
 public abstract class OtherThing {
   public abstract int foo();
 

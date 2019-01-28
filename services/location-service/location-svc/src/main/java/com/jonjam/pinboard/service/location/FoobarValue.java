@@ -5,7 +5,7 @@ import java.util.Set;
 import org.immutables.value.Value;
 
 // TODO Remove.
-@Value.Immutable
+@Immutable
 public abstract class FoobarValue {
   public abstract int foo();
 

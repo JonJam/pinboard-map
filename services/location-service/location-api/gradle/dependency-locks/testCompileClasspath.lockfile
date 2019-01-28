@@ -41,7 +41,7 @@ org.glassfish.jersey.inject:jersey-hk2:2.27
 org.glassfish.jersey.media:jersey-media-jaxb:2.27
 org.glassfish.jersey.media:jersey-media-json-jackson:2.27
 org.javassist:javassist:3.22.0-CR2
-org.junit.jupiter:junit-jupiter-api:5.4.0-M1
-org.junit.jupiter:junit-jupiter-params:5.4.0-M1
-org.junit.platform:junit-platform-commons:1.4.0-M1
+org.junit.jupiter:junit-jupiter-api:5.4.0-RC1
+org.junit.jupiter:junit-jupiter-params:5.4.0-RC1
+org.junit.platform:junit-platform-commons:1.4.0-RC1
 org.opentest4j:opentest4j:1.1.1

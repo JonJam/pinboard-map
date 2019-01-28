@@ -104,3 +104,4 @@ target/
 
 # SonarLint
 .idea/sonarlint-state.xml
+.idea/sonarlint/issuestore

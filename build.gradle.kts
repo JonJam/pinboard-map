@@ -12,6 +12,7 @@ plugins {
     id("org.sonarqube") version "2.7"
     // TODO Remove tomcat plugin
     id("com.bmuschko.tomcat") version "2.5" apply false
+    id("net.ltgt.apt-idea") version "0.20" apply false
 }
 
 // Enabling dependency locking. See https://docs.gradle.org/current/userguide/dependency_locking.html.
@@ -41,6 +42,7 @@ subprojects {
     apply(plugin = "war")
     apply(plugin = "checkstyle")
     apply(plugin = "com.bmuschko.tomcat")
+    apply(plugin = "net.ltgt.apt-idea")
 
     // Use dependency constraints. See https://docs.gradle.org/current/userguide/declaring_dependencies.html#declaring_a_dependency_without_version
     dependencies {
@@ -58,6 +60,10 @@ subprojects {
             // Guice
             "implementation"("com.google.inject.extensions:guice-servlet:4.2+")
             "implementation"("org.glassfish.hk2:guice-bridge:2.5+")
+
+            // Immutables. See for using apt plugin to set up: https://github.com/tbroyer/gradle-apt-plugin#usage-with-ides
+            "annotationProcessor"("org.immutables:value:2.7+")
+            "compileOnly"("org.immutables:value-annotations:2.7+")
 
             "testImplementation"("org.junit.jupiter:junit-jupiter-api:5.+")
             "testImplementation"("org.junit.jupiter:junit-jupiter-params:5.+")

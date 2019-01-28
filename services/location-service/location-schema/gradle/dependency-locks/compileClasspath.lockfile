@@ -39,4 +39,5 @@ org.glassfish.jersey.ext:jersey-entity-filtering:2.27
 org.glassfish.jersey.inject:jersey-hk2:2.27
 org.glassfish.jersey.media:jersey-media-jaxb:2.27
 org.glassfish.jersey.media:jersey-media-json-jackson:2.27
+org.immutables:value-annotations:2.7.5
 org.javassist:javassist:3.22.0-CR2

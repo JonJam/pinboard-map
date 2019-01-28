@@ -24,6 +24,11 @@ public class ExampleController {
   @GET
   @Produces(MediaType.APPLICATION_JSON)
   public Test getIt() {
+
+   FoobarValue value = ImmutableFoobarValue.builder().build();
+
+    OtherThing test = ImmutableOtherThing.builder().build();
+
     return service.test();
   }
 }

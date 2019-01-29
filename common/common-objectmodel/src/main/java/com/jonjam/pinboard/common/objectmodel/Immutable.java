@@ -1,18 +1,18 @@
-package com.jonjam.pinboard.service.location;
+package com.jonjam.pinboard.common.objectmodel;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
-import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+//import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import org.immutables.value.Value;
 
 // For creating custom immutable annotation. See https://immutables.github.io/style.html#custom-immutable-annotation
 // Default style - includes only builder
 @Target({ElementType.TYPE})
 @Retention(RetentionPolicy.RUNTIME)
-@JsonSerialize
+//@JsonSerialize
 @Value.Style(
     typeAbstract = "*",
     typeImmutable = "Immutable*", // prefix immutable concrete implementations with Immutable
@@ -30,7 +30,7 @@ public @interface Immutable {
   // Includes both builder and constructor
   @Target({ElementType.TYPE})
   @Retention(RetentionPolicy.RUNTIME)
-  @JsonSerialize
+  //@JsonSerialize
   @Value.Style(
       typeAbstract = "*",
       typeImmutable = "Immutable*", // prefix immutable concrete implementations with Immutable

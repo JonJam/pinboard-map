@@ -16,6 +16,11 @@ dependencies {
     annotationProcessor("org.immutables:value")
     compileOnly("org.immutables:value-annotations")
 
+    // Project dependencies
+    // Used as annotation processor for Immutables custom annotation.
+    annotationProcessor(project(":common:common-objectmodel"))
+    implementation(project(":common:common-objectmodel"))
+
     testImplementation("org.junit.jupiter:junit-jupiter-api")
     testImplementation("org.junit.jupiter:junit-jupiter-params")
     testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine")

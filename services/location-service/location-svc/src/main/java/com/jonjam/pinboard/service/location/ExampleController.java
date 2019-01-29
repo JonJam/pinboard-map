@@ -2,6 +2,7 @@ package com.jonjam.pinboard.service.location;
 
 import javax.inject.Inject;
 import javax.ws.rs.GET;
+import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
@@ -24,11 +25,15 @@ public class ExampleController {
   @GET
   @Produces(MediaType.APPLICATION_JSON)
   public Test getIt() {
-
-   FoobarValue value = ImmutableFoobarValue.builder().build();
-
-    OtherThing test = ImmutableOtherThing.builder().build();
-
     return service.test();
+  }
+
+  @POST
+  @Produces(MediaType.APPLICATION_JSON)
+  public PostResponse postIt(PostRequest request) {
+    PostResponse response = ImmutablePostResponse.builder()
+        .withBar(request.getBar()).build();
+
+    return response;
   }
 }

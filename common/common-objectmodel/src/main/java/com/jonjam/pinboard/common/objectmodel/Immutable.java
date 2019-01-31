@@ -5,18 +5,17 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
-// TODO Enable this
-//import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import org.immutables.value.Value;
 
 // For creating custom immutable annotation. See https://immutables.github.io/style.html#custom-immutable-annotation
 // Style customizations can be found here: https://github.com/immutables/immutables/blob/master/value-annotations/src/org/immutables/value/Value.java
+// Enable Jackson automatic serialization. See https://immutables.github.io/json.html#reducing-annotation-clutter
 
 // Default style - includes only builder
-@Target({ElementType.TYPE})
+@Target( {ElementType.TYPE})
 @Retention(RetentionPolicy.RUNTIME)
-// TODO Enable this
-//@JsonSerialize
+@JsonSerialize
 @Value.Style(
     typeAbstract = "*", // Naming templates to detect base/raw type name from provided abstract value type name.
     typeImmutable = "Immutable*", // Name template to generate immutable implementation type by using base/raw type name
@@ -32,10 +31,9 @@ import org.immutables.value.Value;
 public @interface Immutable {
 
   // Includes both builder and constructor
-  @Target({ElementType.TYPE})
+  @Target( {ElementType.TYPE})
   @Retention(RetentionPolicy.RUNTIME)
-  // TODO Enable this ?
-  //@JsonSerialize
+  @JsonSerialize
   @Value.Style(
       typeAbstract = "*", // Naming templates to detect base/raw type name from provided abstract value type name.
       typeImmutable = "Immutable*", // Name template to generate immutable implementation type by using base/raw type name

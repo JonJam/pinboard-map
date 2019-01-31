@@ -39,7 +39,6 @@ allprojects {
 subprojects {
     // TODO Refactor below as and when to only be common stuff.
     apply(plugin = "java")
-    apply(plugin = "war") // TODO only apply to service projects, not common.
     apply(plugin = "checkstyle")
     apply(plugin = "com.bmuschko.tomcat")
     apply(plugin = "net.ltgt.apt-idea")

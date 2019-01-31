@@ -1,3 +1,7 @@
+plugins {
+    "war"
+}
+
 dependencies {
     // Jersey
     implementation("org.glassfish.jersey.containers:jersey-container-servlet")

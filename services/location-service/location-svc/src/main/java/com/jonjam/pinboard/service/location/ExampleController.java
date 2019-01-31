@@ -13,8 +13,13 @@ import javax.ws.rs.core.MediaType;
 @Path("example")
 public class ExampleController {
 
+  private final IInjectedService service;
+
   @Inject
-  private IInjectedService service;
+  public ExampleController(
+      final IInjectedService service) {
+    this.service = service;
+  }
 
   /**
    * Method handling HTTP GET requests. The returned object will be sent
@@ -24,16 +29,31 @@ public class ExampleController {
    */
   @GET
   @Produces(MediaType.APPLICATION_JSON)
-  public Test getIt() {
-    return service.test();
+  public ExampleResponse getIt() {
+    ExampleResponse.Builder builder = new ExampleResponse.Builder();
+
+    return builder
+        .withBar(this.service.test().getProp())
+        .withCanValidProperty(true)
+        .withHasValidProp(true)
+        .withHasValidProperty(true)
+        .withIsValidProperty(true)
+        .withShouldValidProperty(true)
+        .build();
   }
 
   @POST
   @Produces(MediaType.APPLICATION_JSON)
-  public PostResponse postIt(PostRequest request) {
-    PostResponse response = ImmutablePostResponse.builder()
-        .withBar(request.getBar()).build();
+  public ExampleResponse postIt(final ExampleRequest request) {
+    ExampleResponse.Builder builder = new ExampleResponse.Builder();
 
-    return response;
+    return builder
+        .withBar(request.getBar())
+        .withCanValidProperty(true)
+        .withHasValidProp(true)
+        .withHasValidProperty(true)
+        .withIsValidProperty(true)
+        .withShouldValidProperty(true)
+        .build();
   }
 }

@@ -26,7 +26,8 @@ import org.immutables.value.Value;
     visibility = Value.Style.ImplementationVisibility.PACKAGE, // Specify the mode in which visibility of generated value type is derived from abstract value type.
     builderVisibility = Value.Style.BuilderVisibility.PACKAGE,  // Specify the mode in which visibility of generated value type is derived from abstract value type.
     overshadowImplementation = true, // Makes abstract value type predominantly used in generated signatures rather than immutable implementation class
-    optionalAcceptNullable = true // Specify whether init, copy and factory methods and constructors for an unwrapped {@code X} of {@code Optional<X>} should accept {@code null} values as empty value.
+    optionalAcceptNullable = true, // Specify whether init, copy and factory methods and constructors for an unwrapped {@code X} of {@code Optional<X>} should accept {@code null} values as empty value.
+    strictBuilder = true // Enable strict builders
 )
 public @interface Immutable {
 
@@ -44,7 +45,8 @@ public @interface Immutable {
       visibility = Value.Style.ImplementationVisibility.PACKAGE, // Specify the mode in which visibility of generated value type is derived from abstract value type.
       builderVisibility = Value.Style.BuilderVisibility.PACKAGE,  // Specify the mode in which visibility of generated value type is derived from abstract value type.
       overshadowImplementation = true, // Makes abstract value type predominantly used in generated signatures rather than immutable implementation class
-      optionalAcceptNullable = true // Specify whether init, copy and factory methods and constructors for an unwrapped {@code X} of {@code Optional<X>} should accept {@code null} values as empty value.
+      optionalAcceptNullable = true, // Specify whether init, copy and factory methods and constructors for an unwrapped {@code X} of {@code Optional<X>} should accept {@code null} values as empty value.
+      strictBuilder = true // Enable strict builders
   )
   @interface WithAllArgsConstructor {
   }

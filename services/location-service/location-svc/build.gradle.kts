@@ -11,6 +11,9 @@ dependencies {
 
     // Jackson
     implementation("org.glassfish.jersey.media:jersey-media-json-jackson")
+    implementation("com.fasterxml.jackson.datatype:jackson-datatype-jdk8")
+    implementation("com.fasterxml.jackson.module:jackson-module-parameter-names")
+    implementation("com.fasterxml.jackson.datatype:jackson-datatype-jsr310")
 
     // Guice
     implementation("com.google.inject.extensions:guice-servlet")

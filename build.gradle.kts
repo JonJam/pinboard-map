@@ -47,14 +47,18 @@ subprojects {
     dependencies {
         constraints {
             // Jersey
-            "implementation"("org.glassfish.jersey.containers:jersey-container-servlet:2.27+")
-            "implementation"("org.glassfish.jersey.inject:jersey-hk2:2.27+")
+            "implementation"("org.glassfish.jersey.containers:jersey-container-servlet:2.28+")
+            "implementation"("org.glassfish.jersey.inject:jersey-hk2:2.28+")
             // javax.xml.bind:jaxb-api and javax.activation:activation are needed to prevent errors. See https://www.jeffryhouser.com/index.cfm/2017/12/21/Why-wont-Jersey-work-on-JDK-9
             "implementation"("javax.xml.bind:jaxb-api:2.3+")
             "implementation"("javax.activation:activation:1.1+")
 
             // Jackson
-            "implementation"("org.glassfish.jersey.media:jersey-media-json-jackson:2.27+")
+            "implementation"("org.glassfish.jersey.media:jersey-media-json-jackson:2.28+")
+            // Enabling Java 8 - https://github.com/FasterXML/jackson-modules-java8
+            "implementation"("com.fasterxml.jackson.datatype:jackson-datatype-jdk8:2.9+")
+            "implementation"("com.fasterxml.jackson.module:jackson-module-parameter-names:2.9+")
+            "implementation"("com.fasterxml.jackson.datatype:jackson-datatype-jsr310:2.9+")
 
             // Guice
             "implementation"("com.google.inject.extensions:guice-servlet:4.2+")

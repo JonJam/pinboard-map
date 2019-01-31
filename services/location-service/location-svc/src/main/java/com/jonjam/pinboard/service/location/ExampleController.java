@@ -1,9 +1,7 @@
 package com.jonjam.pinboard.service.location;
 
 import javax.inject.Inject;
-import javax.ws.rs.GET;
-import javax.ws.rs.Path;
-import javax.ws.rs.Produces;
+import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 
 /**
@@ -12,18 +10,48 @@ import javax.ws.rs.core.MediaType;
 @Path("example")
 public class ExampleController {
 
+  private final IInjectedService service;
+
   @Inject
-  private IInjectedService service;
+  public ExampleController(
+      final IInjectedService service) {
+    this.service = service;
+  }
 
   /**
-   * Method handling HTTP GET requests. The returned object will be sent
-   * to the client as "text/plain" media type.
-   *
-   * @return String that will be returned as a text/plain response.
+   * Method handling HTTP GET requests.
    */
   @GET
   @Produces(MediaType.APPLICATION_JSON)
-  public Test getIt() {
-    return service.test();
+  public ExampleResponse getIt() {
+    ExampleResponse.Builder builder = new ExampleResponse.Builder();
+
+    return builder
+        .withBar(this.service.test().getProp())
+        .withCanValidProperty(true)
+        .withHasValidProp(true)
+        .withHasValidProperty(true)
+        .withIsValidProperty(true)
+        .withShouldValidProperty(true)
+        .build();
+  }
+
+  /**
+   * Method handling HTTP POST requests.
+   */
+  @POST
+  @Consumes(MediaType.APPLICATION_JSON)
+  @Produces(MediaType.APPLICATION_JSON)
+  public ExampleResponse postIt(final ExampleRequest request) {
+    ExampleResponse.Builder builder = new ExampleResponse.Builder();
+
+    return builder
+        .withBar(request.getBar())
+        .withCanValidProperty(true)
+        .withHasValidProp(true)
+        .withHasValidProperty(true)
+        .withIsValidProperty(true)
+        .withShouldValidProperty(true)
+        .build();
   }
 }

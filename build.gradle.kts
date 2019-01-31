@@ -12,6 +12,7 @@ plugins {
     id("org.sonarqube") version "2.7"
     // TODO Remove tomcat plugin
     id("com.bmuschko.tomcat") version "2.5" apply false
+    id("net.ltgt.apt-idea") version "0.20" apply false
 }
 
 // Enabling dependency locking. See https://docs.gradle.org/current/userguide/dependency_locking.html.
@@ -38,26 +39,34 @@ allprojects {
 subprojects {
     // TODO Refactor below as and when to only be common stuff.
     apply(plugin = "java")
-    apply(plugin = "war")
     apply(plugin = "checkstyle")
     apply(plugin = "com.bmuschko.tomcat")
+    apply(plugin = "net.ltgt.apt-idea")
 
     // Use dependency constraints. See https://docs.gradle.org/current/userguide/declaring_dependencies.html#declaring_a_dependency_without_version
     dependencies {
         constraints {
             // Jersey
-            "implementation"("org.glassfish.jersey.containers:jersey-container-servlet:2.27+")
-            "implementation"("org.glassfish.jersey.inject:jersey-hk2:2.27+")
+            "implementation"("org.glassfish.jersey.containers:jersey-container-servlet:2.28+")
+            "implementation"("org.glassfish.jersey.inject:jersey-hk2:2.28+")
             // javax.xml.bind:jaxb-api and javax.activation:activation are needed to prevent errors. See https://www.jeffryhouser.com/index.cfm/2017/12/21/Why-wont-Jersey-work-on-JDK-9
             "implementation"("javax.xml.bind:jaxb-api:2.3+")
             "implementation"("javax.activation:activation:1.1+")
 
             // Jackson
-            "implementation"("org.glassfish.jersey.media:jersey-media-json-jackson:2.27+")
+            "implementation"("org.glassfish.jersey.media:jersey-media-json-jackson:2.28+")
+            // Enabling Java 8 - https://github.com/FasterXML/jackson-modules-java8
+            "implementation"("com.fasterxml.jackson.datatype:jackson-datatype-jdk8:2.9+")
+            "implementation"("com.fasterxml.jackson.module:jackson-module-parameter-names:2.9+")
+            "implementation"("com.fasterxml.jackson.datatype:jackson-datatype-jsr310:2.9+")
 
             // Guice
             "implementation"("com.google.inject.extensions:guice-servlet:4.2+")
             "implementation"("org.glassfish.hk2:guice-bridge:2.5+")
+
+            // Immutables. See for using apt plugin to set up: https://github.com/tbroyer/gradle-apt-plugin#usage-with-ides
+            "annotationProcessor"("org.immutables:value:2.7+")
+            "compileOnly"("org.immutables:value-annotations:2.7+")
 
             "testImplementation"("org.junit.jupiter:junit-jupiter-api:5.+")
             "testImplementation"("org.junit.jupiter:junit-jupiter-params:5.+")

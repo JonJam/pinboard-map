@@ -1,10 +1,7 @@
 package com.jonjam.pinboard.service.location;
 
 import javax.inject.Inject;
-import javax.ws.rs.GET;
-import javax.ws.rs.POST;
-import javax.ws.rs.Path;
-import javax.ws.rs.Produces;
+import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 
 /**
@@ -43,6 +40,7 @@ public class ExampleController {
    * Method handling HTTP POST requests.
    */
   @POST
+  @Consumes(MediaType.APPLICATION_JSON)
   @Produces(MediaType.APPLICATION_JSON)
   public ExampleResponse postIt(final ExampleRequest request) {
     ExampleResponse.Builder builder = new ExampleResponse.Builder();

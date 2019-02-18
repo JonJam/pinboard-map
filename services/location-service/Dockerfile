@@ -6,6 +6,7 @@ FROM tomcat:9.0.14-jre11
 
 WORKDIR $CATALINA_HOME/webapps/
 
-# Making this webapp the default (see https://www.baeldung.com/tomcat-root-application)
-RUN rm -r ROOT/
+# Making this webapp the default (https://wiki.apache.org/tomcat/HowTo#How_do_I_make_my_web_application_be_the_Tomcat_default_application.3F)
+RUN rm -r ROOT
+
 COPY location-svc/build/libs/*.war ROOT.war

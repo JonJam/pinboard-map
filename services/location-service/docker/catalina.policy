@@ -89,15 +89,6 @@ grant codeBase "file:${catalina.home}/bin/tomcat-juli.jar" {
         permission java.util.PropertyPermission "org.apache.juli.AsyncOverflowDropType", "read";
         permission java.util.PropertyPermission "org.apache.juli.ClassLoaderLogManager.debug", "read";
         permission java.util.PropertyPermission "catalina.base", "read";
-
-        // Note: To enable per context logging configuration, permit read access to
-        // the appropriate file. Be sure that the logging configuration is
-        // secure before enabling such access.
-        // E.g. for the examples web application (uncomment and unwrap
-        // the following to be on a single line):
-        // permission java.io.FilePermission "${catalina.base}${file.separator}
-        //  webapps${file.separator}examples${file.separator}WEB-INF
-        //  ${file.separator}classes${file.separator}logging.properties", "read";
 };
 
 // These permissions apply to the server startup code
@@ -111,13 +102,6 @@ grant codeBase "file:${catalina.home}/bin/bootstrap.jar" {
 grant codeBase "file:${catalina.home}/lib/-" {
         permission java.security.AllPermission;
 };
-
-
-// If using a per instance lib directory, i.e. ${catalina.base}/lib,
-// then the following permission will need to be uncommented
-// grant codeBase "file:${catalina.base}/lib/-" {
-//         permission java.security.AllPermission;
-// };
 
 
 // ========== WEB APPLICATION PERMISSIONS =====================================
@@ -177,84 +161,17 @@ grant {
     permission java.lang.RuntimePermission "accessClassInPackage.org.apache.tomcat.websocket.server";
 };
 
+grant codeBase "file:${catalina.base}/webapps/ROOT/-" {
+    permission java.util.PropertyPermission "org.glassfish.jersey.hk2.injection.manager.strategy", "read";
+    permission java.util.PropertyPermission "org.jvnet.hk2.properties.debug.service.locator.lifecycle", "read";
+    permission java.util.PropertyPermission "org.jvnet.hk2.properties.bind.tracing.pattern", "read";
+    permission java.util.PropertyPermission "org.jvnet.hk2.properties.bind.tracing.stacks", "read";
+    permission java.util.PropertyPermission "org.jvnet.hk2.logger.debugToStdout", "read";
+    permission java.util.PropertyPermission "org.jvnet.hk2.properties.useSoftReference", "read";
+    
+    permission java.lang.reflect.ReflectPermission "suppressAccessChecks";
 
-// The Manager application needs access to the following packages to support the
-// session display functionality. It also requires the custom Tomcat
-// DeployXmlPermission to enable the use of META-INF/context.xml
-// These settings support the following configurations:
-// - default CATALINA_HOME == CATALINA_BASE
-// - CATALINA_HOME != CATALINA_BASE, per instance Manager in CATALINA_BASE
-// - CATALINA_HOME != CATALINA_BASE, shared Manager in CATALINA_HOME
-grant codeBase "file:${catalina.base}/webapps/manager/-" {
-    permission java.lang.RuntimePermission "accessClassInPackage.org.apache.catalina";
-    permission java.lang.RuntimePermission "accessClassInPackage.org.apache.catalina.ha.session";
-    permission java.lang.RuntimePermission "accessClassInPackage.org.apache.catalina.manager";
-    permission java.lang.RuntimePermission "accessClassInPackage.org.apache.catalina.manager.util";
-    permission java.lang.RuntimePermission "accessClassInPackage.org.apache.catalina.util";
-    permission org.apache.catalina.security.DeployXmlPermission "manager";
+// TODO Remove this
+// Works with this
+// permission java.security.AllPermission;
 };
-grant codeBase "file:${catalina.home}/webapps/manager/-" {
-    permission java.lang.RuntimePermission "accessClassInPackage.org.apache.catalina";
-    permission java.lang.RuntimePermission "accessClassInPackage.org.apache.catalina.ha.session";
-    permission java.lang.RuntimePermission "accessClassInPackage.org.apache.catalina.manager";
-    permission java.lang.RuntimePermission "accessClassInPackage.org.apache.catalina.manager.util";
-    permission java.lang.RuntimePermission "accessClassInPackage.org.apache.catalina.util";
-    permission org.apache.catalina.security.DeployXmlPermission "manager";
-};
-
-// The Host Manager application needs the custom Tomcat DeployXmlPermission to
-// enable the use of META-INF/context.xml
-// These settings support the following configurations:
-// - default CATALINA_HOME == CATALINA_BASE
-// - CATALINA_HOME != CATALINA_BASE, per instance Host Manager in CATALINA_BASE
-// - CATALINA_HOME != CATALINA_BASE, shared Host Manager in CATALINA_HOME
-grant codeBase "file:${catalina.base}/webapps/host-manager/-" {
-    permission org.apache.catalina.security.DeployXmlPermission "host-manager";
-};
-grant codeBase "file:${catalina.home}/webapps/host-manager/-" {
-    permission org.apache.catalina.security.DeployXmlPermission "host-manager";
-};
-
-
-// You can assign additional permissions to particular web applications by
-// adding additional "grant" entries here, based on the code base for that
-// application, /WEB-INF/classes/, or /WEB-INF/lib/ jar files.
-//
-// Different permissions can be granted to JSP pages, classes loaded from
-// the /WEB-INF/classes/ directory, all jar files in the /WEB-INF/lib/
-// directory, or even to individual jar files in the /WEB-INF/lib/ directory.
-//
-// For instance, assume that the standard "examples" application
-// included a JDBC driver that needed to establish a network connection to the
-// corresponding database and used the scrape taglib to get the weather from
-// the NOAA web server.  You might create a "grant" entries like this:
-//
-// The permissions granted to the context root directory apply to JSP pages.
-// grant codeBase "file:${catalina.base}/webapps/examples/-" {
-//      permission java.net.SocketPermission "dbhost.mycompany.com:5432", "connect";
-//      permission java.net.SocketPermission "*.noaa.gov:80", "connect";
-// };
-//
-// The permissions granted to the context WEB-INF/classes directory
-// grant codeBase "file:${catalina.base}/webapps/examples/WEB-INF/classes/-" {
-// };
-//
-// The permission granted to your JDBC driver
-// grant codeBase "jar:file:${catalina.base}/webapps/examples/WEB-INF/lib/driver.jar!/-" {
-//      permission java.net.SocketPermission "dbhost.mycompany.com:5432", "connect";
-// };
-// The permission granted to the scrape taglib
-// grant codeBase "jar:file:${catalina.base}/webapps/examples/WEB-INF/lib/scrape.jar!/-" {
-//      permission java.net.SocketPermission "*.noaa.gov:80", "connect";
-// };
-
-// To grant permissions for web applications using packed WAR files, use the
-// Tomcat specific WAR url scheme.
-//
-// The permissions granted to the entire web application
-// grant codeBase "war:file:${catalina.base}/webapps/examples.war*/-" {
-// };
-//
-// The permissions granted to a specific JAR
-// grant codeBase "war:file:${catalina.base}/webapps/examples.war*/WEB-INF/lib/foo.jar" {
-// };

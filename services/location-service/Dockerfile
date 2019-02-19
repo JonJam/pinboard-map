@@ -11,7 +11,7 @@ COPY docker/catalina.policy $CATALINA_HOME/conf/catalina.policy
 COPY docker/catalina.properties $CATALINA_HOME/conf/catalina.properties
 
 # Configure server.xml (https://tomcat.apache.org/tomcat-9.0-doc/security-howto.html#server.xml)
-#COPY docker/server.xml $CATALINA_HOME/conf/server.xml
+COPY docker/server.xml $CATALINA_HOME/conf/server.xml
 
 # Removing default web applications (https://tomcat.apache.org/tomcat-9.0-doc/security-howto.html#Default_web_applications)
 RUN rm -r $CATALINA_HOME/webapps
@@ -19,4 +19,13 @@ RUN rm -r $CATALINA_HOME/webapps
 # Making this webapp the default (https://wiki.apache.org/tomcat/HowTo#How_do_I_make_my_web_application_be_the_Tomcat_default_application.3F)
 COPY location-svc/build/libs/*.war $CATALINA_HOME/webapps/ROOT.war
 
+# Running as non-root user (https://tomcat.apache.org/tomcat-9.0-doc/security-howto.html#Non-Tomcat_settings)
+# Helpful links:
+# - https://github.com/docker-library/tomcat/commit/6f1c628fa92feea8b28e98e56a990500f2326936
+# - https://github.com/docker-library/tomcat/issues/35
+RUN groupadd -r tomcatGroup && useradd -r -g tomcatGroup tomcat	
+RUN chown -R tomcat /usr/local/tomcat
+USER tomcat
+
+# Starting with SecurityManager (https://tomcat.apache.org/tomcat-9.0-doc/security-manager-howto.html)
 CMD ["catalina.sh", "run", "-security"]

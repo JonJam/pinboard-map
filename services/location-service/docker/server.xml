@@ -5,7 +5,7 @@
   <Listener className="org.apache.catalina.startup.VersionLoggerListener" />
   
   <!-- Enable Security Listener. See https://tomcat.apache.org/tomcat-9.0-doc/security-howto.html#server.xml-->
-  <!-- <Listener className="org.apache.catalina.security.SecurityListener" /> -->
+  <Listener className="org.apache.catalina.security.SecurityListener" />
   
   <!--APR library loader. Documentation at /docs/apr.html -->
   <Listener className="org.apache.catalina.core.AprLifecycleListener" SSLEngine="on" />

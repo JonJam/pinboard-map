@@ -8,7 +8,10 @@ COPY docker/setenv.sh $CATALINA_HOME/bin
 
 # Configure SecurityManager (https://tomcat.apache.org/tomcat-9.0-doc/security-manager-howto.html)
 COPY docker/catalina.policy $CATALINA_HOME/conf/catalina.policy
-#COPY docker/catalina.properties $CATALINA_HOME/conf/catalina.properties
+COPY docker/catalina.properties $CATALINA_HOME/conf/catalina.properties
+
+# Configure server.xml (https://tomcat.apache.org/tomcat-9.0-doc/security-howto.html#server.xml)
+#COPY docker/server.xml $CATALINA_HOME/conf/server.xml
 
 # Removing default web applications (https://tomcat.apache.org/tomcat-9.0-doc/security-howto.html#Default_web_applications)
 RUN rm -r $CATALINA_HOME/webapps

@@ -13,6 +13,9 @@ COPY docker/catalina.properties $CATALINA_HOME/conf/catalina.properties
 # Configure server.xml (https://tomcat.apache.org/tomcat-9.0-doc/security-howto.html#server.xml)
 COPY docker/server.xml $CATALINA_HOME/conf/server.xml
 
+# Configure logging (https://tomcat.apache.org/tomcat-9.0-doc/logging.html#Considerations_for_production_usage)
+COPY docker/logging.properties $CATALINA_HOME/conf/logging.properties
+
 # Removing default web applications (https://tomcat.apache.org/tomcat-9.0-doc/security-howto.html#Default_web_applications)
 RUN rm -r $CATALINA_HOME/webapps
 

@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- Setting port to -1. See https://tomcat.apache.org/tomcat-9.0-doc/security-howto.html#server.xml -->
+<Server port="-1" shutdown="SHUTDOWN">
+  <Listener className="org.apache.catalina.startup.VersionLoggerListener" />
+  <!-- Enable Security Listener. See https://tomcat.apache.org/tomcat-9.0-doc/security-howto.html#server.xml-->
+  <Listener className="org.apache.catalina.security.SecurityListener" />
+  <Listener className="org.apache.catalina.core.AprLifecycleListener" SSLEngine="on" />
+  <Listener className="org.apache.catalina.core.JreMemoryLeakPreventionListener" />
+  <Listener className="org.apache.catalina.mbeans.GlobalResourcesLifecycleListener" />
+  <Listener className="org.apache.catalina.core.ThreadLocalLeakPreventionListener" />
+
+  <GlobalNamingResources>
+  </GlobalNamingResources>
+
+  <Service name="Catalina">
+    <Connector 
+          port="8080"
+          protocol="HTTP/1.1"
+          connectionTimeout="20000"
+          redirectPort="8443" />
+          
+    <Connector 
+          port="8443" 
+          protocol="org.apache.coyote.http11.Http11NioProtocol"
+          maxThreads="150" 
+          SSLEnabled="true"
+          scheme="https"
+          secure="true">
+        <SSLHostConfig>
+            <Certificate 
+                  certificateKeystoreFile="conf/.localhost-keystore"
+                  certificateKeystorePassword="changeit"
+                  type="RSA" />
+        </SSLHostConfig>
+    </Connector>
+
+    <Engine 
+          name="Catalina" 
+          defaultHost="localhost">
+
+          <Host 
+               name="localhost"  
+               appBase="webapps"
+               unpackWARs="true"
+               autoDeploy="true">
+
+        <Valve className="org.apache.catalina.valves.AccessLogValve" directory="logs"
+               prefix="localhost_access_log" suffix=".txt"
+               pattern="%h %l %u %t &quot;%r&quot; %s %b" />
+      </Host>
+    </Engine>
+  </Service>
+</Server>

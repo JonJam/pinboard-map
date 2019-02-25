@@ -16,6 +16,9 @@ COPY docker/server.xml $CATALINA_HOME/conf/server.xml
 # Configure logging (https://tomcat.apache.org/tomcat-9.0-doc/logging.html#Considerations_for_production_usage)
 COPY docker/logging.properties $CATALINA_HOME/conf/logging.properties
 
+# Configure HTTPS. Used keytool to generate self cert. (https://tomcat.apache.org/tomcat-9.0-doc/ssl-howto.html)
+COPY docker/keystore $CATALINA_HOME/conf/.localhost-keystore
+
 # Removing default web applications (https://tomcat.apache.org/tomcat-9.0-doc/security-howto.html#Default_web_applications)
 RUN rm -r $CATALINA_HOME/webapps
 
@@ -29,6 +32,8 @@ COPY location-svc/build/libs/*.war $CATALINA_HOME/webapps/ROOT.war
 RUN groupadd -r tomcatGroup && useradd -r -g tomcatGroup tomcat	
 RUN chown -R tomcat /usr/local/tomcat
 USER tomcat
+
+EXPOSE 8080 8443
 
 # Starting with SecurityManager (https://tomcat.apache.org/tomcat-9.0-doc/security-manager-howto.html)
 CMD ["catalina.sh", "run", "-security"]

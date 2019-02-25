@@ -33,7 +33,8 @@ RUN groupadd -r tomcatGroup && useradd -r -g tomcatGroup tomcat
 RUN chown -R tomcat /usr/local/tomcat
 USER tomcat
 
-EXPOSE 8080 8443
+# Exposing HTTP, HTTPS, JMX
+EXPOSE 8080 8443 7035
 
 # Starting with SecurityManager (https://tomcat.apache.org/tomcat-9.0-doc/security-manager-howto.html)
 CMD ["catalina.sh", "run", "-security"]

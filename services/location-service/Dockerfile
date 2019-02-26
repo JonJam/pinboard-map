@@ -16,6 +16,7 @@ COPY docker/server.xml $CATALINA_HOME/conf/server.xml
 # Configure logging (https://tomcat.apache.org/tomcat-9.0-doc/logging.html#Considerations_for_production_usage)
 COPY docker/logging.properties $CATALINA_HOME/conf/logging.properties
 
+# TODO Change these to be prod only
 # Configure HTTPS. Used keytool to generate self cert. (https://tomcat.apache.org/tomcat-9.0-doc/ssl-howto.html)
 COPY docker/dev-localhost-keystore $CATALINA_HOME/conf/.localhost-keystore
 
@@ -33,8 +34,9 @@ RUN groupadd -r tomcatGroup && useradd -r -g tomcatGroup tomcat
 RUN chown -R tomcat /usr/local/tomcat
 USER tomcat
 
+# TODO Change these to be prod only ones
 # Exposing HTTP, HTTPS, JMX, Debug
-EXPOSE 8080 8443 7035 4035
+EXPOSE 8081 8441 7031 4031
 
 # Starting with SecurityManager (https://tomcat.apache.org/tomcat-9.0-doc/security-manager-howto.html)
 CMD ["catalina.sh", "run", "-security"]

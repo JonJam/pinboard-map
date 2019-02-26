@@ -1,0 +1,9 @@
+version: '3'
+services:
+  locationservice:
+    build: ../.
+    ports:
+    - "8081:8081" # HTTP
+    - "8441:8441" # HTTPS
+    - "7031:7031" # JMX
+    - "4031:4031" # DEBUG

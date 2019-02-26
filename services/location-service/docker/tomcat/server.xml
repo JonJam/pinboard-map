@@ -15,13 +15,13 @@
 
   <Service name="Catalina">
     <Connector 
-          port="8031"
+          port="${port.http}"
           protocol="HTTP/1.1"
           connectionTimeout="20000"
-          redirectPort="8431" />
+          redirectPort="${port.https}" />
           
     <Connector 
-          port="8431" 
+          port="${port.https}" 
           protocol="org.apache.coyote.http11.Http11NioProtocol"
           maxThreads="150" 
           SSLEnabled="true"

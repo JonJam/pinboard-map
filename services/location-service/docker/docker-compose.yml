@@ -1,12 +1,10 @@
 version: '3'
 services:
   locationservice:
-
-    # TODO Target https://docs.docker.com/compose/compose-file/#target ?
     build: 
       context: ../.
-      # args:
-      #   env: dev
+      args:
+        env: dev
 
     container_name: location-service
 
@@ -17,5 +15,3 @@ services:
     - "8431:8431" # HTTPS
     - "7031:7031" # JMX
     - "4031:4031" # DEBUG
-
-    # TODO https://docs.docker.com/compose/compose-file/#environment

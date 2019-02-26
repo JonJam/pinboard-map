@@ -6,18 +6,16 @@ FROM tomcat:9.0.14-jre11
 
 ARG env=prod
 
-COPY docker/tomcat/$env/setenv.sh $CATALINA_HOME/bin
+ENV APP_ID 31
 
+COPY docker/tomcat/$env/setenv.sh $CATALINA_HOME/bin
 # Configure SecurityManager (https://tomcat.apache.org/tomcat-9.0-doc/security-manager-howto.html)
 COPY docker/tomcat/catalina.policy $CATALINA_HOME/conf/catalina.policy
 COPY docker/tomcat/catalina.properties $CATALINA_HOME/conf/catalina.properties
-
 # Configure server.xml (https://tomcat.apache.org/tomcat-9.0-doc/security-howto.html#server.xml)
 COPY docker/tomcat/server.xml $CATALINA_HOME/conf/server.xml
-
 # Configure logging (https://tomcat.apache.org/tomcat-9.0-doc/logging.html#Considerations_for_production_usage)
 COPY docker/tomcat/logging.properties $CATALINA_HOME/conf/logging.properties
-
 # Configure HTTPS. Used keytool to generate self cert. (https://tomcat.apache.org/tomcat-9.0-doc/ssl-howto.html)
 COPY docker/tomcat/$env/localhost-keystore $CATALINA_HOME/conf/.localhost-keystore
 
@@ -34,10 +32,6 @@ COPY location-svc/build/libs/*.war $CATALINA_HOME/webapps/ROOT.war
 RUN groupadd -r tomcatGroup && useradd -r -g tomcatGroup tomcat	
 RUN chown -R tomcat /usr/local/tomcat
 USER tomcat
-
-# TODO Change these to be prod only ones
-# Exposing HTTP, HTTPS, JMX, Debug
-EXPOSE 8031 8431 7031 4031
 
 # Starting with SecurityManager (https://tomcat.apache.org/tomcat-9.0-doc/security-manager-howto.html)
 CMD ["catalina.sh", "run", "-security"]

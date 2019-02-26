@@ -1,9 +1,21 @@
 version: '3'
 services:
   locationservice:
-    build: ../.
+
+    # TODO Target https://docs.docker.com/compose/compose-file/#target ?
+    build: 
+      context: ../.
+      # args:
+      #   env: dev
+
+    container_name: location-service
+
+    image: jonjam/pinboard-map-location-service:master
+
     ports:
-    - "8081:8081" # HTTP
-    - "8441:8441" # HTTPS
+    - "8031:8031" # HTTP
+    - "8431:8431" # HTTPS
     - "7031:7031" # JMX
     - "4031:4031" # DEBUG
+
+    # TODO https://docs.docker.com/compose/compose-file/#environment

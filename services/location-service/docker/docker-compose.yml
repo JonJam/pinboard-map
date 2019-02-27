@@ -1,0 +1,17 @@
+version: '3'
+services:
+  locationservice:
+    build: 
+      context: ../.
+      args:
+        env: dev
+
+    container_name: location-service
+
+    image: jonjam/pinboard-map-location-service:master
+
+    ports:
+    - "8031:8031" # HTTP
+    - "8431:8431" # HTTPS
+    - "7031:7031" # JMX
+    - "4031:4031" # DEBUG

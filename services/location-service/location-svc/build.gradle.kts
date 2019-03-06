@@ -1,5 +1,5 @@
 plugins {
-    "war"
+    war
 }
 
 dependencies {
@@ -31,4 +31,20 @@ dependencies {
     testImplementation("org.junit.jupiter:junit-jupiter-api")
     testImplementation("org.junit.jupiter:junit-jupiter-params")
     testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine")
+}
+
+tasks {
+    register<Copy>("explodedWar") {
+        group = "Custom"
+        description = "Copies contents of a WAR into a directory"
+
+        dependsOn("war")
+
+        from(zipTree("$buildDir/libs/${project.name}-${project.version}.war"))
+        into("$buildDir/exploded")
+    }
+
+    named("assemble") {
+        dependsOn("explodedWar")
+    }
 }

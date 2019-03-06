@@ -1,0 +1,7 @@
+# Use .dockerignore file to minimise context size (https://docs.docker.com/develop/develop-images/dockerfile_best-practices/#exclude-with-dockerignore)
+build
+docker
+location-api
+location-schema
+location-svc
+!location-svc/build/libs

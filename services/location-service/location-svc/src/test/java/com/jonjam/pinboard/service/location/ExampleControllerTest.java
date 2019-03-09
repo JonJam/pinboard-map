@@ -1,7 +1,7 @@
 package com.jonjam.pinboard.service.location;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.is;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -20,11 +20,11 @@ class ExampleControllerTest {
   void getIt_returnsExampleResponse() {
     final ExampleResponse response = exampleController.getIt();
 
-    assertEquals("hi", response.getBar());
-    assertTrue(response.canValidProperty());
-    assertTrue(response.hasValidProp());
-    assertTrue(response.getHasValidProperty());
-    assertTrue(response.isValidProperty());
-    assertTrue(response.shouldValidProperty());
+    assertThat(response.getBar(), is("hi"));
+    assertThat(response.canValidProperty(), is(true));
+    assertThat(response.hasValidProp(), is(true));
+    assertThat(response.getHasValidProperty(), is(true));
+    assertThat(response.isValidProperty(), is(true));
+    assertThat(response.shouldValidProperty(), is(true));
   }
 }

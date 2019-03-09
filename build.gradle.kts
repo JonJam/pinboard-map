@@ -31,6 +31,18 @@ allprojects {
     version = "0.0.1"
 }
 
+tasks.register("resolveAndLockAll") {
+    doFirst {
+        require(gradle.startParameter.isWriteDependencyLocks)
+    }
+    doLast {
+        configurations.filter {
+            // Add any custom filtering on the configurations to be resolved
+            it.isCanBeResolved
+        }.forEach { it.resolve() }
+    }
+}
+
 subprojects {
     // TODO Refactor below as and when to only be common stuff.
     apply(plugin = "java")
@@ -65,6 +77,9 @@ subprojects {
             // JUnit. See for setup: https://docs.gradle.org/current/userguide/java_testing.html#using_junit5
             "testImplementation"("org.junit.jupiter:junit-jupiter-api:5.4+")
             "testRuntimeOnly"("org.junit.jupiter:junit-jupiter-engine:5.4+")
+
+            // Hamcrest
+            "testImplementation"("org.hamcrest:hamcrest-library:2.1")
         }
     }
 

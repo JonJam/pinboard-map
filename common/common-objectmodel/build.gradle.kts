@@ -7,6 +7,6 @@ dependencies {
     implementation("org.glassfish.jersey.media:jersey-media-json-jackson")
 
     testImplementation("org.junit.jupiter:junit-jupiter-api")
-    testImplementation("org.junit.jupiter:junit-jupiter-params")
+    testImplementation("org.hamcrest:hamcrest-library")
     testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine")
 }

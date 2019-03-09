@@ -30,19 +30,6 @@ allprojects {
     // Declare version. See https://docs.gradle.org/current/userguide/building_java_projects.html#introduction
     version = "0.0.1"
 }
-
-tasks.register("resolveAndLockAll") {
-    doFirst {
-        require(gradle.startParameter.isWriteDependencyLocks)
-    }
-    doLast {
-        configurations.filter {
-            // Add any custom filtering on the configurations to be resolved
-            it.isCanBeResolved
-        }.forEach { it.resolve() }
-    }
-}
-
 subprojects {
     // TODO Refactor below as and when to only be common stuff.
     apply(plugin = "java")

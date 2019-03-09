@@ -30,6 +30,7 @@ allprojects {
     // Declare version. See https://docs.gradle.org/current/userguide/building_java_projects.html#introduction
     version = "0.0.1"
 }
+
 subprojects {
     // TODO Refactor below as and when to only be common stuff.
     apply(plugin = "java")

@@ -62,9 +62,12 @@ subprojects {
             "annotationProcessor"("org.immutables:value:2.7+")
             "compileOnly"("org.immutables:value-annotations:2.7+")
 
-            "testImplementation"("org.junit.jupiter:junit-jupiter-api:5.+")
-            "testImplementation"("org.junit.jupiter:junit-jupiter-params:5.+")
-            "testRuntimeOnly"("org.junit.jupiter:junit-jupiter-engine:5.+")
+            // JUnit. See for setup: https://docs.gradle.org/current/userguide/java_testing.html#using_junit5
+            "testImplementation"("org.junit.jupiter:junit-jupiter-api:5.4+")
+            "testRuntimeOnly"("org.junit.jupiter:junit-jupiter-engine:5.4+")
+
+            // Hamcrest
+            "testImplementation"("org.hamcrest:hamcrest-library:2.1")
         }
     }
 
@@ -80,10 +83,16 @@ subprojects {
     }
 
     tasks.withType<Test> {
+        // JUnit - setup. See https://docs.gradle.org/current/userguide/java_testing.html#using_junit5
+        useJUnitPlatform()
+
+        // JUnit - parralel execution. See https://junit.org/junit5/docs/current/user-guide/#writing-tests-parallel-execution
+        systemProperty("junit.jupiter.execution.parallel.enabled", "true")
+        systemProperty("junit.jupiter.execution.parallel.mode.default", "concurrent")
+
+        // Performance suggestions for Java projects. See https://guides.gradle.org/performance/#suggestions_for_java_projects
         maxParallelForks = (Runtime.getRuntime().availableProcessors() / 2).takeIf { it > 0 } ?: 1
-
         setForkEvery(100)
-
         reports.html.isEnabled = false
         reports.junitXml.isEnabled = false
     }

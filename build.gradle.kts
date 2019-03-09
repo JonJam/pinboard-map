@@ -62,9 +62,9 @@ subprojects {
             "annotationProcessor"("org.immutables:value:2.7+")
             "compileOnly"("org.immutables:value-annotations:2.7+")
 
-            "testImplementation"("org.junit.jupiter:junit-jupiter-api:5.+")
-            "testImplementation"("org.junit.jupiter:junit-jupiter-params:5.+")
-            "testRuntimeOnly"("org.junit.jupiter:junit-jupiter-engine:5.+")
+            // JUnit. See for setup: https://docs.gradle.org/current/userguide/java_testing.html#using_junit5
+            "testImplementation"("org.junit.jupiter:junit-jupiter-api:5.4+")
+            "testRuntimeOnly"("org.junit.jupiter:junit-jupiter-engine:5.4+")
         }
     }
 
@@ -80,6 +80,8 @@ subprojects {
     }
 
     tasks.withType<Test> {
+        useJUnitPlatform()
+
         maxParallelForks = (Runtime.getRuntime().availableProcessors() / 2).takeIf { it > 0 } ?: 1
 
         setForkEvery(100)

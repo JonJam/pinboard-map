@@ -92,7 +92,9 @@ public @interface Immutable {
        */
       optionalAcceptNullable = true,
       // Enable strict builders
-      strictBuilder = true
+      strictBuilder = true,
+      // Enable staged builders
+      stagedBuilder = true
   )
   @interface WithAllArgsConstructor {
   }

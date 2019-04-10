@@ -22,6 +22,8 @@ javax.activation:javax.activation-api:1.2.0
 javax.inject:javax.inject:1
 javax.validation:validation-api:2.0.1.Final
 javax.xml.bind:jaxb-api:2.3.1
+net.bytebuddy:byte-buddy-agent:1.9.10
+net.bytebuddy:byte-buddy:1.9.10
 org.apiguardian:apiguardian-api:1.0.0
 org.checkerframework:checker-compat-qual:2.0.0
 org.codehaus.mojo:animal-sniffer-annotations:1.14
@@ -45,6 +47,9 @@ org.hamcrest:hamcrest-core:2.1
 org.hamcrest:hamcrest-library:2.1
 org.hamcrest:hamcrest:2.1
 org.javassist:javassist:3.22.0-CR2
-org.junit.jupiter:junit-jupiter-api:5.4.0
-org.junit.platform:junit-platform-commons:1.4.0
+org.junit.jupiter:junit-jupiter-api:5.4.2
+org.junit.platform:junit-platform-commons:1.4.2
+org.mockito:mockito-core:2.26.0
+org.mockito:mockito-junit-jupiter:2.26.0
+org.objenesis:objenesis:2.6
 org.opentest4j:opentest4j:1.1.1

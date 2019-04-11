@@ -36,6 +36,7 @@ subprojects {
     apply(plugin = "java")
     apply(plugin = "checkstyle")
     apply(plugin = "net.ltgt.apt-idea")
+    apply(plugin = "jacoco")
 
     // Use dependency constraints. See https://docs.gradle.org/current/userguide/declaring_dependencies.html#declaring_a_dependency_without_version
     dependencies {

@@ -99,6 +99,6 @@ subprojects {
         maxParallelForks = (Runtime.getRuntime().availableProcessors() / 2).takeIf { it > 0 } ?: 1
         setForkEvery(100)
         reports.html.isEnabled = false
-        reports.junitXml.isEnabled = false
+        reports.junitXml.isEnabled = true
     }
 }

@@ -73,6 +73,10 @@ subprojects {
             // Mockito
             "testImplementation"("org.mockito:mockito-core:2.26+")
             "testImplementation"("org.mockito:mockito-junit-jupiter:2.26+")
+
+            // TestContainers
+            "testImplementation"("org.testcontainers:testcontainers:1.11+")
+            "testImplementation"("org.testcontainers:junit-jupiter:1.11+")
         }
     }
 

@@ -32,6 +32,8 @@ dependencies {
     testImplementation("org.hamcrest:hamcrest-library")
     testImplementation("org.mockito:mockito-core")
     testImplementation("org.mockito:mockito-junit-jupiter")
+    testImplementation("org.testcontainers:testcontainers")
+    testImplementation("org.testcontainers:junit-jupiter")
     testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine")
 }
 

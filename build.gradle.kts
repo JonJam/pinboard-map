@@ -96,8 +96,9 @@ subprojects {
         useJUnitPlatform()
 
         // JUnit - parralel execution. See https://junit.org/junit5/docs/current/user-guide/#writing-tests-parallel-execution
-        systemProperty("junit.jupiter.execution.parallel.enabled", "true")
-        systemProperty("junit.jupiter.execution.parallel.mode.default", "concurrent")
+        // TODO Renable when integtest in seperate task
+        // systemProperty("junit.jupiter.execution.parallel.enabled", "true")
+        // systemProperty("junit.jupiter.execution.parallel.mode.default", "concurrent")
 
         // Performance suggestions for Java projects. See https://guides.gradle.org/performance/#suggestions_for_java_projects
         maxParallelForks = (Runtime.getRuntime().availableProcessors() / 2).takeIf { it > 0 } ?: 1

@@ -4,7 +4,9 @@ dependencies {
     compileOnly("org.immutables:value-annotations")
 
     // Jackson
-    implementation("org.glassfish.jersey.media:jersey-media-json-jackson")
+    implementation("com.fasterxml.jackson.core:jackson-core")
+    implementation("com.fasterxml.jackson.core:jackson-databind")
+    implementation("com.fasterxml.jackson.core:jackson-annotations")
 
     testImplementation("org.junit.jupiter:junit-jupiter-api")
     testImplementation("org.hamcrest:hamcrest-library")

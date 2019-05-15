@@ -1,18 +1,14 @@
 package com.jonjam.pinboard.service.location;
 
+import com.jonjam.pinboard.service.location.api.ExampleService;
+import com.jonjam.pinboard.service.location.api.model.ExampleRequest;
+import com.jonjam.pinboard.service.location.api.model.ExampleResponse;
 import javax.inject.Inject;
-import javax.ws.rs.Consumes;
-import javax.ws.rs.GET;
-import javax.ws.rs.POST;
-import javax.ws.rs.Path;
-import javax.ws.rs.Produces;
-import javax.ws.rs.core.MediaType;
 
 /**
- * Root resource (exposed at "myresource" path).
+ * Implementation of ExampleService.
  */
-@Path("example")
-public class ExampleController {
+public class ExampleController implements ExampleService {
 
   private final IInjectedService service;
 
@@ -25,8 +21,6 @@ public class ExampleController {
   /**
    * Method handling HTTP GET requests.
    */
-  @GET
-  @Produces(MediaType.APPLICATION_JSON)
   public ExampleResponse getIt() {
     ExampleResponse.Builder builder = new ExampleResponse.Builder();
 
@@ -43,9 +37,6 @@ public class ExampleController {
   /**
    * Method handling HTTP POST requests.
    */
-  @POST
-  @Consumes(MediaType.APPLICATION_JSON)
-  @Produces(MediaType.APPLICATION_JSON)
   public ExampleResponse postIt(final ExampleRequest request) {
     ExampleResponse.Builder builder = new ExampleResponse.Builder();
 

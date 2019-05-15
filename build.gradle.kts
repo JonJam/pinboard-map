@@ -77,6 +77,12 @@ subprojects {
             // TestContainers
             "testImplementation"("org.testcontainers:testcontainers:1.11+")
             "testImplementation"("org.testcontainers:junit-jupiter:1.11+")
+
+            // Feign
+            "testImplementation"("io.github.openfeign:feign-core:10.2+")
+            "testImplementation"("io.github.openfeign:feign-jackson:10.2+")
+            "testImplementation"("io.github.openfeign:feign-jaxrs:10.2+")
+
         }
     }
 

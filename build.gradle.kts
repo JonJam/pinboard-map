@@ -29,6 +29,13 @@ allprojects {
 
     // Declare version. See https://docs.gradle.org/current/userguide/building_java_projects.html#introduction
     version = "0.0.1"
+
+    configurations.all {
+        resolutionStrategy {
+            // Fail eagerly on version conflict (includes transitive dependencies)
+            failOnVersionConflict()
+        }
+    }
 }
 
 subprojects {
@@ -49,11 +56,16 @@ subprojects {
             "implementation"("javax.activation:activation:1.1+")
 
             // Jackson
-            "implementation"("org.glassfish.jersey.media:jersey-media-json-jackson:2.28+")
+            "implementation"("org.glassfish.jersey.media:jersey-media-json-jackson:2.28")
+            "implementation"("com.fasterxml.jackson.core:jackson-core:2.9.8")
+            "implementation"("com.fasterxml.jackson.core:jackson-databind:2.9.8")
+            "implementation"("com.fasterxml.jackson.core:jackson-annotations:2.9.8") {
+                isForce = true
+            }
             // Enabling Java 8 - https://github.com/FasterXML/jackson-modules-java8
-            "implementation"("com.fasterxml.jackson.datatype:jackson-datatype-jdk8:2.9+")
-            "implementation"("com.fasterxml.jackson.module:jackson-module-parameter-names:2.9+")
-            "implementation"("com.fasterxml.jackson.datatype:jackson-datatype-jsr310:2.9+")
+            "implementation"("com.fasterxml.jackson.datatype:jackson-datatype-jdk8:2.9.8")
+            "implementation"("com.fasterxml.jackson.module:jackson-module-parameter-names:2.9.8")
+            "implementation"("com.fasterxml.jackson.datatype:jackson-datatype-jsr310:2.9.8")
 
             // Guice
             "implementation"("com.google.inject.extensions:guice-servlet:4.2+")

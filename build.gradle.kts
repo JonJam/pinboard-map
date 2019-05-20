@@ -60,6 +60,7 @@ subprojects {
             "implementation"("com.fasterxml.jackson.core:jackson-core:2.9.8")
             "implementation"("com.fasterxml.jackson.core:jackson-databind:2.9.8")
             "implementation"("com.fasterxml.jackson.core:jackson-annotations:2.9.8") {
+                // Resolving conflict
                 isForce = true
             }
             // Enabling Java 8 - https://github.com/FasterXML/jackson-modules-java8
@@ -68,27 +69,42 @@ subprojects {
             "implementation"("com.fasterxml.jackson.datatype:jackson-datatype-jsr310:2.9.8")
 
             // Guice
-            "implementation"("com.google.inject.extensions:guice-servlet:4.2+")
-            "implementation"("org.glassfish.hk2:guice-bridge:2.5+")
+            "implementation"("com.google.inject.extensions:guice-servlet:4.2.2")
+            "implementation"("org.glassfish.hk2:guice-bridge:2.5.0")
+            "implementation"("com.google.inject:guice:4.2.2") {
+                // Resolving conflict - guice-servlet / guice-bridge
+                isForce = true
+            }
 
             // Immutables. See for using apt plugin to set up: https://github.com/tbroyer/gradle-apt-plugin#usage-with-ides
             "annotationProcessor"("org.immutables:value:2.7+")
             "compileOnly"("org.immutables:value-annotations:2.7+")
 
             // JUnit. See for setup: https://docs.gradle.org/current/userguide/java_testing.html#using_junit5
-            "testImplementation"("org.junit.jupiter:junit-jupiter-api:5.4+")
-            "testRuntimeOnly"("org.junit.jupiter:junit-jupiter-engine:5.4+")
+            "testImplementation"("org.junit.jupiter:junit-jupiter-api:5.4.2") {
+                // Resolving conflict - this / testcontainers
+                isForce = true
+            }
+            "testRuntimeOnly"("org.junit.jupiter:junit-jupiter-engine:5.4.2")
 
             // Hamcrest
-            "testImplementation"("org.hamcrest:hamcrest-library:2.1+")
+            "testImplementation"("org.hamcrest:hamcrest-library:2.1")
+            "testImplementation"("org.hamcrest:hamcrest-core:2.1") {
+                // Only specified to resolve conflict - hamcrest-library / testcontainers
+                isForce = true
+            }
 
             // Mockito
             "testImplementation"("org.mockito:mockito-core:2.26+")
             "testImplementation"("org.mockito:mockito-junit-jupiter:2.26+")
 
             // TestContainers
-            "testImplementation"("org.testcontainers:testcontainers:1.11+")
-            "testImplementation"("org.testcontainers:junit-jupiter:1.11+")
+            "testImplementation"("org.testcontainers:testcontainers:1.11.2")
+            "testImplementation"("org.testcontainers:junit-jupiter:1.11.2")
+            "testImplementation"("org.slf4j:slf4j-api:1.7.26") {
+                // Only specified to resolve conflict between testcontainers libs.
+                isForce = true
+            }
 
             // Feign
             "testImplementation"("io.github.openfeign:feign-core:10.2+")

@@ -18,7 +18,7 @@ COPY docker/tomcat/logging.properties $CATALINA_HOME/conf/logging.properties
 COPY docker/tomcat/$env/localhost-keystore $CATALINA_HOME/conf/.localhost-keystore
 
 # Removing default web applications (https://tomcat.apache.org/tomcat-9.0-doc/security-howto.html#Default_web_applications)
-RUN rm -r $CATALINA_HOME/webapps
+RUN rm -r $CATALINA_HOME/webapps/*
 
 # Running as non-root user (https://tomcat.apache.org/tomcat-9.0-doc/security-howto.html#Non-Tomcat_settings)
 # Helpful links:

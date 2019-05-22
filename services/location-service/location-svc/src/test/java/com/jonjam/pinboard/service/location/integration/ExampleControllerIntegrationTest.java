@@ -46,16 +46,14 @@ class ExampleControllerIntegrationTest {
         ":" +
         dslContainer.getMappedPort(PORT);
 
-    final ExampleService service = Feign.builder()
-        .contract(new JAXRSContract())
-        .encoder(new JacksonEncoder())
-        .decoder(new JacksonDecoder())
-        .target(ExampleService.class, address);
+      final ExampleService service = Feign.builder()
+          .contract(new JAXRSContract())
+          .encoder(new JacksonEncoder())
+          .decoder(new JacksonDecoder())
+          .target(ExampleService.class, address);
 
-    // TODO work out why 500 error when security manager enabled.
-    final ExampleResponse response = service.getIt();
-
-    assertThat(response.getHasValidProperty(), is(true));
+      final ExampleResponse response = service.getIt();
+      assertThat(response.getHasValidProperty(), is(true));
 
     dslContainer.stop();
   }

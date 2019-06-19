@@ -19,19 +19,32 @@ dependencies {
     implementation("com.google.inject.extensions:guice-servlet")
     implementation("org.glassfish.hk2:guice-bridge")
 
-    // Immutables
-    annotationProcessor("org.immutables:value")
-    compileOnly("org.immutables:value-annotations")
-
     // Project dependencies
     // Used as annotation processor for Immutables custom annotation.
     annotationProcessor(project(":common:common-objectmodel"))
     implementation(project(":common:common-objectmodel"))
+    implementation(project(":services:location-service:location-api"))
 
+    // JUnit
     testImplementation("org.junit.jupiter:junit-jupiter-api")
+
+    // Hamcrest
     testImplementation("org.hamcrest:hamcrest-library")
+
+    // Mockito
     testImplementation("org.mockito:mockito-core")
     testImplementation("org.mockito:mockito-junit-jupiter")
+
+    // TestContainers
+    testImplementation("org.testcontainers:testcontainers")
+    testImplementation("org.testcontainers:junit-jupiter")
+
+    // Feign
+    testImplementation("io.github.openfeign:feign-core")
+    testImplementation("io.github.openfeign:feign-jackson")
+    testImplementation("io.github.openfeign:feign-jaxrs")
+
+    // JUnit
     testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine")
 }
 

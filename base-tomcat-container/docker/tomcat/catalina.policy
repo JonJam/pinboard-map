@@ -161,7 +161,27 @@ grant {
     permission java.lang.RuntimePermission "accessClassInPackage.org.apache.tomcat.websocket.server";
 };
 
-grant codeBase "file:${catalina.base}/webapps/ROOT/-" {
-    // TODO Specify explicit permissions for application.
+// Ensure keep below in sync.
+grant codeBase "war:file:${catalina.base}/webapps/ROOT.war*/-" {
     permission java.security.AllPermission;
+    // TODO Specify explicit permissions for application: need to resolve java.lang.NullPointerException at org.glassfish.hk2.utilities.ServiceLocatorUtilities.addClasses
+    // permission java.util.PropertyPermission "org.glassfish.jersey.hk2.injection.manager.strategy", "read";
+    // permission java.util.PropertyPermission "org.jvnet.hk2.properties.debug.service.locator.lifecycle", "read";
+    // permission java.util.PropertyPermission "org.jvnet.hk2.properties.bind.tracing.pattern", "read";
+    // permission java.util.PropertyPermission "org.jvnet.hk2.properties.bind.tracing.stacks", "read";
+    // permission java.util.PropertyPermission "org.jvnet.hk2.logger.debugToStdout", "read";
+    // permission java.util.PropertyPermission "org.jvnet.hk2.properties.useSoftReference", "read";
+    // permission java.lang.reflect.ReflectPermission "suppressAccessChecks";
+};
+
+grant codeBase "file:${catalina.base}/webapps/ROOT/-" {
+    permission java.security.AllPermission;
+    // TODO Specify explicit permissions for application: need to resolve java.lang.NullPointerException at org.glassfish.hk2.utilities.ServiceLocatorUtilities.addClasses
+    // permission java.util.PropertyPermission "org.glassfish.jersey.hk2.injection.manager.strategy", "read";
+    // permission java.util.PropertyPermission "org.jvnet.hk2.properties.debug.service.locator.lifecycle", "read";
+    // permission java.util.PropertyPermission "org.jvnet.hk2.properties.bind.tracing.pattern", "read";
+    // permission java.util.PropertyPermission "org.jvnet.hk2.properties.bind.tracing.stacks", "read";
+    // permission java.util.PropertyPermission "org.jvnet.hk2.logger.debugToStdout", "read";
+    // permission java.util.PropertyPermission "org.jvnet.hk2.properties.useSoftReference", "read";
+    // permission java.lang.reflect.ReflectPermission "suppressAccessChecks";
 };

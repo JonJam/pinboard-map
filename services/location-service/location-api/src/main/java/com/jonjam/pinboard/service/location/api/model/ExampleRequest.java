@@ -1,4 +1,4 @@
-package com.jonjam.pinboard.service.location;
+package com.jonjam.pinboard.service.location.api.model;
 
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.jonjam.pinboard.common.objectmodel.Immutable;
@@ -8,5 +8,6 @@ import com.jonjam.pinboard.common.objectmodel.Immutable;
 public abstract class ExampleRequest {
   public abstract String getBar();
 
-  public static class Builder extends ImmutableExampleRequest.Builder {}
+  public static class Builder extends ImmutableExampleRequest.Builder {
+  }
 }

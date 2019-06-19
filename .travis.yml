@@ -34,7 +34,6 @@ jobs:
       script:
       - ./gradlew check
       - ./gradlew sonarqube
-      if: branch = master AND type IN (push)
       after_success:
       - test $TRAVIS_BRANCH = "master" && test $TRAVIS_PULL_REQUEST = "false"
       - docker login -u="$DOCKER_USERNAME" -p="$DOCKER_PASSWORD"

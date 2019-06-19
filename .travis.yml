@@ -34,6 +34,7 @@ jobs:
       script:
       - ./gradlew check
       - ./gradlew sonarqube
+      if: branch = master AND type IN (push)
       after_success:
       - docker login -u="$DOCKER_USERNAME" -p="$DOCKER_PASSWORD"
       - docker build -t pinboard-map-base-tomcat-container --build-arg env=dev ./base-tomcat-container/.

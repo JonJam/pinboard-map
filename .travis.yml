@@ -32,9 +32,8 @@ jobs:
       before_script:
       - if [[ ! $PWD/ = "/home/travis/build/JonJam/pinboard-map" ]]; then cd "/home/travis/build/JonJam/pinboard-map"; fi
       script:
-       - ls
-#      - ./gradlew check
-#      - ./gradlew sonarqube
+      - ./gradlew check
+      - ./gradlew sonarqube
 #      after_success:
 #      if: branch = master AND type IN (push)
 #      - docker login -u="$DOCKER_USERNAME" -p="$DOCKER_PASSWORD"

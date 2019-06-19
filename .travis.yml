@@ -29,6 +29,8 @@ stages:
 jobs:
   include:
     - stage: build
+      before_script:
+      - if [[ ! $PWD/ = "/home/travis/build/JonJam/pinboard-map" ]]; then cd "/home/travis/build/JonJam/pinboard-map"; fi
       script:
        - ls
 #      - ./gradlew check

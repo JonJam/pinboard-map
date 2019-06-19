@@ -14,7 +14,7 @@ import org.testcontainers.junit.jupiter.Testcontainers;
 @Testcontainers
 abstract class ServiceIntegrationTest {
 
-  private static final Path dockerBuildContext = Paths.get("..");
+  private static final Path DOCKER_BUILD_CONTEXT = Paths.get("..");
   private static final String APP_ID_BUILD_ARGUMENT_NAME = "APP_ID";
   private static final String TEST_APP_ID = "99";
 
@@ -24,11 +24,11 @@ abstract class ServiceIntegrationTest {
   @Container
   private static GenericContainer serviceContainer = new GenericContainer(
       new ImageFromDockerfile()
-          .withFileFromPath(".", dockerBuildContext)
+          .withFileFromPath(".", DOCKER_BUILD_CONTEXT)
           .withBuildArg(APP_ID_BUILD_ARGUMENT_NAME, TEST_APP_ID))
       .withExposedPorts(HTTP_PORT);
 
-  protected <T> T getClient(Class<T> serviceInterface) {
+  protected <T> T getClient(final Class<T> serviceInterface) {
     final String address = "http://"
         + serviceContainer.getContainerIpAddress()
         + ":"

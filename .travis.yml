@@ -37,7 +37,9 @@ jobs:
       - ./gradlew build --no-daemon
       - ./gradlew sonarqube --no-daemon
     - stage: deploy
-      deploy:
-        skip_cleanup: true
-        provider: script
-        script: bash ./scripts/docker_push
+      skip_cleanup: true
+      provider: script
+      before_script:
+      - if [[ ! $PWD/ = "/home/travis/build/JonJam/pinboard-map" ]]; then cd "/home/travis/build/JonJam/pinboard-map"; fi
+      script:
+      - bash scripts/docker_push.sh

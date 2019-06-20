@@ -34,7 +34,7 @@ jobs:
       before_script:
       - if [[ ! $PWD/ = "/home/travis/build/JonJam/pinboard-map" ]]; then cd "/home/travis/build/JonJam/pinboard-map"; fi
       script:
-      - ./gradlew check
+      - lsof -i -P -n
       - ./gradlew sonarqube
     - stage: deploy
       deploy:

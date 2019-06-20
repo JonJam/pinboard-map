@@ -39,4 +39,7 @@ jobs:
     - stage: deploy
       skip_cleanup: true
       provider: script
-      script: bash ./scripts/docker_push.sh
+      before_script:
+      - if [[ ! $PWD/ = "/home/travis/build/JonJam/pinboard-map" ]]; then cd "/home/travis/build/JonJam/pinboard-map"; fi
+      script:
+      - bash scripts/docker_push.sh

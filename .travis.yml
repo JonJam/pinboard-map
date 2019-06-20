@@ -26,7 +26,7 @@ cache:
 stages:
   - build
   - name: deploy
-    if: branch = master AND type IN (push)
+#    if: branch = master AND type IN (push)
 
 jobs:
   include:

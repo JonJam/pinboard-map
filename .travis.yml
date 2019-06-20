@@ -33,8 +33,8 @@ jobs:
     - stage: build
       before_script:
       - if [[ ! $PWD/ = "/home/travis/build/JonJam/pinboard-map" ]]; then cd "/home/travis/build/JonJam/pinboard-map"; fi
+      - docker pull jonjam/pinboard-map-base-tomcat-container:latest
       script:
-      - sudo lsof -i -P -n
       - ./gradlew sonarqube
     - stage: deploy
       deploy:

@@ -45,6 +45,8 @@ allprojects {
             property("sonar.host.url", "https://sonarcloud.io")
             property("sonar.junit.reportPaths", "build/tests-results/test")
             property("sonar.coverage.jacoco.xmlReportPaths", "build/jacoco")
+            
+            versionDetails()
         }
     }
 }

@@ -35,7 +35,7 @@ jobs:
       - if [[ ! $PWD/ = "/home/travis/build/JonJam/pinboard-map" ]]; then cd "/home/travis/build/JonJam/pinboard-map"; fi
       - docker pull jonjam/pinboard-map-base-tomcat-container:latest
       script:
-      - ./gradlew sonarqube
+      - ./gradlew sonarqube --stacktrace
     - stage: deploy
       deploy:
         skip_cleanup: true

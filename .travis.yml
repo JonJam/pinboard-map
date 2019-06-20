@@ -34,8 +34,9 @@ jobs:
       script:
       - ./gradlew check
       - ./gradlew sonarqube
+      if: branch = master AND type IN (push)
       after_success:
-      - test $TRAVIS_BRANCH = "master" && test $TRAVIS_PULL_REQUEST = "false"
+#      - test $TRAVIS_BRANCH = "master" && test $TRAVIS_PULL_REQUEST = "false"
       - docker login -u="$DOCKER_USERNAME" -p="$DOCKER_PASSWORD"
       - docker build -t pinboard-map-base-tomcat-container --build-arg env=dev ./base-tomcat-container/.
       - docker build -t pinboard-map-location-service ./services/location-service/.

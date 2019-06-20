@@ -36,6 +36,17 @@ allprojects {
             failOnVersionConflict()
         }
     }
+
+    sonarqube {
+        properties {
+            property("sonar.organization", "jonjam-github")
+            property("sonar.projectName", "pinboard-map")
+            property("sonar.projectKey", "pinboard-map")
+            property("sonar.host.url", "https://sonarcloud.io")
+            property("sonar.junit.reportPaths", "build/tests-results/test")
+            property("sonar.coverage.jacoco.xmlReportPaths", "build/jacoco")
+        }
+    }
 }
 
 subprojects {

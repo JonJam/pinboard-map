@@ -39,6 +39,7 @@ jobs:
     - stage: deploy
       skip_cleanup: true
       provider: script
+      install: skip
       before_script:
       - if [[ ! $PWD/ = "/home/travis/build/JonJam/pinboard-map" ]]; then cd "/home/travis/build/JonJam/pinboard-map"; fi
       script:

@@ -87,6 +87,12 @@ subprojects {
                 isForce = true
             }
 
+            // log4j
+            "implementation"("org.apache.logging.log4j:log4j-api:2.12.0")
+            "implementation"("org.apache.logging.log4j:log4j-core:2.12.0")
+            // Required when running log4j in a web app. See: https://logging.apache.org/log4j/2.x/manual/webapp.html
+            "implementation"("org.apache.logging.log4j:log4j-web:2.12.0")
+
             // Immutables. See for using apt plugin to set up: https://github.com/tbroyer/gradle-apt-plugin#usage-with-ides
             "annotationProcessor"("org.immutables:value:2.7+")
             "compileOnly"("org.immutables:value-annotations:2.7+")

@@ -4,11 +4,15 @@ import com.jonjam.pinboard.service.location.api.ExampleService;
 import com.jonjam.pinboard.service.location.api.model.ExampleRequest;
 import com.jonjam.pinboard.service.location.api.model.ExampleResponse;
 import javax.inject.Inject;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 /**
  * Implementation of ExampleService.
  */
 public class ExampleController implements ExampleService {
+
+  private static final Logger LOGGER = LogManager.getLogger();
 
   private final IInjectedService service;
 
@@ -22,7 +26,11 @@ public class ExampleController implements ExampleService {
    * Method handling HTTP GET requests.
    */
   public ExampleResponse getIt() {
+    LOGGER.debug("Calling getIt.");
+
     ExampleResponse.Builder builder = new ExampleResponse.Builder();
+
+    LOGGER.debug("Built example response.");
 
     return builder
         .withBar(this.service.test().getProp())

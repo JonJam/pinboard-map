@@ -19,6 +19,11 @@ dependencies {
     implementation("com.google.inject.extensions:guice-servlet")
     implementation("org.glassfish.hk2:guice-bridge")
 
+    // log4j
+    implementation("org.apache.logging.log4j:log4j-api")
+    implementation("org.apache.logging.log4j:log4j-core")
+    implementation("org.apache.logging.log4j:log4j-web")
+
     // Project dependencies
     // Used as annotation processor for Immutables custom annotation.
     annotationProcessor(project(":common:common-objectmodel"))

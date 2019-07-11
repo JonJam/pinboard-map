@@ -9,6 +9,9 @@ import com.fasterxml.jackson.module.paramnames.ParameterNamesModule;
 
 public class ObjectMapperBuilder {
 
+  private ObjectMapperBuilder() {
+  }
+
   /**
    * Constructs a configured ObjectMapper.
    * @return Instance of ObjectMapper.

@@ -4,8 +4,6 @@ import com.jonjam.pinboard.service.location.api.ExampleService;
 import com.jonjam.pinboard.service.location.api.model.ExampleRequest;
 import com.jonjam.pinboard.service.location.api.model.ExampleResponse;
 import javax.inject.Inject;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 
 /**
  * Implementation of ExampleService.

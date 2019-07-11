@@ -26,11 +26,11 @@ public class ExampleController implements ExampleService {
    * Method handling HTTP GET requests.
    */
   public ExampleResponse getIt() {
-    LOGGER.debug("Calling getIt.");
+    LOGGER.error("Calling getIt.");
 
     ExampleResponse.Builder builder = new ExampleResponse.Builder();
 
-    LOGGER.debug("Built example response.");
+    LOGGER.info("Built example response.");
 
     return builder
         .withBar(this.service.test().getProp())

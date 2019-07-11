@@ -10,6 +10,9 @@ import javax.inject.Inject;
  */
 public class ExampleController implements ExampleService {
 
+  private static final StructuredLogger LOGGER = StructuredLogger
+      .getLogger(ExampleController.class);
+
   private final IInjectedService service;
 
   @Inject
@@ -22,9 +25,10 @@ public class ExampleController implements ExampleService {
    * Method handling HTTP GET requests.
    */
   public ExampleResponse getIt() {
-    ExampleResponse.Builder builder = new ExampleResponse.Builder();
+    LOGGER.error()
+        .write("Calling getIt.");
 
-    return builder
+    final ExampleResponse response = new ExampleResponse.Builder()
         .withBar(this.service.test().getProp())
         .withCanValidProperty(true)
         .withHasValidProp(true)
@@ -32,6 +36,12 @@ public class ExampleController implements ExampleService {
         .withIsValidProperty(true)
         .withShouldValidProperty(true)
         .build();
+
+    LOGGER.info()
+        .withData("response", response)
+        .write("Built example response.");
+
+    return response;
   }
 
   /**

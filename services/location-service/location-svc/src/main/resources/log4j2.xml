@@ -8,7 +8,8 @@
         </File>
     </Appenders>
     <Loggers>
-        <Root level="info">
+        <!-- Turning off location information due to performance impact: https://logging.apache.org/log4j/2.x/manual/layouts.html#LocationInformation -->
+        <Root level="info" includeLocation="false">
             <AppenderRef ref="File"/>
         </Root>
     </Loggers>

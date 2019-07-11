@@ -17,6 +17,7 @@ com.google.inject:guice:4.2.2
 com.google.j2objc:j2objc-annotations:1.1
 com.kohlschutter.junixsocket:junixsocket-common:2.0.4
 com.kohlschutter.junixsocket:junixsocket-native-common:2.0.4
+com.lmax:disruptor:3.4.2
 io.github.openfeign:feign-core:10.2.3
 io.github.openfeign:feign-jackson:10.2.3
 io.github.openfeign:feign-jaxrs:10.2.3
@@ -37,6 +38,7 @@ net.java.dev.jna:jna:5.2.0
 org.apache.commons:commons-compress:1.18
 org.apache.logging.log4j:log4j-api:2.12.0
 org.apache.logging.log4j:log4j-core:2.12.0
+org.apache.logging.log4j:log4j-web:2.12.0
 org.apiguardian:apiguardian-api:1.0.0
 org.checkerframework:checker-compat-qual:2.0.0
 org.codehaus.mojo:animal-sniffer-annotations:1.14

@@ -92,6 +92,8 @@ subprojects {
             "implementation"("org.apache.logging.log4j:log4j-core:2.12.0")
             // Required when running log4j in a web app. See: https://logging.apache.org/log4j/2.x/manual/webapp.html
             "implementation"("org.apache.logging.log4j:log4j-web:2.12.0")
+            // Required for async loggers: https://logging.apache.org/log4j/2.x/manual/async.html#Making_All_Loggers_Asynchronous
+            "implementation"("com.lmax:disruptor:3.4.2")
 
             // Immutables. See for using apt plugin to set up: https://github.com/tbroyer/gradle-apt-plugin#usage-with-ides
             "annotationProcessor"("org.immutables:value:2.7+")

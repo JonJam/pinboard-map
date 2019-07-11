@@ -23,6 +23,7 @@ javax.activation:javax.activation-api:1.2.0
 javax.inject:javax.inject:1
 javax.validation:validation-api:2.0.1.Final
 javax.xml.bind:jaxb-api:2.3.1
+org.apache.commons:commons-lang3:3.9
 org.apache.logging.log4j:log4j-api:2.12.0
 org.apache.logging.log4j:log4j-core:2.12.0
 org.apache.logging.log4j:log4j-web:2.12.0

@@ -12,7 +12,8 @@ import org.apache.logging.log4j.Logger;
  */
 public class ExampleController implements ExampleService {
 
-  private static final Logger LOGGER = LogManager.getLogger();
+  private static final StructuredLogger LOGGER = StructuredLogger
+      .getLogger(ExampleController.class);
 
   private final IInjectedService service;
 
@@ -26,13 +27,10 @@ public class ExampleController implements ExampleService {
    * Method handling HTTP GET requests.
    */
   public ExampleResponse getIt() {
-    LOGGER.error("Calling getIt.");
+    LOGGER.error()
+        .write("Calling getIt.");
 
-    ExampleResponse.Builder builder = new ExampleResponse.Builder();
-
-    LOGGER.info("Built example response.");
-
-    return builder
+    final ExampleResponse response = new ExampleResponse.Builder()
         .withBar(this.service.test().getProp())
         .withCanValidProperty(true)
         .withHasValidProp(true)
@@ -40,6 +38,12 @@ public class ExampleController implements ExampleService {
         .withIsValidProperty(true)
         .withShouldValidProperty(true)
         .build();
+
+    LOGGER.info()
+        .withData("response", response)
+        .write("Built example response.");
+
+    return response;
   }
 
   /**

@@ -25,6 +25,8 @@ dependencies {
     implementation("org.apache.logging.log4j:log4j-web")
     implementation("com.lmax:disruptor")
 
+    implementation("org.apache.commons:commons-lang3")
+
     // Project dependencies
     // Used as annotation processor for Immutables custom annotation.
     annotationProcessor(project(":common:common-objectmodel"))

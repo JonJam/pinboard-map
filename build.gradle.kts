@@ -95,6 +95,8 @@ subprojects {
             // Required for async loggers: https://logging.apache.org/log4j/2.x/manual/async.html#Making_All_Loggers_Asynchronous
             "implementation"("com.lmax:disruptor:3.4.2")
 
+            "implementation"("org.apache.commons:commons-lang3:3.9")
+
             // Immutables. See for using apt plugin to set up: https://github.com/tbroyer/gradle-apt-plugin#usage-with-ides
             "annotationProcessor"("org.immutables:value:2.7+")
             "compileOnly"("org.immutables:value-annotations:2.7+")

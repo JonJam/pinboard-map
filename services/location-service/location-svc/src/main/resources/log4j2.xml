@@ -2,7 +2,8 @@
 <Configuration status="INFO">
     <Appenders>
         <File name="File" fileName="${env:CATALINA_HOME}/logs/${env:SERVICE_NAME}.log">
-            <PatternLayout>
+            <!-- Specifying ISO-8859-1 charset for performance improvements: https://logging.apache.org/log4j/2.x/manual/layouts.html -->
+            <PatternLayout charset="ISO-8859-1">
                 <Pattern>[%d{HH:mm:ss,SSS}] [%p] %c{3} - %m%n</Pattern>
             </PatternLayout>
         </File>

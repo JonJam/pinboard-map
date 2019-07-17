@@ -51,6 +51,8 @@ dependencies {
     testImplementation("io.github.openfeign:feign-core")
     testImplementation("io.github.openfeign:feign-jackson")
     testImplementation("io.github.openfeign:feign-jaxrs")
+    testImplementation("io.github.openfeign:feign-slf4j")
+    testImplementation("org.apache.logging.log4j:log4j-slf4j-impl")
 
     // JUnit
     testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine")

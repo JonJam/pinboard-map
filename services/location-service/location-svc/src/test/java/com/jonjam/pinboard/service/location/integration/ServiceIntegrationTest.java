@@ -1,9 +1,13 @@
 package com.jonjam.pinboard.service.location.integration;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.jonjam.pinboard.common.objectmodel.ObjectMapperBuilder;
 import feign.Feign;
+import feign.Logger;
 import feign.jackson.JacksonDecoder;
 import feign.jackson.JacksonEncoder;
 import feign.jaxrs.JAXRSContract;
+import feign.slf4j.Slf4jLogger;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import org.testcontainers.containers.GenericContainer;
@@ -34,10 +38,14 @@ abstract class ServiceIntegrationTest {
         + ":"
         + serviceContainer.getMappedPort(HTTP_PORT);
 
+    final ObjectMapper objectMapper = ObjectMapperBuilder.build();
+
     return Feign.builder()
         .contract(new JAXRSContract())
-        .encoder(new JacksonEncoder())
-        .decoder(new JacksonDecoder())
+        .encoder(new JacksonEncoder(objectMapper))
+        .decoder(new JacksonDecoder(objectMapper))
+        .logger(new Slf4jLogger(serviceInterface))
+        .logLevel(Logger.Level.BASIC)
         .target(serviceInterface, address);
   }
 }

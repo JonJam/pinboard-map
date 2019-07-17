@@ -131,7 +131,9 @@ subprojects {
             "testImplementation"("io.github.openfeign:feign-core:10.2+")
             "testImplementation"("io.github.openfeign:feign-jackson:10.2+")
             "testImplementation"("io.github.openfeign:feign-jaxrs:10.2+")
-
+            "testImplementation"("io.github.openfeign:feign-slf4j:10.2+")
+            // For redirecting Feign logging via SLF4j to log4j2. See: https://logging.apache.org/log4j/2.x/log4j-slf4j-impl/index.html
+            "testImplementation"("org.apache.logging.log4j:log4j-slf4j-impl:2.12.0")
         }
     }
 

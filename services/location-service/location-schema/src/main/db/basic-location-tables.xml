@@ -1,0 +1,45 @@
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
+
+    <changeSet id="create_location_status_table" author="jonjam">
+        <createTable tableName="location_status" remarks="A status associated with a location.">
+            <column name="location_status_id" type="INTEGER" remarks="The internal unique identifier for a location status.">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="pk_location_status"/>
+            </column>
+
+            <column name="name" type="TEXT" remarks="The name of the status.">
+                <constraints nullable="false" />
+            </column>
+
+            <column name="description" type="TEXT" remarks="The description of the status.">
+                <constraints nullable="true" />
+            </column>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="create_location_table" author="jonjam">
+        <createTable tableName="location" remarks="A location that is displayed on a map.">
+            <column name="location_id" type="BIGINT" autoIncrement="true" remarks="The internal unique identifier for a location.">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="pk_location"/>
+            </column>
+
+            <column name="location_code" type="BIGINT" autoIncrement="true" startWith="99999" incrementBy="1" remarks="The exposed unique identifier for a location.">
+                <constraints nullable="false" unique="true" uniqueConstraintName="idx_location_code"/>
+            </column>
+
+            <column name="location_status_id" type="INTEGER"  remarks="The status of the location.">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="created_at" type="DATETIME" defaultValueComputed="(now() at time zone 'utc')" remarks="The timestamp of when the row was created.">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="updated_at" type="DATETIME" defaultValueComputed="(now() at time zone 'utc')" remarks="The timestamp of when the row was updated.">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+</databaseChangeLog>

@@ -8,6 +8,7 @@
 plugins {
     id("org.sonarqube") version "2.7"
     id("net.ltgt.apt-idea") version "0.20" apply false
+    id("org.liquibase.gradle") version "2.0.4" apply false
 }
 
 // Enabling dependency locking. See https://docs.gradle.org/current/userguide/dependency_locking.html.
@@ -56,28 +57,47 @@ subprojects {
     apply(plugin = "net.ltgt.apt-idea")
     apply(plugin = "jacoco")
 
+    // Workaround: To get gradle to recognise liquibaseRuntime configuration here where define dependency versions.
+    // As plugin (which creates this configuration) is only applied to schema projects.
+    configurations {
+        create("liquibaseRuntime")
+    }
+
     // Use dependency constraints. See https://docs.gradle.org/current/userguide/declaring_dependencies.html#declaring_a_dependency_without_version
     dependencies {
         constraints {
+
+            val jaxbApiVersion = project.property("javax.xml.bind.jaxb-api.version")
+            val jacksonVersion = project.property("com.fasterxml.jackson.version")
+            val jerseyVersion = project.property("org.glassfish.jersey.version")
+            val log4jVersion = project.property("org.apache.logging.log4j.version")
+            val immutablesVersion = project.property("org.immutables.version")
+            val junitVersion = project.property("org.junit.jupiter.version")
+            val hamcrestVersion = project.property("org.hamcrest.version")
+            val mockitoVersion = project.property("org.mockito.version")
+            val testcontainersVersion = project.property("org.testcontainers.version")
+            val sl4jVersion = project.property("org.slf4j.version")
+            val feignVersion = project.property("io.github.openfeign.version")
+
             // Jersey
-            "implementation"("org.glassfish.jersey.containers:jersey-container-servlet:2.28+")
-            "implementation"("org.glassfish.jersey.inject:jersey-hk2:2.28+")
+            "implementation"("org.glassfish.jersey.containers:jersey-container-servlet:${jerseyVersion}")
+            "implementation"("org.glassfish.jersey.inject:jersey-hk2:${jerseyVersion}")
             // javax.xml.bind:jaxb-api and javax.activation:activation are needed to prevent errors. See https://www.jeffryhouser.com/index.cfm/2017/12/21/Why-wont-Jersey-work-on-JDK-9
-            "implementation"("javax.xml.bind:jaxb-api:2.3+")
+            "implementation"("javax.xml.bind:jaxb-api:${jaxbApiVersion}")
             "implementation"("javax.activation:activation:1.1+")
 
             // Jackson
-            "implementation"("org.glassfish.jersey.media:jersey-media-json-jackson:2.28")
-            "implementation"("com.fasterxml.jackson.core:jackson-core:2.9.8")
-            "implementation"("com.fasterxml.jackson.core:jackson-databind:2.9.8")
-            "implementation"("com.fasterxml.jackson.core:jackson-annotations:2.9.8") {
+            "implementation"("org.glassfish.jersey.media:jersey-media-json-jackson:${jerseyVersion}")
+            "implementation"("com.fasterxml.jackson.core:jackson-core:${jacksonVersion}")
+            "implementation"("com.fasterxml.jackson.core:jackson-databind:${jacksonVersion}")
+            "implementation"("com.fasterxml.jackson.core:jackson-annotations:${jacksonVersion}") {
                 // Resolving conflict
                 isForce = true
             }
             // Enabling Java 8 - https://github.com/FasterXML/jackson-modules-java8
-            "implementation"("com.fasterxml.jackson.datatype:jackson-datatype-jdk8:2.9.8")
-            "implementation"("com.fasterxml.jackson.module:jackson-module-parameter-names:2.9.8")
-            "implementation"("com.fasterxml.jackson.datatype:jackson-datatype-jsr310:2.9.8")
+            "implementation"("com.fasterxml.jackson.datatype:jackson-datatype-jdk8:${jacksonVersion}")
+            "implementation"("com.fasterxml.jackson.module:jackson-module-parameter-names:${jacksonVersion}")
+            "implementation"("com.fasterxml.jackson.datatype:jackson-datatype-jsr310:${jacksonVersion}")
 
             // Guice
             "implementation"("com.google.inject.extensions:guice-servlet:4.2.2")
@@ -88,52 +108,62 @@ subprojects {
             }
 
             // log4j
-            "implementation"("org.apache.logging.log4j:log4j-api:2.12.0")
-            "implementation"("org.apache.logging.log4j:log4j-core:2.12.0")
+            "implementation"("org.apache.logging.log4j:log4j-api:${log4jVersion}")
+            "implementation"("org.apache.logging.log4j:log4j-core:${log4jVersion}")
             // Required when running log4j in a web app. See: https://logging.apache.org/log4j/2.x/manual/webapp.html
-            "implementation"("org.apache.logging.log4j:log4j-web:2.12.0")
+            "implementation"("org.apache.logging.log4j:log4j-web:${log4jVersion}")
             // Required for async loggers: https://logging.apache.org/log4j/2.x/manual/async.html#Making_All_Loggers_Asynchronous
             "implementation"("com.lmax:disruptor:3.4.2")
 
             "implementation"("org.apache.commons:commons-lang3:3.9")
 
             // Immutables. See for using apt plugin to set up: https://github.com/tbroyer/gradle-apt-plugin#usage-with-ides
-            "annotationProcessor"("org.immutables:value:2.7+")
-            "compileOnly"("org.immutables:value-annotations:2.7+")
+            "annotationProcessor"("org.immutables:value:${immutablesVersion}")
+            "compileOnly"("org.immutables:value-annotations:${immutablesVersion}")
 
             // JUnit. See for setup: https://docs.gradle.org/current/userguide/java_testing.html#using_junit5
-            "testImplementation"("org.junit.jupiter:junit-jupiter-api:5.4.2") {
+            "testImplementation"("org.junit.jupiter:junit-jupiter-api:${junitVersion}") {
                 // Resolving conflict - this / testcontainers
                 isForce = true
             }
-            "testRuntimeOnly"("org.junit.jupiter:junit-jupiter-engine:5.4.2")
+            "testRuntimeOnly"("org.junit.jupiter:junit-jupiter-engine:${junitVersion}")
 
             // Hamcrest
-            "testImplementation"("org.hamcrest:hamcrest-library:2.1")
-            "testImplementation"("org.hamcrest:hamcrest-core:2.1") {
+            "testImplementation"("org.hamcrest:hamcrest-library:${hamcrestVersion}")
+            "testImplementation"("org.hamcrest:hamcrest-core:${hamcrestVersion}") {
                 // Only specified to resolve conflict - hamcrest-library / testcontainers
                 isForce = true
             }
 
             // Mockito
-            "testImplementation"("org.mockito:mockito-core:2.26+")
-            "testImplementation"("org.mockito:mockito-junit-jupiter:2.26+")
+            "testImplementation"("org.mockito:mockito-core:${mockitoVersion}")
+            "testImplementation"("org.mockito:mockito-junit-jupiter:${mockitoVersion}")
 
             // TestContainers
-            "testImplementation"("org.testcontainers:testcontainers:1.11.2")
-            "testImplementation"("org.testcontainers:junit-jupiter:1.11.2")
-            "testImplementation"("org.slf4j:slf4j-api:1.7.26") {
+            "testImplementation"("org.testcontainers:testcontainers:${testcontainersVersion}")
+            "testImplementation"("org.testcontainers:junit-jupiter:${testcontainersVersion}")
+            "testImplementation"("org.slf4j:slf4j-api:${sl4jVersion}") {
                 // Only specified to resolve conflict between testcontainers libs.
                 isForce = true
             }
 
             // Feign
-            "testImplementation"("io.github.openfeign:feign-core:10.2+")
-            "testImplementation"("io.github.openfeign:feign-jackson:10.2+")
-            "testImplementation"("io.github.openfeign:feign-jaxrs:10.2+")
-            "testImplementation"("io.github.openfeign:feign-slf4j:10.2+")
+            "testImplementation"("io.github.openfeign:feign-core:${feignVersion}")
+            "testImplementation"("io.github.openfeign:feign-jackson:${feignVersion}")
+            "testImplementation"("io.github.openfeign:feign-jaxrs:${feignVersion}")
+            "testImplementation"("io.github.openfeign:feign-slf4j:${feignVersion}")
             // For redirecting Feign logging via SLF4j to log4j2. See: https://logging.apache.org/log4j/2.x/log4j-slf4j-impl/index.html
-            "testImplementation"("org.apache.logging.log4j:log4j-slf4j-impl:2.12.0")
+            "testImplementation"("org.apache.logging.log4j:log4j-slf4j-impl:${log4jVersion}")
+
+            // Liquibase and Postgres
+            "liquibaseRuntime"("org.liquibase:liquibase-core:3.8.1")
+            "liquibaseRuntime"("org.postgresql:postgresql:42.2.13")
+            "liquibaseRuntime"("org.slf4j:slf4j-api:${sl4jVersion}") {
+                // Only specified to resolve conflicts when added.
+                isForce = true
+            }
+            // Needed to fix class not found errors when run liquibase.
+            "liquibaseRuntime"("javax.xml.bind:jaxb-api:${jaxbApiVersion}")
         }
     }
 

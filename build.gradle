@@ -149,7 +149,6 @@ configure(subprojects.findAll { !it.name.endsWith('schema') }) {
             testImplementation "io.github.openfeign:feign-slf4j:${feignVersion}"
             // For redirecting Feign logging via SLF4j to log4j2. See: https://logging.apache.org/log4j/2.x/log4j-slf4j-impl/index.html
             testImplementation "org.apache.logging.log4j:log4j-slf4j-impl:${log4jVersion}"
-
         }
     }
     
@@ -226,9 +225,9 @@ configure(subprojects.findAll { it.name.endsWith('schema') }) {
         activities {
             main {
                 changeLogFile 'src/main/db/changelog.xml'
-                url project.property('schema_db_url')
-                username project.property('schema_db_username')
-                password project.property('schema_db_password')
+                url project.findProperty('schema_db_url')
+                username project.findProperty('schema_db_username')
+                password project.findProperty('schema_db_password')
             }
         }
     }

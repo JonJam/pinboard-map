@@ -4,6 +4,7 @@ import com.jonjam.pinboard.service.location.api.ExampleService;
 import com.jonjam.pinboard.service.location.api.model.ExampleRequest;
 import com.jonjam.pinboard.service.location.api.model.ExampleResponse;
 import javax.inject.Inject;
+import javax.ws.rs.Path;
 
 /**
  * Implementation of ExampleService.

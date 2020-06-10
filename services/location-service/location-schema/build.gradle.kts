@@ -10,9 +10,9 @@ dependencies {
 
 liquibase {
     activities.register("main") {
-        val dbUrl = project.properties["schema_db_url"]
-        val dbUsername = project.properties["schema_db_username"]
-        val dbPassword = project.properties["schema_db_password"]
+        val dbUrl = project.property("schema_db_url")
+        val dbUsername = project.property("schema_db_username")
+        val dbPassword = project.property("schema_db_password")
         this.arguments = mapOf(
                 "logLevel" to "info",
                 "changeLogFile" to "src/main/db/changelog.xml",

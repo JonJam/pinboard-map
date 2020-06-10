@@ -67,17 +67,17 @@ subprojects {
     dependencies {
         constraints {
 
-            val jaxbApiVersion = project.findProperty("javax.xml.bind.jaxb-api.version")
-            val jacksonVersion = project.findProperty("com.fasterxml.jackson.version")
-            val jerseyVersion = project.findProperty("org.glassfish.jersey.version")
-            val log4jVersion = project.findProperty("org.apache.logging.log4j.version")
-            val immutablesVersion = project.findProperty("org.immutables.version")
-            val junitVersion = project.findProperty("org.junit.jupiter.version")
-            val hamcrestVersion = project.findProperty("org.hamcrest.version")
-            val mockitoVersion = project.findProperty("org.mockito.version")
-            val testcontainersVersion = project.findProperty("org.testcontainers.version")
-            val sl4jVersion = project.findProperty("org.slf4j.version")
-            val feignVersion = project.findProperty("io.github.openfeign.version")
+            val jaxbApiVersion = project.property("javax.xml.bind.jaxb-api.version")
+            val jacksonVersion = project.property("com.fasterxml.jackson.version")
+            val jerseyVersion = project.property("org.glassfish.jersey.version")
+            val log4jVersion = project.property("org.apache.logging.log4j.version")
+            val immutablesVersion = project.property("org.immutables.version")
+            val junitVersion = project.property("org.junit.jupiter.version")
+            val hamcrestVersion = project.property("org.hamcrest.version")
+            val mockitoVersion = project.property("org.mockito.version")
+            val testcontainersVersion = project.property("org.testcontainers.version")
+            val sl4jVersion = project.property("org.slf4j.version")
+            val feignVersion = project.property("io.github.openfeign.version")
 
             // Jersey
             "implementation"("org.glassfish.jersey.containers:jersey-container-servlet:${jerseyVersion}")

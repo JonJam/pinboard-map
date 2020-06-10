@@ -1,0 +1,7 @@
+dependencies {
+    // Java API for RESTful Web Services
+    implementation 'javax.ws.rs:javax.ws.rs-api'
+
+    // Jackson
+    implementation 'com.fasterxml.jackson.core:jackson-databind'
+}

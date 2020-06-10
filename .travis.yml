@@ -9,8 +9,7 @@ jdk:
 addons:
   sonarcloud:
     organization: "jonjam-github"
-    token:
-      secure: $SONAR_TOKEN
+    token: $SONAR_TOKEN
 
 services:
   - docker

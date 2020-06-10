@@ -9,8 +9,7 @@ jdk:
 addons:
   sonarcloud:
     organization: "jonjam-github"
-    token:
-      secure: $SONAR_TOKEN
+    token: $SONAR_TOKEN
 
 services:
   - docker
@@ -35,7 +34,7 @@ jobs:
       - if [[ ! $PWD/ = "/home/travis/build/JonJam/pinboard-map" ]]; then cd "/home/travis/build/JonJam/pinboard-map"; fi
       script:
       - ./gradlew build --no-daemon
-      - ./gradlew sonarqube --no-daemon -Dsonar.login=$SONAR_TOKEN
+      - ./gradlew sonarqube --no-daemon
     - stage: deploy
       skip_cleanup: true
       provider: script

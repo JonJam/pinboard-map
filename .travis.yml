@@ -2,8 +2,6 @@
 # - https://docs.travis-ci.com/user/languages/java/
 # - https://docs.travis-ci.com/user/sonarcloud/
 # - https://github.com/SonarSource/sq-com_example_java-gradle-travis
-dist: trusty
-
 language: java
 jdk:
   - openjdk11
@@ -37,7 +35,7 @@ jobs:
       - if [[ ! $PWD/ = "/home/travis/build/JonJam/pinboard-map" ]]; then cd "/home/travis/build/JonJam/pinboard-map"; fi
       script:
       - ./gradlew build --no-daemon
-      - ./gradlew sonarqube --no-daemon
+      - ./gradlew sonarqube --no-daemon -Dsonar.login=$SONAR_TOKEN
     - stage: deploy
       skip_cleanup: true
       provider: script

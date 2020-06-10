@@ -8,6 +8,9 @@
 plugins {
     id("org.sonarqube") version "2.7"
     id("net.ltgt.apt-idea") version "0.20" apply false
+
+    // https://github.com/liquibase/liquibase-gradle-plugin
+    id("org.liquibase.gradle") version "2.0.4" apply false
 }
 
 // Enabling dependency locking. See https://docs.gradle.org/current/userguide/dependency_locking.html.
@@ -55,6 +58,12 @@ subprojects {
     apply(plugin = "checkstyle")
     apply(plugin = "net.ltgt.apt-idea")
     apply(plugin = "jacoco")
+
+    // Workaround to get gradle to understand liquibaseRuntime configuration which is only
+    // created when liquibase plugin applied.
+    configurations {
+        create("liquibaseRuntime")
+    }
 
     // Use dependency constraints. See https://docs.gradle.org/current/userguide/declaring_dependencies.html#declaring_a_dependency_without_version
     dependencies {
@@ -134,6 +143,16 @@ subprojects {
             "testImplementation"("io.github.openfeign:feign-slf4j:10.2+")
             // For redirecting Feign logging via SLF4j to log4j2. See: https://logging.apache.org/log4j/2.x/log4j-slf4j-impl/index.html
             "testImplementation"("org.apache.logging.log4j:log4j-slf4j-impl:2.12.0")
+
+            // Liquibase and Postgres
+            "liquibaseRuntime"("org.liquibase:liquibase-core:3.8.1")
+            "liquibaseRuntime"("org.postgresql:postgresql:42.2.13")
+            "liquibaseRuntime"("org.slf4j:slf4j-api:1.7.26") {
+                // Only specified to resolve conflicts when added.
+                isForce = true
+            }
+            // Needed to fix class not found errors when run liquibase
+            "liquibaseRuntime"("javax.xml.bind:jaxb-api:2.3+")
         }
     }
 

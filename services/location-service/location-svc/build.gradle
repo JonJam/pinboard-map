@@ -1,8 +1,4 @@
 dependencies {
-    // Immutables
-    annotationProcessor 'org.immutables:value'
-    compileOnly 'org.immutables:value-annotations'
-
     // Jersey
     implementation 'org.glassfish.jersey.containers:jersey-container-servlet'
     implementation 'org.glassfish.jersey.inject:jersey-hk2'
@@ -28,9 +24,6 @@ dependencies {
     implementation 'org.apache.commons:commons-lang3'
 
     // Project dependencies
-    // Used as annotation processor for Immutables custom annotation.
-    annotationProcessor project(':common:common-objectmodel')
-    implementation project(':common:common-objectmodel')
     implementation project(':services:location-service:location-api')
 
     // JUnit

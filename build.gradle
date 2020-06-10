@@ -179,9 +179,34 @@ configure(subprojects.findAll { !it.name.endsWith('schema') }) {
     }
 }
 
+// API projects
+configure(subprojects.findAll { it.name.endsWith('api') }) {
+    dependencies {
+        // Immutables
+        annotationProcessor 'org.immutables:value'
+        compileOnly 'org.immutables:value-annotations'
+
+        // Project dependencies
+        // Used as annotation processor for Immutables custom annotation.
+        annotationProcessor project(':common:common-objectmodel')
+        implementation project(':common:common-objectmodel')
+    }
+}
+
 // Service implementation projects
 configure(subprojects.findAll { it.name.endsWith('svc') }) {
     apply plugin: 'war'
+
+    dependencies {
+        // Immutables
+        annotationProcessor 'org.immutables:value'
+        compileOnly 'org.immutables:value-annotations'
+
+        // Project dependencies
+        // Used as annotation processor for Immutables custom annotation.
+        annotationProcessor project(':common:common-objectmodel')
+        implementation project(':common:common-objectmodel')
+    }
 
     tasks {
         task explodedWar(type: Copy) {

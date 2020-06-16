@@ -10,6 +10,7 @@ import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+// TODO Move to common
 public class StructuredLogger {
 
   private static final ObjectMapper MAPPER = ObjectMapperBuilder.build();

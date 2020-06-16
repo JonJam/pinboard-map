@@ -4,7 +4,7 @@ import com.google.inject.AbstractModule;
 import com.jonjam.pinboard.service.location.IInjectedService;
 import com.jonjam.pinboard.service.location.InjectedService;
 
-public class LocationModule extends AbstractModule {
+public class LocationServiceModule extends AbstractModule {
 
   @Override
   protected void configure() {

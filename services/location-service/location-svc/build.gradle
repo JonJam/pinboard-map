@@ -23,6 +23,8 @@ dependencies {
 
     implementation 'org.apache.commons:commons-lang3'
 
+    implementation 'com.typesafe:config'
+
     // Project dependencies
     implementation project(':services:location-service:location-api')
 

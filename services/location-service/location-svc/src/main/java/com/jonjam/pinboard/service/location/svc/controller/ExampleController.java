@@ -1,23 +1,25 @@
-package com.jonjam.pinboard.service.location;
+package com.jonjam.pinboard.service.location.svc.controller;
 
+import com.jonjam.pinboard.service.location.IInjectedService;
+import com.jonjam.pinboard.service.location.StructuredLogger;
 import com.jonjam.pinboard.service.location.api.ExampleService;
 import com.jonjam.pinboard.service.location.api.model.ExampleRequest;
 import com.jonjam.pinboard.service.location.api.model.ExampleResponse;
 import javax.inject.Inject;
+import javax.ws.rs.Path;
 
 /**
  * Implementation of ExampleService.
  */
+@Path(ExampleService.ROOT_PATH)
 public class ExampleController implements ExampleService {
 
-  private static final StructuredLogger LOGGER = StructuredLogger
-      .getLogger(ExampleController.class);
+  private static final StructuredLogger LOGGER = StructuredLogger.getLogger(ExampleController.class);
 
   private final IInjectedService service;
 
   @Inject
-  public ExampleController(
-      final IInjectedService service) {
+  public ExampleController(final IInjectedService service) {
     this.service = service;
   }
 

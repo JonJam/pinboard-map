@@ -1,12 +1,12 @@
 version: '3'
 services:
-  locationservice:
+  location:
     build:
       context: ../.
 
-    container_name: location-service
+    container_name: location
 
-    image: jonjam/pinboard-map-location-service:master
+    image: jonjam/pinboard-map-location:master
 
     ports:
       - "8031:8031" # HTTP
@@ -16,3 +16,6 @@ services:
 
     volumes:
       - ../location-svc/build/exploded:/usr/local/tomcat/webapps/ROOT
+
+    environment:
+      - SUSPEND_STARTUP=${SUSPEND_STARTUP:-n}

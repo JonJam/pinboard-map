@@ -1,7 +1,7 @@
 package com.jonjam.pinboard.service.location.svc.controller;
 
-import com.jonjam.pinboard.service.location.IInjectedService;
-import com.jonjam.pinboard.service.location.StructuredLogger;
+import com.jonjam.pinboard.service.location.svc.service.IInjectedService;
+import com.jonjam.pinboard.common.logging.StructuredLogger;
 import com.jonjam.pinboard.service.location.api.ExampleService;
 import com.jonjam.pinboard.service.location.api.model.ExampleRequest;
 import com.jonjam.pinboard.service.location.api.model.ExampleResponse;

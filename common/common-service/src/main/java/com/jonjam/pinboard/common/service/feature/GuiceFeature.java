@@ -1,4 +1,4 @@
-package com.jonjam.pinboard.service.location.svc.config.common;
+package com.jonjam.pinboard.common.service.feature;
 
 import com.google.inject.Guice;
 import com.google.inject.Injector;
@@ -11,7 +11,6 @@ import org.glassfish.jersey.internal.inject.InjectionManager;
 import org.jvnet.hk2.guice.bridge.api.GuiceBridge;
 import org.jvnet.hk2.guice.bridge.api.GuiceIntoHK2Bridge;
 
-// TODO Move to common project
 public class GuiceFeature implements Feature {
 
   private final Module[] modules;

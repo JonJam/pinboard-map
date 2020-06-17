@@ -8,12 +8,12 @@
 
     <!--https://jersey.github.io/documentation/latest/deployment.html#deployment.servlet.3-->
     <servlet>
-        <servlet-name>com.jonjam.pinboard.service.location.svc.config.LocationServiceJAX</servlet-name>
+        <servlet-name>com.jonjam.pinboard.service.location.svc.LocationServiceJAX</servlet-name>
         <load-on-startup>1</load-on-startup>
     </servlet>
 
     <servlet-mapping>
-        <servlet-name>com.jonjam.pinboard.service.location.svc.config.LocationServiceJAX</servlet-name>
+        <servlet-name>com.jonjam.pinboard.service.location.svc.LocationServiceJAX</servlet-name>
         <url-pattern>/*</url-pattern>
     </servlet-mapping>
 

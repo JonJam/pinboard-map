@@ -1,6 +1,8 @@
-package com.jonjam.pinboard.service.location.svc.config.common;
+package com.jonjam.pinboard.common.service.module;
 
 import com.google.inject.AbstractModule;
+import com.jonjam.pinboard.common.service.config.SelfConfiguration;
+import com.jonjam.pinboard.common.service.config.ServiceConfiguration;
 
 public class ConfigurationModule<T extends ServiceConfiguration> extends AbstractModule {
 
@@ -18,5 +20,5 @@ public class ConfigurationModule<T extends ServiceConfiguration> extends Abstrac
         addAdditionalBinds(serviceConfig);
     }
 
-    protected void addAdditionalBinds(final T serviceConfig) {}
+    protected void addAdditionalBinds(final T serviceConfig) { }
 }

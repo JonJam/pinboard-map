@@ -1,4 +1,4 @@
-package com.jonjam.pinboard.service.location;
+package com.jonjam.pinboard.service.location.svc.service;
 
 public class InjectedService implements IInjectedService {
 

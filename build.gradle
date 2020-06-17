@@ -209,6 +209,9 @@ configure(subprojects.findAll { it.name.endsWith('svc') }) {
         // Used as annotation processor for Immutables custom annotation.
         annotationProcessor project(':common:common-objectmodel')
         implementation project(':common:common-objectmodel')
+
+        implementation project(':common:common-logging')
+        implementation project(':common:common-service')
     }
 
     tasks {

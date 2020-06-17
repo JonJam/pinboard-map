@@ -14,5 +14,5 @@ ${env:CATALINA_HOME}/
 # Docker
 docker-compose.override.yml
 
-# Ignoring individual service configuration
+# Ignoring individual engineer service configuration
 location-*.conf

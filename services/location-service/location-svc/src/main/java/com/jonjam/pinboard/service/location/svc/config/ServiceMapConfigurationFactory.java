@@ -1,8 +1,6 @@
 package com.jonjam.pinboard.service.location.svc.config;
 
-import com.jonjam.pinboard.service.location.svc.config.common.ConfigurationFactory;
-import com.jonjam.pinboard.service.location.svc.config.common.SelfConfiguration;
-import com.jonjam.pinboard.service.location.svc.config.common.SelfConfigurationFactory;
+import com.jonjam.pinboard.common.service.config.ConfigurationFactory;
 import com.typesafe.config.Config;
 
 public class ServiceMapConfigurationFactory extends ConfigurationFactory<ServiceMapConfiguration> {

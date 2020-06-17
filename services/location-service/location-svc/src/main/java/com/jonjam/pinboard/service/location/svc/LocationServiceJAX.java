@@ -1,7 +1,11 @@
-package com.jonjam.pinboard.service.location.svc.config;
+package com.jonjam.pinboard.service.location.svc;
 
 import com.google.inject.Module;
-import com.jonjam.pinboard.service.location.svc.config.common.ServiceResourceConfig;
+import com.jonjam.pinboard.common.service.ServiceResourceConfig;
+import com.jonjam.pinboard.service.location.svc.config.LocationConfigurationFactory;
+import com.jonjam.pinboard.service.location.svc.config.LocationServiceConfiguration;
+import com.jonjam.pinboard.service.location.svc.module.LocationServiceConfigurationModule;
+import com.jonjam.pinboard.service.location.svc.module.LocationServiceModule;
 
 public class LocationServiceJAX extends ServiceResourceConfig<LocationServiceConfiguration> {
   private static final String CONTROLLERS_PACKAGES = "com.jonjam.pinboard.service.location.svc.controller";

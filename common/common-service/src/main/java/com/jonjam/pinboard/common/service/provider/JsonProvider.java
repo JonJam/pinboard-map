@@ -1,4 +1,4 @@
-package com.jonjam.pinboard.service.location.svc.config.common;
+package com.jonjam.pinboard.common.service.provider;
 
 import javax.ws.rs.Consumes;
 import javax.ws.rs.Produces;

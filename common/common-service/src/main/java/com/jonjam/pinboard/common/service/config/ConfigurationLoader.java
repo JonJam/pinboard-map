@@ -1,4 +1,4 @@
-package com.jonjam.pinboard.service.location.svc.config.common;
+package com.jonjam.pinboard.common.service.config;
 
 import com.typesafe.config.Config;
 import com.typesafe.config.ConfigFactory;
@@ -12,7 +12,7 @@ public class ConfigurationLoader<T extends ServiceConfiguration> {
 
     private final ConfigurationFactory<T> configurationFactory;
 
-    public ConfigurationLoader(final ConfigurationFactory<T> configurationFactory){
+    public ConfigurationLoader(final ConfigurationFactory<T> configurationFactory) {
         this.configurationFactory = configurationFactory;
     }
 

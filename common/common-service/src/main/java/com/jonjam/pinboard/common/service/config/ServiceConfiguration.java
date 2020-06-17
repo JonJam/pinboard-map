@@ -1,4 +1,4 @@
-package com.jonjam.pinboard.service.location.svc.config.common;
+package com.jonjam.pinboard.common.service.config;
 
 public abstract class ServiceConfiguration {
     public abstract SelfConfiguration getSelfConfiguration();

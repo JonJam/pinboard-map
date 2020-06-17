@@ -1,4 +1,4 @@
-package com.jonjam.pinboard.service.location.svc.config.common;
+package com.jonjam.pinboard.common.service.config;
 
 import com.jonjam.pinboard.common.objectmodel.Immutable;
 
@@ -6,5 +6,5 @@ import com.jonjam.pinboard.common.objectmodel.Immutable;
 public abstract class SelfConfiguration {
     public abstract String getRole();
 
-    public static class Builder extends ImmutableSelfConfiguration.Builder {}
+    public static class Builder extends ImmutableSelfConfiguration.Builder { }
 }

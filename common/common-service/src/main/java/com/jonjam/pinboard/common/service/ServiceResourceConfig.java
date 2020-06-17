@@ -1,5 +1,10 @@
-package com.jonjam.pinboard.service.location.svc.config.common;
+package com.jonjam.pinboard.common.service;
 
+import com.jonjam.pinboard.common.service.config.ConfigurationFactory;
+import com.jonjam.pinboard.common.service.config.ConfigurationLoader;
+import com.jonjam.pinboard.common.service.config.ServiceConfiguration;
+import com.jonjam.pinboard.common.service.feature.GuiceFeature;
+import com.jonjam.pinboard.common.service.provider.JsonProvider;
 import org.glassfish.jersey.server.ResourceConfig;
 
 import java.util.List;

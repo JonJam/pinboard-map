@@ -6,5 +6,5 @@ import com.jonjam.pinboard.common.objectmodel.Immutable;
 public abstract class ServiceMapConfiguration {
     public abstract String getTest();
 
-    public static class Builder extends ImmutableServiceMapConfiguration.Builder {}
+    public static class Builder extends ImmutableServiceMapConfiguration.Builder { }
 }

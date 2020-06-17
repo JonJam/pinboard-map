@@ -1,4 +1,4 @@
-package com.jonjam.pinboard.service.location;
+package com.jonjam.pinboard.service.location.svc.service;
 
 import com.jonjam.pinboard.common.objectmodel.Immutable;
 
@@ -6,5 +6,5 @@ import com.jonjam.pinboard.common.objectmodel.Immutable;
 public abstract class TestDto {
   public abstract String getProp();
 
-  public static class Builder extends ImmutableTestDto.Builder {}
+  public static class Builder extends ImmutableTestDto.Builder { }
 }

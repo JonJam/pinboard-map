@@ -1,4 +1,4 @@
-package com.jonjam.pinboard.service.location.integration;
+package com.jonjam.pinboard.service.location.svc;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.jonjam.pinboard.common.objectmodel.ObjectMapperBuilder;
@@ -15,22 +15,28 @@ import org.testcontainers.images.builder.ImageFromDockerfile;
 import org.testcontainers.junit.jupiter.Container;
 import org.testcontainers.junit.jupiter.Testcontainers;
 
+// TODO Move
 @Testcontainers
-abstract class ServiceIntegrationTest {
+public abstract class ServiceIntegrationTest {
 
   private static final Path DOCKER_BUILD_CONTEXT = Paths.get("..");
   private static final String APP_ID_BUILD_ARGUMENT_NAME = "APP_ID";
   private static final String TEST_APP_ID = "99";
+  private static final String VERSION_BUILD_ARGUMENT_NAME = "VERSION";
+  private static final String VERSION = "dev";
+  private static final String ENVIRONMENT_VARIABLE = "ENVIRONMENT";
+  private static final String ENVIRONMENT = "dev";
 
   // NOTE - last two digits map to TEST_APP_ID.
   private static final int HTTP_PORT = 8099;
 
   @Container
-  private static GenericContainer serviceContainer = new GenericContainer(
-      new ImageFromDockerfile()
-          .withFileFromPath(".", DOCKER_BUILD_CONTEXT)
-          .withBuildArg(APP_ID_BUILD_ARGUMENT_NAME, TEST_APP_ID))
-      .withExposedPorts(HTTP_PORT);
+  private static GenericContainer<?> serviceContainer = new GenericContainer(new ImageFromDockerfile()
+      .withFileFromPath(".", DOCKER_BUILD_CONTEXT)
+      .withBuildArg(APP_ID_BUILD_ARGUMENT_NAME, TEST_APP_ID)
+      .withBuildArg(VERSION_BUILD_ARGUMENT_NAME, VERSION))
+      .withExposedPorts(HTTP_PORT)
+      .withEnv(ENVIRONMENT_VARIABLE, ENVIRONMENT);
 
   protected <T> T getClient(final Class<T> serviceInterface) {
     final String address = "http://"

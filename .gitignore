@@ -1,13 +1,18 @@
-## Gradle generated
-# Ignore Gradle project-specific cache directory
+# Gradle
 .gradle
 
-# Ignore Gradle build output directory
+# Java
 build
-
-# Below from: https://github.com/github/gitignore/blob/master/Global/JetBrains.gitignore
-.idea
-
 out
 
+# Idea
+.idea
+
+# Tomcat
 ${env:CATALINA_HOME}/
+
+# Docker
+docker-compose.override.yml
+
+# Ignoring individual engineer service configuration
+location-*.conf

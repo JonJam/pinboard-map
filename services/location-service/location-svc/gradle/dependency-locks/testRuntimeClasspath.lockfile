@@ -18,6 +18,7 @@ com.google.j2objc:j2objc-annotations:1.1
 com.kohlschutter.junixsocket:junixsocket-common:2.0.4
 com.kohlschutter.junixsocket:junixsocket-native-common:2.0.4
 com.lmax:disruptor:3.4.2
+com.typesafe:config:1.4.0
 io.github.openfeign:feign-core:10.2.3
 io.github.openfeign:feign-jackson:10.2.3
 io.github.openfeign:feign-jaxrs:10.2.3

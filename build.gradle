@@ -116,6 +116,9 @@ configure(subprojects.findAll { !it.name.endsWith('schema') }) {
             annotationProcessor "org.immutables:value:${immutablesVersion}"
             compileOnly "org.immutables:value-annotations:${immutablesVersion}"
 
+            // Config
+            implementation 'com.typesafe:config:1.4.0'
+
             // JUnit. See for setup: https://docs.gradle.org/current/userguide/java_testing.html#using_junit5
             testImplementation ("org.junit.jupiter:junit-jupiter-api:${junitVersion}") {
                 // Resolving conflict - this / testcontainers
@@ -206,6 +209,9 @@ configure(subprojects.findAll { it.name.endsWith('svc') }) {
         // Used as annotation processor for Immutables custom annotation.
         annotationProcessor project(':common:common-objectmodel')
         implementation project(':common:common-objectmodel')
+
+        implementation project(':common:common-logging')
+        implementation project(':common:common-service')
     }
 
     tasks {

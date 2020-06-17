@@ -1,4 +1,4 @@
-package com.jonjam.pinboard.service.location.svc.config;
+package com.jonjam.pinboard.common.service.feature;
 
 import com.google.inject.Guice;
 import com.google.inject.Injector;
@@ -15,21 +15,22 @@ public class GuiceFeature implements Feature {
 
   private final Module[] modules;
 
-  public GuiceFeature(Module... modules) {
+  public GuiceFeature(final Module... modules) {
     this.modules = modules;
   }
 
   @Override
-  public boolean configure(FeatureContext context) {
-    InjectionManager injectionManager = InjectionManagerProvider.getInjectionManager(context);
+  public boolean configure(final FeatureContext context) {
+    final InjectionManager injectionManager = InjectionManagerProvider.getInjectionManager(context);
 
-    ServiceLocator serviceLocator = injectionManager.getInstance(ServiceLocator.class);
+    final ServiceLocator serviceLocator = injectionManager.getInstance(ServiceLocator.class);
 
     GuiceBridge.getGuiceBridge().initializeGuiceBridge(serviceLocator);
-    GuiceIntoHK2Bridge guiceBridge = serviceLocator.getService(GuiceIntoHK2Bridge.class);
+
+    final GuiceIntoHK2Bridge guiceBridge = serviceLocator.getService(GuiceIntoHK2Bridge.class);
 
     // TODO Set stage
-    Injector injector = Guice.createInjector(modules);
+    final Injector injector = Guice.createInjector(modules);
 
     guiceBridge.bridgeGuiceInjector(injector);
 

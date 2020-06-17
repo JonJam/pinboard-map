@@ -29,7 +29,7 @@
           secure="true">
         <SSLHostConfig>
             <Certificate 
-                  certificateKeystoreFile="conf/.localhost-keystore"
+                  certificateKeystoreFile="conf/.keystore"
                   certificateKeystorePassword="changeit"
                   type="RSA" />
         </SSLHostConfig>

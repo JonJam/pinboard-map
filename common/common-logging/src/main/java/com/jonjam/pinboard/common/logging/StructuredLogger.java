@@ -1,4 +1,4 @@
-package com.jonjam.pinboard.service.location;
+package com.jonjam.pinboard.common.logging;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -21,8 +21,7 @@ public class StructuredLogger {
     this.logger = logger;
   }
 
-  public static StructuredLogger getLogger(
-      final Class clazz) {
+  public static StructuredLogger getLogger(final Class clazz) {
     return new StructuredLogger(LogManager.getLogger(clazz));
   }
 

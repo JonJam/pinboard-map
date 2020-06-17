@@ -1,10 +1,12 @@
-package com.jonjam.pinboard.service.location;
+package com.jonjam.pinboard.service.location.svc.controller;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
 import static org.mockito.Mockito.when;
 
 import com.jonjam.pinboard.service.location.api.model.ExampleResponse;
+import com.jonjam.pinboard.service.location.svc.service.IInjectedService;
+import com.jonjam.pinboard.service.location.svc.service.TestDto;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -18,9 +20,7 @@ class ExampleControllerTest {
   private ExampleController exampleController;
 
   @BeforeEach
-  void beforeEach(
-      final @Mock IInjectedService injectedService
-  ) {
+  void beforeEach(final @Mock IInjectedService injectedService) {
     final TestDto value = new TestDto.Builder()
         .withProp(PROP_VALUE)
         .build();

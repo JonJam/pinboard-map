@@ -14,8 +14,8 @@ COPY docker/tomcat/catalina.properties $CATALINA_HOME/conf/catalina.properties
 COPY docker/tomcat/server.xml $CATALINA_HOME/conf/server.xml
 # Configure logging (https://tomcat.apache.org/tomcat-9.0-doc/logging.html#Considerations_for_production_usage)
 COPY docker/tomcat/logging.properties $CATALINA_HOME/conf/logging.properties
-# Configure HTTPS. Used keytool to generate self cert. (https://tomcat.apache.org/tomcat-9.0-doc/ssl-howto.html)
-COPY docker/tomcat/$env/localhost-keystore $CATALINA_HOME/conf/.localhost-keystore
+# Configure HTTPS (https://tomcat.apache.org/tomcat-9.0-doc/ssl-howto.html)
+COPY docker/tomcat/$env/.keystore $CATALINA_HOME/conf/.keystore
 
 # Removing default web applications (https://tomcat.apache.org/tomcat-9.0-doc/security-howto.html#Default_web_applications)
 RUN rm -r $CATALINA_HOME/webapps/*

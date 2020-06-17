@@ -1,4 +1,4 @@
-ARG VERSION=latest
+ARG VERSION
 FROM jonjam/pinboard-map-base-tomcat-container:$VERSION
 
 # This is to support integration tests using testcontainers.

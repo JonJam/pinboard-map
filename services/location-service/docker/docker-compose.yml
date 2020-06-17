@@ -3,6 +3,8 @@ services:
   location:
     build:
       context: ../.
+      args:
+        VERSION: dev
 
     container_name: location
 
@@ -18,4 +20,7 @@ services:
       - ../location-svc/build/exploded:/usr/local/tomcat/webapps/ROOT
 
     environment:
+      # Used to determine which environment configuration to load.
+      - ENVIRONMENT=${ENVIRONMENT:-dev}
+
       - SUSPEND_STARTUP=${SUSPEND_STARTUP:-n}

@@ -11,6 +11,3 @@ CATALINA_OPTS="$CATALINA_OPTS -Dcom.sun.management.jmxremote.authenticate=false"
 
 # Enabling Java Remote Debug (https://wiki.apache.org/tomcat/FAQ/Developing#Q1)
 CATALINA_OPTS="$CATALINA_OPTS -Xdebug -Xrunjdwp:transport=dt_socket,address=*:40${APP_ID},server=y,suspend=${SUSPEND_STARTUP:-n}"
-
-# Service configuration
-CATALINA_OPTS="$CATALINA_OPTS -Denvironment=${ENVIRONMENT}"

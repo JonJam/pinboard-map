@@ -1,5 +1,2 @@
 CATALINA_OPTS="$CATALINA_OPTS -Dport.http=80${APP_ID}"
 CATALINA_OPTS="$CATALINA_OPTS -Dport.https=84${APP_ID}"
-
-# Service configuration
-CATALINA_OPTS="$CATALINA_OPTS -Denvironment=${ENVIRONMENT}"

@@ -6,7 +6,8 @@ services:
       args:
         VERSION: dev
 
-    container_name: location
+    container_name: location-$USER
+    hostname: location-$USER
 
     image: jonjam/pinboard-map-location:master
 

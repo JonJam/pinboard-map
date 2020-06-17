@@ -4,31 +4,40 @@ import com.typesafe.config.Config;
 import com.typesafe.config.ConfigFactory;
 import org.apache.commons.lang3.StringUtils;
 
-public class ConfigurationLoader {
-    private static final String ENVIRONMENT_PROPERTY = "environment";
+public class ConfigurationLoader<T extends ServiceConfiguration> {
+    private static final String ENVIRONMENT = "ENVIRONMENT";
+    private static final String HOSTNAME = "HOSTNAME";
 
-    public <T extends ServiceConfiguration> T readConfig(final ConfigurationFactory<T> configurationFactory) {
-        final String environment = getEnvironment();
+    private static final String COMMON_CONFIGURATION_NAME = "common";
 
-        final Config commonConfig = ConfigFactory.load("common");
+    private final ConfigurationFactory<T> configurationFactory;
 
+    public ConfigurationLoader(final ConfigurationFactory<T> configurationFactory){
+        this.configurationFactory = configurationFactory;
+    }
+
+    public T readConfig() {
+        final String hostname = getEnvironmentVariable(HOSTNAME);
+        final Config hostnameConfig = ConfigFactory.load(hostname);
+
+        final String environment = getEnvironmentVariable(ENVIRONMENT);
         final Config environmentConfig = ConfigFactory.load(environment);
 
-        final Config mergedConfig = environmentConfig.withFallback(commonConfig);
+        final Config commonConfig = ConfigFactory.load(COMMON_CONFIGURATION_NAME);
 
-        // TODO override: host e.g. location-user
-        // TODO override: system env
+        final Config mergedConfig = hostnameConfig.withFallback(environmentConfig)
+                                                  .withFallback(commonConfig);
 
         return configurationFactory.getConfiguration(mergedConfig);
     }
 
-    private String getEnvironment(){
-        final String environment = System.getProperty(ENVIRONMENT_PROPERTY);
+    private String getEnvironmentVariable(final String environmentVariableName) {
+        final String value = System.getenv(environmentVariableName);
 
-        if (StringUtils.isBlank(environment)) {
-           throw new IllegalStateException(String.format("System property \"%s\" is not set.", ENVIRONMENT_PROPERTY));
+        if (StringUtils.isBlank(value)) {
+           throw new IllegalStateException(String.format("Environment variable \"%s\" is not set.", environmentVariableName));
         }
 
-        return environment;
+        return value;
     }
 }

@@ -27,4 +27,9 @@ dependencies {
     // Used as annotation processor for Immutables custom annotation.
     annotationProcessor project(':common:common-objectmodel')
     implementation project(':common:common-objectmodel')
+
+    // JDBC
+    implementation 'org.postgresql:postgresql'
+    implementation 'com.zaxxer:HikariCP'
+    implementation 'org.jdbi:jdbi'
 }

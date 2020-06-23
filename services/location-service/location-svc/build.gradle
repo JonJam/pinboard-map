@@ -12,6 +12,12 @@ dependencies {
     // Guice
     implementation 'com.google.inject:guice'
 
+    // JDBC
+//    TODO Remove ?
+    implementation 'org.postgresql:postgresql'
+    implementation 'com.zaxxer:HikariCP'
+    implementation 'org.jdbi:jdbi'
+
     // Project dependencies
     implementation project(':services:location-service:location-api')
 

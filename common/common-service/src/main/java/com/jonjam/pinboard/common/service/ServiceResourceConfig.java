@@ -4,6 +4,7 @@ import com.jonjam.pinboard.common.service.config.ConfigurationFactory;
 import com.jonjam.pinboard.common.service.config.ConfigurationLoader;
 import com.jonjam.pinboard.common.service.config.ServiceConfiguration;
 import com.jonjam.pinboard.common.service.feature.GuiceFeature;
+import com.jonjam.pinboard.common.service.module.DatabaseModule;
 import com.jonjam.pinboard.common.service.provider.JsonProvider;
 import org.glassfish.jersey.server.ResourceConfig;
 
@@ -34,12 +35,20 @@ public abstract class ServiceResourceConfig<T extends ServiceConfiguration> exte
 
   protected abstract Module getServiceModule();
 
+  protected boolean includeDatabaseModule() {
+    return false;
+  }
+
   protected abstract String getServiceControllerPackageName();
 
   private Module configureGuiceModules(final T config) {
     final List<Module> modules = List.of(
         getConfigurationModule(config),
         getServiceModule());
+
+    if (includeDatabaseModule()) {
+      modules.add(new DatabaseModule());
+    }
 
     return Modules.combine(modules);
   }

@@ -25,6 +25,11 @@ public class LocationServiceJAX extends ServiceResourceConfig<LocationServiceCon
   }
 
   @Override
+  protected boolean includeDatabaseModule() {
+    return true;
+  }
+
+  @Override
   protected String getServiceControllerPackageName() {
       return CONTROLLERS_PACKAGES;
   }

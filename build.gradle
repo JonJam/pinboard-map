@@ -60,6 +60,8 @@ def mockitoVersion = project.property('org.mockito.version')
 def testcontainersVersion = project.property('org.testcontainers.version')
 def sl4jVersion = project.property('org.slf4j.version')
 def feignVersion = project.property('io.github.openfeign.version')
+def postgresVersion = project.property('org.postgresql.version')
+def jnaVersion = project.property('net.java.dev.jna.version')
 
 // Java projects
 configure(subprojects.findAll { !it.name.endsWith('schema') }) {
@@ -118,6 +120,19 @@ configure(subprojects.findAll { !it.name.endsWith('schema') }) {
 
             // Config
             implementation 'com.typesafe:config:1.4.0'
+
+            // JDBC
+            implementation 'com.zaxxer:HikariCP:3.4.5'
+            implementation 'org.jdbi:jdbi:2.78'
+            implementation "org.postgresql:postgresql:${postgresVersion}"
+            testRuntimeOnly ("net.java.dev.jna:jna-platform:${jnaVersion}") {
+                // Resolving conflict with postgresql and testcontainers
+                force = true
+            }
+            testRuntimeOnly ("net.java.dev.jna:jna:${jnaVersion}") {
+                // Resolving conflict with postgresql and testcontainers
+                force = true
+            }
 
             // JUnit. See for setup: https://docs.gradle.org/current/userguide/java_testing.html#using_junit5
             testImplementation ("org.junit.jupiter:junit-jupiter-api:${junitVersion}") {
@@ -240,7 +255,7 @@ configure(subprojects.findAll { it.name.endsWith('schema') }) {
         constraints {
             // Liquibase and Postgres
             liquibaseRuntime 'org.liquibase:liquibase-core:3.8.1'
-            liquibaseRuntime 'org.postgresql:postgresql:42.2.13'
+            liquibaseRuntime "org.postgresql:postgresql:${postgresVersion}"
             liquibaseRuntime ("org.slf4j:slf4j-api:${sl4jVersion}") {
                 // Only specified to resolve conflicts when added.
                 force = true

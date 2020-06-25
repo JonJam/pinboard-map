@@ -1,22 +1,24 @@
 package com.jonjam.pinboard.common.service.module;
 
+import javax.sql.DataSource;
+
 import com.google.inject.AbstractModule;
 import com.jonjam.pinboard.common.service.database.ConnectionInfo;
 import com.jonjam.pinboard.common.service.database.ConnectionInfoProvider;
-import com.jonjam.pinboard.common.service.database.ConnectionPool;
-import com.jonjam.pinboard.common.service.database.ConnectionPoolProvider;
+import com.jonjam.pinboard.common.service.database.DataSourceProvider;
+import com.jonjam.pinboard.common.service.database.JdbiProvider;
+import org.jdbi.v3.core.Jdbi;
 
 public class DatabaseModule extends AbstractModule {
 
     @Override
     protected void configure() {
         // TODO Binds here
-        // TODO Need to create provider classes ?
         bind(ConnectionInfo.class).toProvider(ConnectionInfoProvider.class).asEagerSingleton();
-        bind(ConnectionPool.class).toProvider(ConnectionPoolProvider.class).asEagerSingleton();
+        bind(DataSource.class).toProvider(DataSourceProvider.class).asEagerSingleton();
+        bind(Jdbi.class).toProvider(JdbiProvider.class).asEagerSingleton();
 
         // TODO transaction stuff
 
-        // TODO jdbi
     }
 }

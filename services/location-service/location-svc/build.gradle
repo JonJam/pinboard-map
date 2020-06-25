@@ -14,9 +14,7 @@ dependencies {
 
     // JDBC
 //    TODO Remove ?
-    implementation 'org.postgresql:postgresql'
-    implementation 'com.zaxxer:HikariCP'
-    implementation 'org.jdbi:jdbi'
+    implementation 'org.jdbi:jdbi3-core'
 
     // Project dependencies
     implementation project(':services:location-service:location-api')

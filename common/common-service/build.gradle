@@ -31,5 +31,6 @@ dependencies {
     // JDBC
     implementation 'org.postgresql:postgresql'
     implementation 'com.zaxxer:HikariCP'
-    implementation 'org.jdbi:jdbi'
+    implementation 'org.jdbi:jdbi3-core'
+    implementation 'org.jdbi:jdbi3-postgres'
 }

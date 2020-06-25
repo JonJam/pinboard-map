@@ -7,7 +7,7 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
-// TODO Make less TA-y
+// TODO Refactor
 // TODO Move to own common project
 public interface DatabaseBackedEnum {
     class Hidden {

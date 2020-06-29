@@ -106,13 +106,15 @@ configure(subprojects.findAll { !it.name.endsWith('schema') }) {
                 force = true
             }
 
-            // log4j
+            // Logging
             implementation "org.apache.logging.log4j:log4j-api:${log4jVersion}"
             implementation "org.apache.logging.log4j:log4j-core:${log4jVersion}"
             // Required when running log4j in a web app. See: https://logging.apache.org/log4j/2.x/manual/webapp.html
             implementation "org.apache.logging.log4j:log4j-web:${log4jVersion}"
             // Required for async loggers: https://logging.apache.org/log4j/2.x/manual/async.html#Making_All_Loggers_Asynchronous
             implementation 'com.lmax:disruptor:3.4.2'
+            // Redirecting slf4j to log4j2: https://logging.apache.org/log4j/2.x/log4j-slf4j-impl/index.html
+            implementation "org.apache.logging.log4j:log4j-slf4j-impl:${log4jVersion}"
 
             implementation 'org.apache.commons:commons-lang3:3.9'
 
@@ -176,8 +178,6 @@ configure(subprojects.findAll { !it.name.endsWith('schema') }) {
             testImplementation "io.github.openfeign:feign-jackson:${feignVersion}"
             testImplementation "io.github.openfeign:feign-jaxrs:${feignVersion}"
             testImplementation "io.github.openfeign:feign-slf4j:${feignVersion}"
-            // For redirecting Feign logging via SLF4j to log4j2. See: https://logging.apache.org/log4j/2.x/log4j-slf4j-impl/index.html
-            testImplementation "org.apache.logging.log4j:log4j-slf4j-impl:${log4jVersion}"
         }
     }
     

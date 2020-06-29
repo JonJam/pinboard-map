@@ -1,5 +1,6 @@
 package com.jonjam.pinboard.common.service;
 
+import com.google.common.collect.Lists;
 import com.jonjam.pinboard.common.service.config.ConfigurationFactory;
 import com.jonjam.pinboard.common.service.config.ConfigurationLoader;
 import com.jonjam.pinboard.common.service.config.ServiceConfiguration;
@@ -22,7 +23,9 @@ public abstract class ServiceResourceConfig<T extends ServiceConfiguration> exte
   }
 
   public void postConstruct() {
-    final GuiceFeature guiceFeature = new GuiceFeature(configureGuiceModules(config));
+    final GuiceFeature guiceFeature = new GuiceFeature(
+        this.config.getGuiceConfiguration(),
+        configureGuiceModules(config));
 
     register(guiceFeature);
 
@@ -42,9 +45,10 @@ public abstract class ServiceResourceConfig<T extends ServiceConfiguration> exte
   protected abstract String getServiceControllerPackageName();
 
   private Module configureGuiceModules(final T config) {
-    final List<Module> modules = List.of(
+    final List<Module> modules = Lists.newArrayList(
         getConfigurationModule(config),
-        getServiceModule());
+        getServiceModule()
+    );
 
     if (includeDatabaseModule()) {
       modules.add(new DatabaseModule());

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="INFO">
+    <Appenders>
+        <Console name="Console" target="SYSTEM_OUT">
+            <!-- Specifying ISO-8859-1 charset for performance improvements: https://logging.apache.org/log4j/2.x/manual/layouts.html -->
+            <PatternLayout charset="ISO-8859-1">
+                <Pattern>[%d{HH:mm:ss,SSS}] [%p] %c{3} - %m%n</Pattern>
+            </PatternLayout>
+        </Console>
+    </Appenders>
+    <Loggers>
+        <!-- Turning off location information due to performance impact: https://logging.apache.org/log4j/2.x/manual/layouts.html#LocationInformation -->
+        <Root level="info" includeLocation="false">
+            <AppenderRef ref="Console"/>
+        </Root>
+    </Loggers>
+</Configuration>

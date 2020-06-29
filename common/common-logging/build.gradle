@@ -1,9 +1,10 @@
 dependencies {
-    // log4j
+    // Logging
     implementation 'org.apache.logging.log4j:log4j-api'
     implementation 'org.apache.logging.log4j:log4j-core'
     implementation 'org.apache.logging.log4j:log4j-web'
     implementation 'com.lmax:disruptor'
+    implementation 'org.apache.logging.log4j:log4j-slf4j-impl'
 
     // Apache
     implementation 'org.apache.commons:commons-lang3'

@@ -25,3 +25,6 @@ services:
       - ENVIRONMENT=${ENVIRONMENT:-dev}
 
       - SUSPEND_STARTUP=${SUSPEND_STARTUP:-n}
+
+      # log4j2: Use dev logging i.e. console.
+      - LOG4J_CONFIGURATION_FILE=log4j2-dev.xml

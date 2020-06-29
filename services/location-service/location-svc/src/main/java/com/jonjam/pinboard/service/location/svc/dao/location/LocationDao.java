@@ -1,74 +1,59 @@
 package com.jonjam.pinboard.service.location.svc.dao.location;
 
 import javax.inject.Inject;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.Collection;
 import java.util.Optional;
-import java.util.Set;
 
+import com.jonjam.pinboard.service.location.svc.dao.location.model.InsertLocationRequest;
 import com.jonjam.pinboard.service.location.svc.dao.location.model.Location;
+import com.jonjam.pinboard.service.location.svc.dao.location.model.LocationStatus;
 import org.jdbi.v3.core.Jdbi;
+import org.jdbi.v3.core.mapper.RowMapper;
+import org.jdbi.v3.core.statement.StatementContext;
 
 public class LocationDao {
 
     private final Jdbi jdbi;
 
+    private final LocationMapper locationMapper;
+
     @Inject
-    public LocationDao(final Jdbi jdbi) {
+    public LocationDao(
+        final Jdbi jdbi,
+        final LocationMapper locationMapper) {
         this.jdbi = jdbi;
+        this.locationMapper = locationMapper;
     }
 
-    public Location getByCodeOrThrow(final long locationCode) {
-        jdbi.withHandle(h -> {
+    // TODO Switch non with handle
 
-        });
-
-//        return jdbcHelper.query(
-//            "SELECT campaign_id, campaign_code, expiry_after_value, expiry_after_unit_id, applicable_from, applicable_through, applicable_time_zone_id, campaign_status_id, user_allocation_limit",
-//            "FROM campaign",
-//            "WHERE campaign_id = @id")
-//                         .withParameter("id", campaignId)
-//                         .mapResultsWith(this::campaignMapper)
-//                         .toOptional()
-//                         .orElseThrow(() -> new IllegalStateException("Campaign not found"));
+    public Optional<Location> getByCode(final long locationCode) {
+        return jdbi.withHandle(h -> h.createQuery("SELECT location_id, location_code, location_status_id FROM location WHERE location_code = :locationCode")
+                              .bind("locationCode", locationCode)
+                              .map(locationMapper)
+                              .findOne());
     }
 
-//    public long upsert(final UpsertCampaignDaoRequest upsertCampaignDaoRequest) {
-//        return jdbcHelper.insertInto("campaign")
-//                         .setValue("campaign_code", upsertCampaignDaoRequest.getCampaignCode())
-//                         .setValue("expiry_after_value", upsertCampaignDaoRequest.getExpiryAfterValue())
-//                         .setValue("expiry_after_unit_id", upsertCampaignDaoRequest.getExpiryAfterUnit().map(PromotionCodeExpiryAfterUnit::getId))
-//                         .setValue("applicable_from", upsertCampaignDaoRequest.getApplicableFrom())
-//                         .setValue("applicable_through", upsertCampaignDaoRequest.getApplicableThrough())
-//                         .setValue("applicable_time_zone_id", upsertCampaignDaoRequest.getApplicableTimeZone().map(CampaignTimeZone::getId))
-//                         .setValue("campaign_status_id", upsertCampaignDaoRequest.getCampaignStatus().getId())
-//                         .setValue("user_allocation_limit", upsertCampaignDaoRequest.getUserAllocationLimit())
-//                         .setToNow("updated_at")
-//                         .setValue("updated_by", callerIdentity.getDisplayName())
-//                         .onConflict("campaign_code")
-//                         .doUpdateUsingInsertValues()
-//                         .executeAndReturnGeneratedKey();
-//    }
+    public Location insertLocation(final InsertLocationRequest request) {
+        return jdbi.withHandle(h -> h.createUpdate("INSERT INTO location (location_status_id) VALUES (:locationStatusId)")
+                                     .bind("locationStatusId", request.getLocationStatus().getId())
+                                     .executeAndReturnGeneratedKeys()
+                                     .map(locationMapper)
+                                     .one());
+    }
 
-    private Location locationMapper(final QueryResult queryResult) {
-//        final Optional<PromotionCodeExpiryAfterUnit> expiryAfterUnit = queryResult.getOptionalInt("expiry_after_unit_id")
-//                                                                                  .flatMap(PromotionCodeExpiryAfterUnit::fromDatabaseRepresentation);
-//
-//        final CampaignCode campaignCode = CampaignCode.valueOf(queryResult.getString("campaign_code"));
-//        final CampaignStatus campaignStatus = CampaignStatus.fromDatabaseRepresentation(queryResult.getInt("campaign_status_id"))
-//                                                            .orElseThrow(() -> ILLEGAL_CAMPAIGN_STATUS_EXCEPTION);
-//        final CampaignTimeZone applicableTimeZone = CampaignTimeZone.fromDatabaseRepresentation(queryResult.getInt("applicable_time_zone_id"))
-//                                                                    .orElseThrow(() -> ILLEGAL_CAMPAIGN_TIME_ZONE_EXCEPTION);
-//
-//        return new Campaign.Builder()
-//            .withCampaignId(queryResult.getLong("campaign_id"))
-//            .withCampaignCode(campaignCode)
-//            .withExpiryAfterValue(queryResult.getOptionalInt("expiry_after_value"))
-//            .withExpiryAfterUnit(expiryAfterUnit)
-//            .withApplicableFrom(queryResult.getLocalDateTime("applicable_from"))
-//            .withApplicableThrough(queryResult.getOptionalLocalDateTime("applicable_through"))
-//            .withApplicableTimeZone(applicableTimeZone)
-//            .withCampaignStatus(campaignStatus)
-//            .withUserAllocationLimit(queryResult.getInt("user_allocation_limit"))
-//            .build();
+    public static class LocationMapper implements RowMapper<Location> {
+        @Override
+        public Location map(final ResultSet rs, final StatementContext ctx) throws SQLException {
+            final LocationStatus status = LocationStatus.fromDatabaseRepresentation(rs.getInt("location_status_id"));
+
+            return new Location.Builder()
+                .withLocationId(rs.getLong("location_id"))
+                .withLocationCode(rs.getLong("location_code"))
+                .withLocationStatus(status)
+                .build();
+        }
     }
 }

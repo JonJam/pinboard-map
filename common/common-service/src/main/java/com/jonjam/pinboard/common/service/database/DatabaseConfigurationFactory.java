@@ -19,7 +19,7 @@ public class DatabaseConfigurationFactory extends ConfigurationFactory<DatabaseC
         final boolean logUnclosedConnections = config.getBoolean("database.logUnclosedConnections");
         final int socketTimeout = config.getInt("database.socketTimeout");
 
-        return new DatabaseConfiguration.Builder()
+        final DatabaseConfiguration.Builder builder = new DatabaseConfiguration.Builder()
             .withDatabaseName(databaseName)
             .withPort(port)
             .withHost(host)
@@ -29,7 +29,17 @@ public class DatabaseConfigurationFactory extends ConfigurationFactory<DatabaseC
             .withUseSSL(useSSL)
             .withLogLevel(logLevel)
             .withLogUnclosedConnections(logUnclosedConnections)
-            .withSocketTimeout(socketTimeout)
-            .build();
+            .withSocketTimeout(socketTimeout);
+
+        // Optional support for specifying username and password via configuration.
+        if (config.hasPath("database.username")) {
+            builder.withUsername(config.getString("database.username"));
+        }
+
+        if (config.hasPath("database.password")) {
+            builder.withPassword(config.getString("database.password"));
+        }
+
+        return builder.build();
     }
 }

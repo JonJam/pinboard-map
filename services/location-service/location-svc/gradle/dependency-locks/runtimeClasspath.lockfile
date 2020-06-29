@@ -35,6 +35,7 @@ org.antlr:antlr4-runtime:4.7.2
 org.apache.commons:commons-lang3:3.9
 org.apache.logging.log4j:log4j-api:2.12.0
 org.apache.logging.log4j:log4j-core:2.12.0
+org.apache.logging.log4j:log4j-slf4j-impl:2.12.0
 org.apache.logging.log4j:log4j-web:2.12.0
 org.checkerframework:checker-compat-qual:2.0.0
 org.checkerframework:checker-qual:2.10.0

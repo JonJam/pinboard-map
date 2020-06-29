@@ -1,5 +1,7 @@
 package com.jonjam.pinboard.common.service.database;
 
+import java.util.Optional;
+
 import com.jonjam.pinboard.common.objectmodel.Immutable;
 
 // TODO Split into driver vs pool
@@ -8,6 +10,10 @@ public abstract class DatabaseConfiguration {
     public abstract String getDatabaseName();
 
     public abstract String getHost();
+
+    public abstract Optional<String> getUsername();
+
+    public abstract Optional<String> getPassword();
 
     public abstract int getPort();
 

@@ -45,8 +45,6 @@ public class JdbiProvider implements Provider<Jdbi> {
     // Originally thought to create this in its own provider class, however Guice
     // recommends to avoid binding closeable resources: https://github.com/google/guice/wiki/Avoid-Injecting-Closable-Resources
     private DataSource createDataSource() {
-        // TODO See jdbi docs for high availability
-
         // Other things that could setup are:
         // - Driver doesn't support slow query logging: https://github.com/brettwooldridge/HikariCP#log-statement-text--slow-query-logging
         // - Caching already enabled by default: https://github.com/brettwooldridge/HikariCP/wiki/FAQ#q-how-to-i-properly-enable-preparedstatement-caching-for-postgresql
@@ -57,6 +55,9 @@ public class JdbiProvider implements Provider<Jdbi> {
         config.setMaximumPoolSize(connectionInfo.getMaximumPoolSize());
         config.setPoolName(connectionInfo.getDatabaseName());
         config.setLeakDetectionThreshold(connectionInfo.getLeakDetectionThreshold());
+
+        // Same as default value but expliclty setting as value is updated in AutoTransactionHandleContext.
+        config.setAutoCommit(true);
 
         config.setUsername(connectionInfo.getUsername());
         config.setPassword(connectionInfo.getPassword());

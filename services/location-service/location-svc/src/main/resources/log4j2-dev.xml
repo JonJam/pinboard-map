@@ -10,7 +10,7 @@
     </Appenders>
     <Loggers>
         <!-- Turning off location information due to performance impact: https://logging.apache.org/log4j/2.x/manual/layouts.html#LocationInformation -->
-        <Root level="info" includeLocation="false">
+        <Root level="debug" includeLocation="false">
             <AppenderRef ref="Console"/>
         </Root>
     </Loggers>

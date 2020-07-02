@@ -25,6 +25,10 @@ public class StructuredLogger {
     return new StructuredLogger(LogManager.getLogger(clazz));
   }
 
+  public LogEntryBuilder debug() {
+    return new LogEntryBuilder(logger, Level.DEBUG);
+  }
+
   public LogEntryBuilder info() {
     return new LogEntryBuilder(logger, Level.INFO);
   }
@@ -50,48 +54,35 @@ public class StructuredLogger {
       this.data = new LinkedHashMap<>();
     }
 
-    /**
-     * Adds key value pair to the log entry builder.
-     * @param key The key to use.
-     * @param value The value to store.
-     * @return this.
-     */
-    public LogEntryBuilder withData(
-        final String key,
-        final Object value) {
+    public LogEntryBuilder withData(final String key, final Object value) {
 
       data.put(key, value);
 
       return this;
     }
 
-    public LogEntryBuilder withData(
-        final Map<String, ?> map) {
+    public LogEntryBuilder withData(final Map<String, ?> map) {
       map.forEach(this::withData);
+
       return this;
     }
 
-    public void write(
-        final String message) {
+    public void write(final String message) {
       // Using lambdas for lazy logging. See: https://logging.apache.org/log4j/2.x/manual/api.html#Java_8_lambda_support_for_lazy_logging
       logger.log(logLevel, () -> buildMessageWithData(message));
     }
 
-    public void write(
-        final Throwable error) {
+    public void write(final Throwable error) {
       // Using lambdas for lazy logging. See: https://logging.apache.org/log4j/2.x/manual/api.html#Java_8_lambda_support_for_lazy_logging
       logger.log(logLevel, () -> buildMessageWithData(null), error);
     }
 
-    public void write(
-        final String message,
-        final Throwable error) {
+    public void write(final String message, final Throwable error) {
       // Using lambdas for lazy logging. See: https://logging.apache.org/log4j/2.x/manual/api.html#Java_8_lambda_support_for_lazy_logging
       logger.log(logLevel, () -> buildMessageWithData(message), error);
     }
 
-    String buildMessageWithData(
-        String message) {
+    String buildMessageWithData(String message) {
 
       if (StringUtils.isEmpty(message)) {
         message = StringUtils.EMPTY;
@@ -109,7 +100,7 @@ public class StructuredLogger {
       } catch (final JsonProcessingException exception) {
         LOG.error()
             .withData("data", this.data.toString())
-            .write("Unable to serialise additional log attributes");
+            .write("Unable to serialise additional log attributes.");
 
         return message;
       }

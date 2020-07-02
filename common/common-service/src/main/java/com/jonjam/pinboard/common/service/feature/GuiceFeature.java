@@ -1,8 +1,11 @@
 package com.jonjam.pinboard.common.service.feature;
 
+import com.google.common.collect.ObjectArrays;
 import com.google.inject.Guice;
 import com.google.inject.Injector;
 import com.google.inject.Module;
+
+import javax.annotation.Priority;
 import javax.ws.rs.core.Feature;
 import javax.ws.rs.core.FeatureContext;
 
@@ -14,6 +17,7 @@ import org.glassfish.jersey.internal.inject.InjectionManager;
 import org.jvnet.hk2.guice.bridge.api.GuiceBridge;
 import org.jvnet.hk2.guice.bridge.api.GuiceIntoHK2Bridge;
 
+@Priority(1)
 public class GuiceFeature implements Feature {
   private final GuiceConfiguration guiceConfiguration;
   private final Module[] modules;

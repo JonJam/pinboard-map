@@ -1,7 +1,6 @@
 package com.jonjam.pinboard.service.location.svc.module;
 
 import com.google.inject.AbstractModule;
-import com.jonjam.pinboard.service.location.svc.dao.location.LocationDao;
 import com.jonjam.pinboard.service.location.svc.service.IInjectedService;
 import com.jonjam.pinboard.service.location.svc.service.InjectedService;
 

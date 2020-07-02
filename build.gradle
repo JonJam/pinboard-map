@@ -61,9 +61,9 @@ def testcontainersVersion = project.property('org.testcontainers.version')
 def sl4jVersion = project.property('org.slf4j.version')
 def feignVersion = project.property('io.github.openfeign.version')
 def postgresVersion = project.property('org.postgresql.version')
-
 def jnaVersion = project.property('net.java.dev.jna.version')
 def jdbiVersion = project.property('org.jdbi.version')
+def guiceVersion = project.property('com.google.inject.guice.version')
 
 // Java projects
 configure(subprojects.findAll { !it.name.endsWith('schema') }) {
@@ -99,9 +99,9 @@ configure(subprojects.findAll { !it.name.endsWith('schema') }) {
             implementation "com.fasterxml.jackson.datatype:jackson-datatype-jsr310:${jacksonVersion}"
 
             // Guice
-            implementation 'com.google.inject.extensions:guice-servlet:4.2.2'
+            implementation "com.google.inject.extensions:guice-servlet:${guiceVersion}"
             implementation 'org.glassfish.hk2:guice-bridge:2.5.0'
-            implementation ('com.google.inject:guice:4.2.2') {
+            implementation ("com.google.inject:guice:${guiceVersion}") {
                 // Resolving conflict - guice-servlet / guice-bridge
                 force = true
             }

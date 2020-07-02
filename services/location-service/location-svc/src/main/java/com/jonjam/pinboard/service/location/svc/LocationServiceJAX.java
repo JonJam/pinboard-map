@@ -25,7 +25,7 @@ public class LocationServiceJAX extends ServiceResourceConfig<LocationServiceCon
   }
 
   @Override
-  protected boolean includeDatabaseModule() {
+  protected boolean useDb() {
     return true;
   }
 

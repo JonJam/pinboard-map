@@ -50,7 +50,6 @@ public abstract class AbstractRemoteExceptionMapper implements ExceptionMapper<E
                                                       .getName();
         final JsonNode exceptionDetails = objectMapper.valueToTree(exceptionToReturn);
 
-//        new RemoteExceptionDto(exceptionType, exceptionDetails)
         final RemoteExceptionDto body = new RemoteExceptionDto.Builder()
             .withExceptionType(exceptionType)
             .withExceptionDetails(exceptionDetails)

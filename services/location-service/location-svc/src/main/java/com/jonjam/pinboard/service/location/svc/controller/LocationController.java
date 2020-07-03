@@ -53,10 +53,7 @@ public class LocationController implements LocationService {
 
     final Location createdLocation = locationDao.insertLocation(dbRequest);
 
-    // TODO Remove - testing
-    throw new IllegalStateException("should rollback insert");
-
-//    return convertToLocationDto(createdLocation);
+    return convertToLocationDto(createdLocation);
   }
 
   private LocationDto convertToLocationDto(final Location createdLocation) {

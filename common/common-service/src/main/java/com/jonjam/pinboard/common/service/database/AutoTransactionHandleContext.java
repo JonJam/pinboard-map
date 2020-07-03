@@ -83,33 +83,6 @@ public class AutoTransactionHandleContext implements AutoCloseable {
         isRollback = true;
     }
 
-    // TODO This should be called by whatever is executing the queries. ??
-//
-//    /**
-//     * This method performs connection open/close count and responsible for closing connection
-//     * (unless there is a transaction open at the moment)
-//     */
-//    public void closeConnection(Connection conn) {
-//        if (this.currentConnection == null) {
-//            LOGGER.warn()
-//                  .write("current connection already closed");
-//            return;
-//        }
-//
-//        if (conn != this.currentConnection && conn != this.currentConnection.unwrapConnection()) {
-//            throw new IllegalArgumentException("Don't know how to close this connection");
-//        }
-//        try {
-//            if (this.currentConnection.getAutoCommit()) { // can eagerly release connection
-//                releaseConnection();
-//            } else {  // If in transaction - connection will be closed by transaction termination
-//                LOG.debug().write("still in transaction - closing delegated to transaction handling code");
-//            }
-//        } catch (SQLException e) {
-//            throw new DatabaseException(e);
-//        }
-//    }
-
     @Override
     public void close() {
         try {

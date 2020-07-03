@@ -5,7 +5,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Optional;
 
-import com.jonjam.pinboard.common.service.database.HandleWrapper;
+import com.jonjam.pinboard.common.database.HandleWrapper;
 import com.jonjam.pinboard.service.location.svc.dao.location.model.InsertLocationRequest;
 import com.jonjam.pinboard.service.location.svc.dao.location.model.Location;
 import com.jonjam.pinboard.service.location.svc.dao.location.model.LocationStatus;

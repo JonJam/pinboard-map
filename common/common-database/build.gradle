@@ -1,0 +1,24 @@
+dependencies {
+    // javax
+    implementation 'javax.inject:javax.inject'
+
+    // JDBC
+    implementation 'org.postgresql:postgresql'
+    implementation 'com.zaxxer:HikariCP'
+    implementation 'org.jdbi:jdbi3-core'
+    implementation 'org.jdbi:jdbi3-postgres'
+
+    // Config
+    implementation 'com.typesafe:config'
+
+    // Immutables
+    annotationProcessor 'org.immutables:value'
+    compileOnly 'org.immutables:value-annotations'
+
+    // Project dependencies
+    implementation project(':common:common-configuration')
+    // Used as annotation processor for Immutables custom annotation.
+    annotationProcessor project(':common:common-objectmodel')
+    implementation project(':common:common-objectmodel')
+    implementation project(':common:common-logging')
+}

@@ -1,4 +1,4 @@
-package com.jonjam.pinboard.common.service.database;
+package com.jonjam.pinboard.common.database;
 
 import javax.inject.Inject;
 import javax.inject.Provider;
@@ -6,6 +6,7 @@ import javax.sql.DataSource;
 
 import java.sql.SQLException;
 
+import com.jonjam.pinboard.common.database.config.ConnectionInfo;
 import com.jonjam.pinboard.common.logging.StructuredLogger;
 import com.zaxxer.hikari.HikariConfig;
 import com.zaxxer.hikari.HikariDataSource;

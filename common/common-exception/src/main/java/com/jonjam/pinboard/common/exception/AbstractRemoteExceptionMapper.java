@@ -1,4 +1,4 @@
-package com.jonjam.pinboard.common.service.exception;
+package com.jonjam.pinboard.common.exception;
 
 import javax.ws.rs.WebApplicationException;
 import javax.ws.rs.core.MediaType;

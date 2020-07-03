@@ -1,4 +1,4 @@
-package com.jonjam.pinboard.common.service.config;
+package com.jonjam.pinboard.common.configuration;
 
 import com.typesafe.config.Config;
 

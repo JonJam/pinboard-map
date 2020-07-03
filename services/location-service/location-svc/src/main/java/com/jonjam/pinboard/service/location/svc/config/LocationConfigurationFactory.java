@@ -1,12 +1,12 @@
 package com.jonjam.pinboard.service.location.svc.config;
 
-import com.jonjam.pinboard.common.service.config.ConfigurationFactory;
+import com.jonjam.pinboard.common.configuration.ConfigurationFactory;
+import com.jonjam.pinboard.common.database.config.DatabaseConfiguration;
+import com.jonjam.pinboard.common.database.config.DatabaseConfigurationFactory;
 import com.jonjam.pinboard.common.service.config.GuiceConfiguration;
 import com.jonjam.pinboard.common.service.config.GuiceConfigurationFactory;
 import com.jonjam.pinboard.common.service.config.SelfConfiguration;
 import com.jonjam.pinboard.common.service.config.SelfConfigurationFactory;
-import com.jonjam.pinboard.common.service.database.DatabaseConfiguration;
-import com.jonjam.pinboard.common.service.database.DatabaseConfigurationFactory;
 import com.typesafe.config.Config;
 
 public class LocationConfigurationFactory extends ConfigurationFactory<LocationServiceConfiguration> {

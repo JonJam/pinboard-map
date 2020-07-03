@@ -1,7 +1,6 @@
-package com.jonjam.pinboard.common.service.database;
+package com.jonjam.pinboard.common.database.config;
 
-import com.jonjam.pinboard.common.service.config.ConfigurationFactory;
-import com.jonjam.pinboard.common.service.config.SelfConfiguration;
+import com.jonjam.pinboard.common.configuration.ConfigurationFactory;
 import com.typesafe.config.Config;
 
 public class DatabaseConfigurationFactory extends ConfigurationFactory<DatabaseConfiguration> {

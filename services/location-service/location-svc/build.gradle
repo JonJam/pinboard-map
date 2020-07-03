@@ -16,6 +16,7 @@ dependencies {
     implementation 'org.jdbi:jdbi3-core'
 
     // Project dependencies
+    implementation project(':common:common-database')
     implementation project(':services:location-service:location-api')
 
     // JUnit

@@ -1,6 +1,5 @@
 package com.jonjam.pinboard.common.service.feature;
 
-import com.google.common.collect.ObjectArrays;
 import com.google.inject.Guice;
 import com.google.inject.Injector;
 import com.google.inject.Module;

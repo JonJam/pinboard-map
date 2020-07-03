@@ -1,4 +1,4 @@
-package com.jonjam.pinboard.common.service.database;
+package com.jonjam.pinboard.common.database.config;
 
 import com.jonjam.pinboard.common.objectmodel.Immutable;
 

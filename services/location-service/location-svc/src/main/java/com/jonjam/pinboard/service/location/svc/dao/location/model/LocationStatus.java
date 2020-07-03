@@ -1,6 +1,6 @@
 package com.jonjam.pinboard.service.location.svc.dao.location.model;
 
-import com.jonjam.pinboard.common.service.database.DatabaseBackedEnum;
+import com.jonjam.pinboard.common.database.DatabaseBackedEnum;
 
 public enum LocationStatus implements DatabaseBackedEnum {
     ACTIVE(1, "Active");

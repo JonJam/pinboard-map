@@ -1,0 +1,10 @@
+dependencies {
+    // Apache
+    implementation 'org.apache.commons:commons-lang3'
+
+    // Config
+    implementation 'com.typesafe:config'
+
+    // Project dependencies
+    implementation project(':common:common-objectmodel')
+}

@@ -1,4 +1,4 @@
-package com.jonjam.pinboard.common.service.exception;
+package com.jonjam.pinboard.common.exception;
 
 import javax.inject.Inject;
 import java.io.IOException;

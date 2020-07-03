@@ -2,11 +2,11 @@ package com.jonjam.pinboard.common.service.module;
 
 import com.google.inject.AbstractModule;
 import com.google.inject.servlet.RequestScoped;
-import com.jonjam.pinboard.common.service.database.AutoTransactionHandleContext;
-import com.jonjam.pinboard.common.service.database.AutoTransactionHandleContextProvider;
-import com.jonjam.pinboard.common.service.database.ConnectionInfo;
-import com.jonjam.pinboard.common.service.database.ConnectionInfoProvider;
-import com.jonjam.pinboard.common.service.database.JdbiProvider;
+import com.jonjam.pinboard.common.database.AutoTransactionHandleContext;
+import com.jonjam.pinboard.common.database.AutoTransactionHandleContextProvider;
+import com.jonjam.pinboard.common.database.JdbiProvider;
+import com.jonjam.pinboard.common.database.config.ConnectionInfo;
+import com.jonjam.pinboard.common.database.config.ConnectionInfoProvider;
 import org.jdbi.v3.core.Jdbi;
 
 public class DatabaseModule extends AbstractModule {

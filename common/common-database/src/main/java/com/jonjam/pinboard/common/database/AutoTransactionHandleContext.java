@@ -1,4 +1,4 @@
-package com.jonjam.pinboard.common.service.database;
+package com.jonjam.pinboard.common.database;
 
 import com.jonjam.pinboard.common.logging.StructuredLogger;
 import org.jdbi.v3.core.Handle;

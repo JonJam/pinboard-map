@@ -2,6 +2,9 @@
 rootProject.name = "pinboard-map"
 
 // https://docs.gradle.org/current/userguide/multi_project_builds.html
+include("common:common-configuration")
+include("common:common-database")
+include("common:common-exception")
 include("common:common-logging")
 include("common:common-objectmodel")
 include("common:common-service")

@@ -11,7 +11,7 @@ import javax.ws.rs.container.DynamicFeature;
 import javax.ws.rs.container.ResourceInfo;
 import javax.ws.rs.core.FeatureContext;
 
-import com.jonjam.pinboard.common.service.database.AutoTransactionHandleContext;
+import com.jonjam.pinboard.common.database.AutoTransactionHandleContext;
 import org.glassfish.jersey.server.ContainerResponse;
 
 public class AutoDatabaseTransactionFeature implements DynamicFeature {

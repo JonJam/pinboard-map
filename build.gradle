@@ -75,8 +75,9 @@ configure(subprojects.findAll { !it.name.endsWith('schema') }) {
     // Use dependency constraints. See https://docs.gradle.org/current/userguide/declaring_dependencies.html#declaring_a_dependency_without_version
     dependencies {
         constraints {
-            // Java API for RESTful Web Services
+            // javax
             implementation 'javax.ws.rs:javax.ws.rs-api:2.1.1'
+            implementation 'javax.inject:javax.inject:1'
 
             // Jersey
             implementation "org.glassfish.jersey.containers:jersey-container-servlet:${jerseyVersion}"
@@ -232,11 +233,11 @@ configure(subprojects.findAll { it.name.endsWith('svc') }) {
         compileOnly 'org.immutables:value-annotations'
 
         // Project dependencies
+        implementation project(':common:common-configuration')
+        implementation project(':common:common-logging')
         // Used as annotation processor for Immutables custom annotation.
         annotationProcessor project(':common:common-objectmodel')
         implementation project(':common:common-objectmodel')
-
-        implementation project(':common:common-logging')
         implementation project(':common:common-service')
     }
 

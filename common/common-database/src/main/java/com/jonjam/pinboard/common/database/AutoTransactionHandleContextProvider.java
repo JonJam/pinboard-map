@@ -1,10 +1,10 @@
-package com.jonjam.pinboard.common.service.database;
+package com.jonjam.pinboard.common.database;
 
 import javax.inject.Inject;
+import javax.inject.Provider;
 
 import java.util.Optional;
 
-import com.google.inject.Provider;
 import org.jdbi.v3.core.Jdbi;
 
 public class AutoTransactionHandleContextProvider implements Provider<AutoTransactionHandleContext> {

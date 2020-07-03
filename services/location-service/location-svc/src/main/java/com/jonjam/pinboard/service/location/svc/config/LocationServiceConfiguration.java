@@ -1,8 +1,8 @@
 package com.jonjam.pinboard.service.location.svc.config;
 
+import com.jonjam.pinboard.common.database.config.DatabaseConfiguration;
 import com.jonjam.pinboard.common.objectmodel.Immutable;
 import com.jonjam.pinboard.common.service.config.ServiceConfiguration;
-import com.jonjam.pinboard.common.service.database.DatabaseConfiguration;
 
 @Immutable
 public abstract class LocationServiceConfiguration extends ServiceConfiguration {

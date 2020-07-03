@@ -1,11 +1,11 @@
 package com.jonjam.pinboard.common.service;
 
 import com.google.common.collect.Lists;
-import com.jonjam.pinboard.common.service.config.ConfigurationFactory;
-import com.jonjam.pinboard.common.service.config.ConfigurationLoader;
+import com.jonjam.pinboard.common.configuration.ConfigurationFactory;
+import com.jonjam.pinboard.common.configuration.ConfigurationLoader;
 import com.jonjam.pinboard.common.service.config.ServiceConfiguration;
-import com.jonjam.pinboard.common.service.exception.AbstractRemoteExceptionMapper;
-import com.jonjam.pinboard.common.service.exception.InternalRemoteExceptionMapper;
+import com.jonjam.pinboard.common.exception.AbstractRemoteExceptionMapper;
+import com.jonjam.pinboard.common.exception.InternalRemoteExceptionMapper;
 import com.jonjam.pinboard.common.service.feature.GuiceFeature;
 import com.jonjam.pinboard.common.service.feature.AutoDatabaseTransactionFeature;
 import com.jonjam.pinboard.common.service.module.DatabaseModule;

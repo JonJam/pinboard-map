@@ -1,4 +1,4 @@
-package com.jonjam.pinboard.common.service.database;
+package com.jonjam.pinboard.common.database;
 
 import javax.inject.Inject;
 
@@ -28,7 +28,7 @@ public class HandleWrapper {
     }
 
     /**
-     * Performs a SqlStatement with a transaction i.e. insert, update, delete.
+     * Performs a SqlStatement within a transaction i.e. insert, update, delete.
      *
      * @param createSqlStatement A function to create a SQL statement.
      * @param <T> The type of SQL statement.

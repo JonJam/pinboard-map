@@ -1,5 +1,6 @@
 package com.jonjam.pinboard.common.service.config;
 
+import com.jonjam.pinboard.common.configuration.ConfigurationFactory;
 import com.typesafe.config.Config;
 
 public class SelfConfigurationFactory extends ConfigurationFactory<SelfConfiguration> {

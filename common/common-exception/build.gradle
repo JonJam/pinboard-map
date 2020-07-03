@@ -1,0 +1,18 @@
+dependencies {
+    // javax
+    implementation 'javax.inject:javax.inject'
+    implementation 'javax.ws.rs:javax.ws.rs-api'
+
+    // Jackson
+    implementation 'com.fasterxml.jackson.core:jackson-databind'
+
+    // Immutables
+    annotationProcessor 'org.immutables:value'
+    compileOnly 'org.immutables:value-annotations'
+
+    // Project dependencies
+    implementation project(':common:common-logging')
+    // Used as annotation processor for Immutables custom annotation.
+    annotationProcessor project(':common:common-objectmodel')
+    implementation project(':common:common-objectmodel')
+}

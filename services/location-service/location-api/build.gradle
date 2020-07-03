@@ -1,5 +1,5 @@
 dependencies {
-    // Java API for RESTful Web Services
+    // javax
     implementation 'javax.ws.rs:javax.ws.rs-api'
 
     // Jackson

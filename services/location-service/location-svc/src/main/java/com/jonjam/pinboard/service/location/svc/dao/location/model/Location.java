@@ -12,6 +12,5 @@ public abstract class Location {
 
     public abstract LocationStatus getLocationStatus();
 
-    public static class Builder extends ImmutableLocation.Builder {}
+    public static class Builder extends ImmutableLocation.Builder { }
 }
-

@@ -7,6 +7,5 @@ public abstract class InsertLocationRequest {
 
     public abstract LocationStatus getLocationStatus();
 
-    public static class Builder extends ImmutableInsertLocationRequest.Builder {}
+    public static class Builder extends ImmutableInsertLocationRequest.Builder { }
 }
-

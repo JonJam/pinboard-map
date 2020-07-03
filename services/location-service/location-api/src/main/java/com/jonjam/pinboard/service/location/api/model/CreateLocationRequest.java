@@ -9,6 +9,6 @@ public abstract class CreateLocationRequest {
 
     public abstract LocationStatusDto getStatus();
 
-    public static class Builder extends ImmutableCreateLocationRequest.Builder {}
+    public static class Builder extends ImmutableCreateLocationRequest.Builder { }
 }
 

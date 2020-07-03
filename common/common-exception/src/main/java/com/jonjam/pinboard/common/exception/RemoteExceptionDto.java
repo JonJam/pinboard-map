@@ -9,5 +9,5 @@ public abstract class RemoteExceptionDto {
 
     public abstract JsonNode getExceptionDetails();
 
-    public static class Builder extends ImmutableRemoteExceptionDto.Builder {}
+    public static class Builder extends ImmutableRemoteExceptionDto.Builder { }
 }

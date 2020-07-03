@@ -32,7 +32,7 @@ public abstract class AbstractRemoteExceptionMapper implements ExceptionMapper<E
         } else if (e instanceof RuntimeException) {
             exceptionToReturn = new WebApplicationException(e);
             statusCode = Response.Status.INTERNAL_SERVER_ERROR.getStatusCode();
-        }else {
+        } else {
             statusCode = Response.Status.BAD_REQUEST.getStatusCode();
         }
 

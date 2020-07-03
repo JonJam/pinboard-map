@@ -41,8 +41,7 @@ public class AutoDatabaseTransactionFeature implements DynamicFeature {
 
         @Override
         public void filter(final ContainerRequestContext requestContext) {
-            // trigger creation of transaction context, and enable auto-management
-            // BUT DO NOT IMMEDIATELY START A TRANSACTION FOR EVERY REQUEST!
+            // Trigger creation of transaction context.
             autoTransactionHandleContextProvider.get();
         }
 
@@ -50,7 +49,7 @@ public class AutoDatabaseTransactionFeature implements DynamicFeature {
         public void filter(
             final ContainerRequestContext requestContext,
             final ContainerResponseContext responseContext) {
-            // NOTE: wrap in try-with-resources in order to perform any pending commit/rollback and release of the connection in the "finally" phase...
+            // Perform any pending commit/rollback and release of the connection upon close.
             try (final AutoTransactionHandleContext context = autoTransactionHandleContextProvider.get()) {
                 if (responseContext instanceof ContainerResponse) {
                     final ContainerResponse containerResponse = (ContainerResponse) responseContext;

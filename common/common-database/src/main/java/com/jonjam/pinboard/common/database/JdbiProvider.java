@@ -6,7 +6,7 @@ import javax.sql.DataSource;
 
 import java.sql.SQLException;
 
-import com.jonjam.pinboard.common.database.config.ConnectionInfo;
+import com.jonjam.pinboard.common.database.config.DatabaseInfo;
 import com.jonjam.pinboard.common.logging.StructuredLogger;
 import com.zaxxer.hikari.HikariConfig;
 import com.zaxxer.hikari.HikariDataSource;
@@ -18,11 +18,11 @@ import org.jdbi.v3.postgres.PostgresPlugin;
 
 public class JdbiProvider implements Provider<Jdbi> {
 
-    private final ConnectionInfo connectionInfo;
+    private final DatabaseInfo databaseInfo;
 
     @Inject
-    public JdbiProvider(final ConnectionInfo connectionInfo) {
-        this.connectionInfo = connectionInfo;
+    public JdbiProvider(final DatabaseInfo databaseInfo) {
+        this.databaseInfo = databaseInfo;
     }
 
     @Override
@@ -52,31 +52,30 @@ public class JdbiProvider implements Provider<Jdbi> {
         final HikariConfig config = new HikariConfig();
         // Using preferred datasource class name. See: https://github.com/brettwooldridge/HikariCP#essentials
         config.setDataSourceClassName("org.postgresql.ds.PGSimpleDataSource");
-        config.setMaxLifetime(connectionInfo.getMaxLifetime());
-        config.setMaximumPoolSize(connectionInfo.getMaximumPoolSize());
-        config.setPoolName(connectionInfo.getDatabaseName());
-        config.setLeakDetectionThreshold(connectionInfo.getLeakDetectionThreshold());
+        config.setMaxLifetime(databaseInfo.getMaxLifetime());
+        config.setMaximumPoolSize(databaseInfo.getMaximumPoolSize());
+        config.setPoolName(databaseInfo.getDatabaseName());
+        config.setLeakDetectionThreshold(databaseInfo.getLeakDetectionThreshold());
 
         // Same as default value but expliclty setting as value is updated in AutoTransactionHandleContext.
         config.setAutoCommit(true);
-
-        config.setUsername(connectionInfo.getUsername());
-        config.setPassword(connectionInfo.getPassword());
+        config.setUsername(databaseInfo.getUsername());
+        config.setPassword(databaseInfo.getPassword());
         // See https://jdbc.postgresql.org/documentation/head/connect.html for details
-        config.addDataSourceProperty("serverName", connectionInfo.getHost());
-        config.addDataSourceProperty("databaseName", connectionInfo.getDatabaseName());
-        config.addDataSourceProperty("portNumber", connectionInfo.getPort());
-        config.addDataSourceProperty("ssl", connectionInfo.getUseSSL());
+        config.addDataSourceProperty("serverName", databaseInfo.getHost());
+        config.addDataSourceProperty("databaseName", databaseInfo.getDatabaseName());
+        config.addDataSourceProperty("portNumber", databaseInfo.getPort());
+        config.addDataSourceProperty("ssl", databaseInfo.getUseSSL());
         // See https://github.com/brettwooldridge/HikariCP/wiki/JDBC-Logging about logging
-        config.addDataSourceProperty("loggerLevel", connectionInfo.getLogLevel());
-        config.addDataSourceProperty("logUnclosedConnections", connectionInfo.getLogUnclosedConnections());
+        config.addDataSourceProperty("loggerLevel", databaseInfo.getLogLevel());
+        config.addDataSourceProperty("logUnclosedConnections", databaseInfo.getLogUnclosedConnections());
         config.addDataSourceProperty("reWriteBatchedInserts", true);
 
         // Setting per guidance on https://jdbc.postgresql.org/documentation/head/callproc.html
         config.addDataSourceProperty("escapeSyntaxCallMode", "callIfNoReturn");
 
         // Setting per guidance on https://github.com/brettwooldridge/HikariCP/wiki/Rapid-Recovery#tcp-timeouts
-        config.addDataSourceProperty("socketTimeout", connectionInfo.getSocketTimeout());
+        config.addDataSourceProperty("socketTimeout", databaseInfo.getSocketTimeout());
 
         return new HikariDataSource(config);
     }

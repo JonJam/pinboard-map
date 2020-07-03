@@ -3,7 +3,7 @@ package com.jonjam.pinboard.common.database.config;
 import com.jonjam.pinboard.common.objectmodel.Immutable;
 
 @Immutable
-public abstract class ConnectionInfo {
+public abstract class DatabaseInfo {
     public abstract String getHost();
     public abstract int getPort();
     public abstract String getDatabaseName();
@@ -19,5 +19,5 @@ public abstract class ConnectionInfo {
     public abstract boolean getLogUnclosedConnections();
     public abstract int getSocketTimeout();
 
-    public static class Builder extends ImmutableConnectionInfo.Builder { }
+    public static class Builder extends ImmutableDatabaseInfo.Builder { }
 }

@@ -2,12 +2,7 @@
 <!DOCTYPE module PUBLIC
         "-//Checkstyle//DTD Checkstyle Configuration 1.3//EN"
         "https://checkstyle.org/dtds/configuration_1_3.dtd">
-<!--
-  !!!! IMPORTANT !!!!
-  The rules defined here should be kept in sync with /build-tools/codestyle/intellij-codestyle.xml.
 
-  Not doing the previous will cause checkstyle errors when using IntelliJ code reformatting options.
--->
 <module name="Checker">
     <property name="severity" value="error"/>
     <property name="charset" value="UTF-8"/>

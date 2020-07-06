@@ -13,7 +13,7 @@ COPY docker/tomcat/catalina.properties $CATALINA_HOME/conf/catalina.properties
 # Configure server.xml (https://tomcat.apache.org/tomcat-9.0-doc/security-howto.html#server.xml)
 COPY docker/tomcat/server.xml $CATALINA_HOME/conf/server.xml
 # Configure logging (https://tomcat.apache.org/tomcat-9.0-doc/logging.html#Considerations_for_production_usage)
-COPY docker/tomcat/logging.properties $CATALINA_HOME/conf/logging.properties
+COPY docker/tomcat/$env/logging.properties $CATALINA_HOME/conf/logging.properties
 # Configure HTTPS (https://tomcat.apache.org/tomcat-9.0-doc/ssl-howto.html)
 COPY docker/tomcat/$env/.keystore $CATALINA_HOME/conf/.keystore
 

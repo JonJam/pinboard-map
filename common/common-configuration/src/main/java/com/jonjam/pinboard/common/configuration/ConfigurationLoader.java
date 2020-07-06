@@ -1,10 +1,10 @@
-package com.jonjam.pinboard.common.service.config;
+package com.jonjam.pinboard.common.configuration;
 
 import com.typesafe.config.Config;
 import com.typesafe.config.ConfigFactory;
 import org.apache.commons.lang3.StringUtils;
 
-public class ConfigurationLoader<T extends ServiceConfiguration> {
+public class ConfigurationLoader<T> {
     private static final String ENVIRONMENT = "ENVIRONMENT";
     private static final String HOSTNAME = "HOSTNAME";
 

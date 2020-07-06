@@ -1,9 +1,16 @@
 package com.jonjam.pinboard.common.service;
 
-import com.jonjam.pinboard.common.service.config.ConfigurationFactory;
-import com.jonjam.pinboard.common.service.config.ConfigurationLoader;
+import com.google.common.collect.Lists;
+import com.jonjam.pinboard.common.configuration.ConfigurationFactory;
+import com.jonjam.pinboard.common.configuration.ConfigurationLoader;
 import com.jonjam.pinboard.common.service.config.ServiceConfiguration;
+import com.jonjam.pinboard.common.exception.AbstractRemoteExceptionMapper;
+import com.jonjam.pinboard.common.exception.InternalRemoteExceptionMapper;
 import com.jonjam.pinboard.common.service.feature.GuiceFeature;
+import com.jonjam.pinboard.common.service.feature.AutoDatabaseTransactionFeature;
+import com.jonjam.pinboard.common.service.module.DatabaseModule;
+import com.jonjam.pinboard.common.service.module.ExceptionModule;
+import com.jonjam.pinboard.common.service.module.ServiceServletModule;
 import com.jonjam.pinboard.common.service.provider.JsonProvider;
 import org.glassfish.jersey.server.ResourceConfig;
 
@@ -21,26 +28,50 @@ public abstract class ServiceResourceConfig<T extends ServiceConfiguration> exte
   }
 
   public void postConstruct() {
-    final GuiceFeature guiceFeature = new GuiceFeature(configureGuiceModules(config));
-
-    register(guiceFeature);
+    registerFeatures();
 
     register(new JsonProvider());
 
     packages(getServiceControllerPackageName());
+
+    register(getExceptionMapper());
+  }
+
+  private Class<? extends AbstractRemoteExceptionMapper> getExceptionMapper() {
+    return InternalRemoteExceptionMapper.class;
   }
 
   protected abstract Module getConfigurationModule(final T config);
 
   protected abstract Module getServiceModule();
 
+  protected boolean useDb() {
+    return false;
+  }
+
   protected abstract String getServiceControllerPackageName();
 
-  private Module configureGuiceModules(final T config) {
-    final List<Module> modules = List.of(
-        getConfigurationModule(config),
-        getServiceModule());
+  private void registerFeatures() {
+    register(createGuiceFeature());
 
-    return Modules.combine(modules);
+    if (useDb()) {
+      register(AutoDatabaseTransactionFeature.class);
+    }
+  }
+
+  private GuiceFeature createGuiceFeature() {
+    final List<Module> modules = Lists.newArrayList(
+        new ExceptionModule(),
+        getConfigurationModule(config),
+        getServiceModule(),
+        new ServiceServletModule());
+
+    if (useDb()) {
+      modules.add(new DatabaseModule());
+    }
+
+    return new GuiceFeature(
+        this.config.getGuiceConfiguration(),
+        Modules.combine(modules));
   }
 }

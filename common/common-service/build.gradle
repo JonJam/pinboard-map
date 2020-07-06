@@ -23,8 +23,15 @@ dependencies {
     implementation 'javax.xml.bind:jaxb-api'
     implementation 'javax.activation:activation'
 
+    // JDBC
+    implementation 'org.jdbi:jdbi3-core'
+
     // Project dependencies
+    implementation project(':common:common-configuration')
+    implementation project(':common:common-database')
+    implementation project(':common:common-exception')
     // Used as annotation processor for Immutables custom annotation.
     annotationProcessor project(':common:common-objectmodel')
     implementation project(':common:common-objectmodel')
+    implementation project(':common:common-logging')
 }

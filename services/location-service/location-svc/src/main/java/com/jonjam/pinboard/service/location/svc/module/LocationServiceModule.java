@@ -8,6 +8,7 @@ public class LocationServiceModule extends AbstractModule {
 
   @Override
   protected void configure() {
+    // TODO Remove
     bind(IInjectedService.class).to(InjectedService.class);
   }
 }

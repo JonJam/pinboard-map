@@ -60,6 +60,10 @@ def mockitoVersion = project.property('org.mockito.version')
 def testcontainersVersion = project.property('org.testcontainers.version')
 def sl4jVersion = project.property('org.slf4j.version')
 def feignVersion = project.property('io.github.openfeign.version')
+def postgresVersion = project.property('org.postgresql.version')
+def jnaVersion = project.property('net.java.dev.jna.version')
+def jdbiVersion = project.property('org.jdbi.version')
+def guiceVersion = project.property('com.google.inject.guice.version')
 
 // Java projects
 configure(subprojects.findAll { !it.name.endsWith('schema') }) {
@@ -71,8 +75,9 @@ configure(subprojects.findAll { !it.name.endsWith('schema') }) {
     // Use dependency constraints. See https://docs.gradle.org/current/userguide/declaring_dependencies.html#declaring_a_dependency_without_version
     dependencies {
         constraints {
-            // Java API for RESTful Web Services
+            // javax
             implementation 'javax.ws.rs:javax.ws.rs-api:2.1.1'
+            implementation 'javax.inject:javax.inject:1'
 
             // Jersey
             implementation "org.glassfish.jersey.containers:jersey-container-servlet:${jerseyVersion}"
@@ -95,20 +100,22 @@ configure(subprojects.findAll { !it.name.endsWith('schema') }) {
             implementation "com.fasterxml.jackson.datatype:jackson-datatype-jsr310:${jacksonVersion}"
 
             // Guice
-            implementation 'com.google.inject.extensions:guice-servlet:4.2.2'
+            implementation "com.google.inject.extensions:guice-servlet:${guiceVersion}"
             implementation 'org.glassfish.hk2:guice-bridge:2.5.0'
-            implementation ('com.google.inject:guice:4.2.2') {
+            implementation ("com.google.inject:guice:${guiceVersion}") {
                 // Resolving conflict - guice-servlet / guice-bridge
                 force = true
             }
 
-            // log4j
+            // Logging
             implementation "org.apache.logging.log4j:log4j-api:${log4jVersion}"
             implementation "org.apache.logging.log4j:log4j-core:${log4jVersion}"
             // Required when running log4j in a web app. See: https://logging.apache.org/log4j/2.x/manual/webapp.html
             implementation "org.apache.logging.log4j:log4j-web:${log4jVersion}"
             // Required for async loggers: https://logging.apache.org/log4j/2.x/manual/async.html#Making_All_Loggers_Asynchronous
             implementation 'com.lmax:disruptor:3.4.2'
+            // Redirecting slf4j to log4j2: https://logging.apache.org/log4j/2.x/log4j-slf4j-impl/index.html
+            implementation "org.apache.logging.log4j:log4j-slf4j-impl:${log4jVersion}"
 
             implementation 'org.apache.commons:commons-lang3:3.9'
 
@@ -118,6 +125,28 @@ configure(subprojects.findAll { !it.name.endsWith('schema') }) {
 
             // Config
             implementation 'com.typesafe:config:1.4.0'
+
+            // JDBC
+            implementation 'com.zaxxer:HikariCP:3.4.5'
+            implementation "org.jdbi:jdbi3-core:${jdbiVersion}"
+            implementation "org.jdbi:jdbi3-postgres:${jdbiVersion}"
+            implementation "org.postgresql:postgresql:${postgresVersion}"
+            implementation ("com.github.ben-manes.caffeine:caffeine:2.8.0") {
+                // Resolving conflict with postgresql and jdbi
+                force = true
+            }
+            implementation ("com.google.errorprone:error_prone_annotations:2.3.3") {
+                // Resolving conflict with guice-bridge and jdbi
+                force = true
+            }
+            testRuntimeOnly ("net.java.dev.jna:jna-platform:${jnaVersion}") {
+                // Resolving conflict with postgresql and testcontainers
+                force = true
+            }
+            testRuntimeOnly ("net.java.dev.jna:jna:${jnaVersion}") {
+                // Resolving conflict with postgresql and testcontainers
+                force = true
+            }
 
             // JUnit. See for setup: https://docs.gradle.org/current/userguide/java_testing.html#using_junit5
             testImplementation ("org.junit.jupiter:junit-jupiter-api:${junitVersion}") {
@@ -150,8 +179,6 @@ configure(subprojects.findAll { !it.name.endsWith('schema') }) {
             testImplementation "io.github.openfeign:feign-jackson:${feignVersion}"
             testImplementation "io.github.openfeign:feign-jaxrs:${feignVersion}"
             testImplementation "io.github.openfeign:feign-slf4j:${feignVersion}"
-            // For redirecting Feign logging via SLF4j to log4j2. See: https://logging.apache.org/log4j/2.x/log4j-slf4j-impl/index.html
-            testImplementation "org.apache.logging.log4j:log4j-slf4j-impl:${log4jVersion}"
         }
     }
     
@@ -206,11 +233,11 @@ configure(subprojects.findAll { it.name.endsWith('svc') }) {
         compileOnly 'org.immutables:value-annotations'
 
         // Project dependencies
+        implementation project(':common:common-configuration')
+        implementation project(':common:common-logging')
         // Used as annotation processor for Immutables custom annotation.
         annotationProcessor project(':common:common-objectmodel')
         implementation project(':common:common-objectmodel')
-
-        implementation project(':common:common-logging')
         implementation project(':common:common-service')
     }
 
@@ -240,7 +267,7 @@ configure(subprojects.findAll { it.name.endsWith('schema') }) {
         constraints {
             // Liquibase and Postgres
             liquibaseRuntime 'org.liquibase:liquibase-core:3.8.1'
-            liquibaseRuntime 'org.postgresql:postgresql:42.2.13'
+            liquibaseRuntime "org.postgresql:postgresql:${postgresVersion}"
             liquibaseRuntime ("org.slf4j:slf4j-api:${sl4jVersion}") {
                 // Only specified to resolve conflicts when added.
                 force = true

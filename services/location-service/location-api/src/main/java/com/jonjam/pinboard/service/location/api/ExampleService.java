@@ -9,6 +9,7 @@ import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
+// TODO Remove
 @Path(ExampleService.ROOT_PATH)
 @Consumes(MediaType.APPLICATION_JSON)
 @Produces(MediaType.APPLICATION_JSON)
@@ -28,5 +29,5 @@ public interface ExampleService {
    */
   @POST
   @Path("")
-  ExampleResponse postIt(final ExampleRequest request);
+  ExampleResponse postIt(ExampleRequest request);
 }

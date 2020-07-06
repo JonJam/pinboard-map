@@ -8,6 +8,7 @@ import com.jonjam.pinboard.service.location.api.model.ExampleResponse;
 import javax.inject.Inject;
 import javax.ws.rs.Path;
 
+// TODO Remove
 /**
  * Implementation of ExampleService.
  */

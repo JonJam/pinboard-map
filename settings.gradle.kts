@@ -8,6 +8,7 @@ include("common:common-exception")
 include("common:common-logging")
 include("common:common-objectmodel")
 include("common:common-service")
+include("common:common-test")
 
 include("services:location-service:location-api")
 include("services:location-service:location-schema")

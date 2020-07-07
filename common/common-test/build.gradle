@@ -1,0 +1,22 @@
+dependencies {
+    // Guice
+    implementation 'com.google.inject.extensions:guice-servlet'
+
+    // JDBC
+    implementation 'org.jdbi:jdbi3-core'
+
+    // JUnit
+    implementation 'org.junit.jupiter:junit-jupiter-api'
+
+    // Liquibase
+    implementation 'org.liquibase:liquibase-core'
+
+    // Testcontainers
+    implementation 'org.testcontainers:testcontainers'
+    implementation 'org.testcontainers:junit-jupiter'
+    implementation 'org.testcontainers:postgresql'
+
+    // Project dependencies
+    implementation project(':common:common-database')
+    implementation project(':common:common-service')
+}

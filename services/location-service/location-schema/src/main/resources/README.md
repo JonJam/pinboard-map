@@ -1,0 +1,1 @@
+liquibase files need to be in src/main/resources in order to be able to be used as part of tests in svc projects.

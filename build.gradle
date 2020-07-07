@@ -64,6 +64,7 @@ def postgresVersion = project.property('org.postgresql.version')
 def jnaVersion = project.property('net.java.dev.jna.version')
 def jdbiVersion = project.property('org.jdbi.version')
 def guiceVersion = project.property('com.google.inject.guice.version')
+def liquibaseVersion = project.property('org.liquibase.version')
 
 // Java projects
 configure(subprojects.findAll { !it.name.endsWith('schema') }) {
@@ -139,11 +140,11 @@ configure(subprojects.findAll { !it.name.endsWith('schema') }) {
                 // Resolving conflict with guice-bridge and jdbi
                 force = true
             }
-            testRuntimeOnly ("net.java.dev.jna:jna-platform:${jnaVersion}") {
+            implementation ("net.java.dev.jna:jna-platform:${jnaVersion}") {
                 // Resolving conflict with postgresql and testcontainers
                 force = true
             }
-            testRuntimeOnly ("net.java.dev.jna:jna:${jnaVersion}") {
+            implementation ("net.java.dev.jna:jna:${jnaVersion}") {
                 // Resolving conflict with postgresql and testcontainers
                 force = true
             }
@@ -167,9 +168,10 @@ configure(subprojects.findAll { !it.name.endsWith('schema') }) {
             testImplementation "org.mockito:mockito-junit-jupiter:${mockitoVersion}"
 
             // TestContainers
-            testImplementation "org.testcontainers:testcontainers:${testcontainersVersion}"
-            testImplementation "org.testcontainers:junit-jupiter:${testcontainersVersion}"
-            testImplementation ("org.slf4j:slf4j-api:${sl4jVersion}") {
+            implementation "org.testcontainers:testcontainers:${testcontainersVersion}"
+            implementation "org.testcontainers:junit-jupiter:${testcontainersVersion}"
+            implementation "org.testcontainers:postgresql:${testcontainersVersion}"
+            implementation ("org.slf4j:slf4j-api:${sl4jVersion}") {
                 // Only specified to resolve conflict between testcontainers libs.
                 force = true
             }
@@ -179,6 +181,9 @@ configure(subprojects.findAll { !it.name.endsWith('schema') }) {
             testImplementation "io.github.openfeign:feign-jackson:${feignVersion}"
             testImplementation "io.github.openfeign:feign-jaxrs:${feignVersion}"
             testImplementation "io.github.openfeign:feign-slf4j:${feignVersion}"
+
+            // Liquibase
+            implementation ("org.liquibase:liquibase-core:${liquibaseVersion}")
         }
     }
     
@@ -239,6 +244,7 @@ configure(subprojects.findAll { it.name.endsWith('svc') }) {
         annotationProcessor project(':common:common-objectmodel')
         implementation project(':common:common-objectmodel')
         implementation project(':common:common-service')
+        testImplementation project(':common:common-test')
     }
 
     tasks {
@@ -261,12 +267,14 @@ configure(subprojects.findAll { it.name.endsWith('svc') }) {
 // Schema projects
 configure(subprojects.findAll { it.name.endsWith('schema') }) {
     apply plugin: 'org.liquibase.gradle'
+    // Require java plugin to be applied in order to be able to reference schema projects from svc projects.
+    apply plugin: 'java'
 
     // Use dependency constraints. See https://docs.gradle.org/current/userguide/declaring_dependencies.html#declaring_a_dependency_without_version
     dependencies {
         constraints {
             // Liquibase and Postgres
-            liquibaseRuntime 'org.liquibase:liquibase-core:3.8.1'
+            liquibaseRuntime ("org.liquibase:liquibase-core:${liquibaseVersion}")
             liquibaseRuntime "org.postgresql:postgresql:${postgresVersion}"
             liquibaseRuntime ("org.slf4j:slf4j-api:${sl4jVersion}") {
                 // Only specified to resolve conflicts when added.
@@ -282,7 +290,7 @@ configure(subprojects.findAll { it.name.endsWith('schema') }) {
     liquibase {
         activities {
             main {
-                changeLogFile 'src/main/db/changelog.xml'
+                changeLogFile 'src/main/resources/changelog.xml'
                 url project.findProperty('schema_db_url')
                 username project.findProperty('schema_db_username')
                 password project.findProperty('schema_db_password')

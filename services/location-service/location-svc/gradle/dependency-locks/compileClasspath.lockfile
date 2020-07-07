@@ -35,4 +35,4 @@ org.glassfish.jersey.media:jersey-media-jaxb:2.28
 org.immutables:value-annotations:2.7.5
 org.javassist:javassist:3.22.0-CR2
 org.jdbi:jdbi3-core:3.14.1
-org.slf4j:slf4j-api:1.7.25
+org.slf4j:slf4j-api:1.7.26

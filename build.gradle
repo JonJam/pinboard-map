@@ -291,6 +291,7 @@ configure(subprojects.findAll { it.name.endsWith('schema') }) {
         activities {
             main {
                 changeLogFile 'src/main/resources/changelog.xml'
+                // These are to be specified by environment. See https://docs.gradle.org/current/userguide/build_environment.html#sec:project_properties
                 url project.findProperty('schema_db_url')
                 username project.findProperty('schema_db_username')
                 password project.findProperty('schema_db_password')

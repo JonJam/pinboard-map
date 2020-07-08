@@ -149,6 +149,24 @@ configure(subprojects.findAll { !it.name.endsWith('schema') }) {
                 force = true
             }
 
+            // TestContainers
+            implementation "org.testcontainers:testcontainers:${testcontainersVersion}"
+            implementation "org.testcontainers:junit-jupiter:${testcontainersVersion}"
+            implementation "org.testcontainers:postgresql:${testcontainersVersion}"
+            implementation ("org.slf4j:slf4j-api:${sl4jVersion}") {
+                // Only specified to resolve conflict between testcontainers libs.
+                force = true
+            }
+
+            // Feign
+            implementation "io.github.openfeign:feign-core:${feignVersion}"
+            implementation "io.github.openfeign:feign-jackson:${feignVersion}"
+            implementation "io.github.openfeign:feign-jaxrs:${feignVersion}"
+            implementation "io.github.openfeign:feign-slf4j:${feignVersion}"
+
+            // Liquibase
+            implementation ("org.liquibase:liquibase-core:${liquibaseVersion}")
+
             // JUnit. See for setup: https://docs.gradle.org/current/userguide/java_testing.html#using_junit5
             testImplementation ("org.junit.jupiter:junit-jupiter-api:${junitVersion}") {
                 // Resolving conflict - this / testcontainers
@@ -166,24 +184,6 @@ configure(subprojects.findAll { !it.name.endsWith('schema') }) {
             // Mockito
             testImplementation "org.mockito:mockito-core:${mockitoVersion}"
             testImplementation "org.mockito:mockito-junit-jupiter:${mockitoVersion}"
-
-            // TestContainers
-            implementation "org.testcontainers:testcontainers:${testcontainersVersion}"
-            implementation "org.testcontainers:junit-jupiter:${testcontainersVersion}"
-            implementation "org.testcontainers:postgresql:${testcontainersVersion}"
-            implementation ("org.slf4j:slf4j-api:${sl4jVersion}") {
-                // Only specified to resolve conflict between testcontainers libs.
-                force = true
-            }
-
-            // Feign
-            testImplementation "io.github.openfeign:feign-core:${feignVersion}"
-            testImplementation "io.github.openfeign:feign-jackson:${feignVersion}"
-            testImplementation "io.github.openfeign:feign-jaxrs:${feignVersion}"
-            testImplementation "io.github.openfeign:feign-slf4j:${feignVersion}"
-
-            // Liquibase
-            implementation ("org.liquibase:liquibase-core:${liquibaseVersion}")
         }
     }
     
@@ -239,11 +239,13 @@ configure(subprojects.findAll { it.name.endsWith('svc') }) {
 
         // Project dependencies
         implementation project(':common:common-configuration')
+        implementation project(':common:common-feign')
         implementation project(':common:common-logging')
         // Used as annotation processor for Immutables custom annotation.
         annotationProcessor project(':common:common-objectmodel')
         implementation project(':common:common-objectmodel')
         implementation project(':common:common-service')
+
         testImplementation project(':common:common-test')
     }
 

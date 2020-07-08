@@ -6,7 +6,7 @@ import com.google.inject.AbstractModule;
 import com.google.inject.util.Modules;
 import com.jonjam.pinboard.common.database.config.DatabaseInfo;
 import com.jonjam.pinboard.common.service.module.DatabaseModule;
-import com.jonjam.pinboard.common.test.PostgresTestContainer;
+import com.jonjam.pinboard.common.test.container.PostgresTestContainer;
 
 public class TestDatabaseModule extends AbstractModule {
 

@@ -1,4 +1,4 @@
-package com.jonjam.pinboard.common.test;
+package com.jonjam.pinboard.common.test.container;
 
 
 import javax.sql.DataSource;

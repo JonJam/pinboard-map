@@ -1,0 +1,10 @@
+dependencies {
+    // Feign
+    implementation 'io.github.openfeign:feign-core'
+    implementation 'io.github.openfeign:feign-jackson'
+    implementation 'io.github.openfeign:feign-jaxrs'
+    implementation 'io.github.openfeign:feign-slf4j'
+
+    // Project dependencies
+    implementation project(':common:common-objectmodel')
+}

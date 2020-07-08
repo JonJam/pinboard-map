@@ -1,8 +1,6 @@
 package com.jonjam.pinboard.common.test.container;
 
 import java.nio.file.Paths;
-import java.time.Duration;
-import java.time.temporal.ChronoUnit;
 
 import com.jonjam.pinboard.common.database.config.DatabaseInfo;
 import org.testcontainers.containers.GenericContainer;
@@ -34,6 +32,6 @@ public class ServiceTestContainer {
     }
 
     public static String getUrl() {
-        return "http://"+ SERVICE_CONTAINER.getContainerIpAddress() + ":" + SERVICE_CONTAINER.getMappedPort(HTTP_PORT);
+        return "http://" + SERVICE_CONTAINER.getContainerIpAddress() + ":" + SERVICE_CONTAINER.getMappedPort(HTTP_PORT);
     }
 }

@@ -1,0 +1,11 @@
+# This is a Gradle generated file for dependency locking.
+# Manual edits can break the build and are not advised.
+# This file is expected to be part of source control.
+com.fasterxml.jackson.core:jackson-annotations:2.9.8
+com.fasterxml.jackson.core:jackson-core:2.9.8
+com.fasterxml.jackson.core:jackson-databind:2.9.8
+io.github.openfeign:feign-core:10.2.3
+io.github.openfeign:feign-jackson:10.2.3
+io.github.openfeign:feign-jaxrs:10.2.3
+io.github.openfeign:feign-slf4j:10.2.3
+org.slf4j:slf4j-api:1.7.26

@@ -22,6 +22,7 @@ dependencies {
 
     // JUnit
     testImplementation 'org.junit.jupiter:junit-jupiter-api'
+    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine'
 
     // Hamcrest
     testImplementation 'org.hamcrest:hamcrest-library'
@@ -29,7 +30,4 @@ dependencies {
     // Mockito
     testImplementation 'org.mockito:mockito-core'
     testImplementation 'org.mockito:mockito-junit-jupiter'
-
-    // JUnit
-    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine'
 }

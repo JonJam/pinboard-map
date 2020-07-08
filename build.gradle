@@ -35,6 +35,8 @@ allprojects {
             // Fail eagerly on version conflict (includes transitive dependencies)
             failOnVersionConflict()
         }
+
+        exclude group: 'javax.ws.rs', module: 'jsr311-api'
     }
 
     sonarqube {
@@ -246,7 +248,7 @@ configure(subprojects.findAll { it.name.endsWith('svc') }) {
         implementation project(':common:common-objectmodel')
         implementation project(':common:common-service')
 
-        testImplementation project(':common:common-test')
+//        testImplementation project(':common:common-test')
     }
 
     tasks {

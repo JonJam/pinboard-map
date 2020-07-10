@@ -18,9 +18,11 @@ dependencies {
     // Project dependencies
     implementation project(':common:common-database')
     implementation project(':services:location-service:location-api')
+    testImplementation project(':services:location-service:location-schema')
 
     // JUnit
     testImplementation 'org.junit.jupiter:junit-jupiter-api'
+    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine'
 
     // Hamcrest
     testImplementation 'org.hamcrest:hamcrest-library'
@@ -28,18 +30,4 @@ dependencies {
     // Mockito
     testImplementation 'org.mockito:mockito-core'
     testImplementation 'org.mockito:mockito-junit-jupiter'
-
-    // TestContainers
-    testImplementation 'org.testcontainers:testcontainers'
-    testImplementation 'org.testcontainers:junit-jupiter'
-
-    // Feign
-    testImplementation 'io.github.openfeign:feign-core'
-    testImplementation 'io.github.openfeign:feign-jackson'
-    testImplementation 'io.github.openfeign:feign-jaxrs'
-    testImplementation 'io.github.openfeign:feign-slf4j'
-    testImplementation 'org.apache.logging.log4j:log4j-slf4j-impl'
-
-    // JUnit
-    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine'
 }

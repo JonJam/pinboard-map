@@ -35,12 +35,12 @@ public class DatabaseConfigurationFactory extends ConfigurationFactory<DatabaseC
             .withSocketTimeout(socketTimeout);
 
         // Optional support for specifying username and password via configuration.
-        if (config.hasPath("database.username")) {
-            driverConfiguration.withUsername(config.getString("database.username"));
+        if (config.hasPath("database.driver.username")) {
+            driverConfiguration.withUsername(config.getString("database.driver.username"));
         }
 
-        if (config.hasPath("database.password")) {
-            driverConfiguration.withPassword(config.getString("database.password"));
+        if (config.hasPath("database.driver.password")) {
+            driverConfiguration.withPassword(config.getString("database.driver.password"));
         }
 
         return new DatabaseConfiguration.Builder()

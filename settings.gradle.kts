@@ -5,9 +5,11 @@ rootProject.name = "pinboard-map"
 include("common:common-configuration")
 include("common:common-database")
 include("common:common-exception")
+include("common:common-feign")
 include("common:common-logging")
 include("common:common-objectmodel")
 include("common:common-service")
+include("common:common-test")
 
 include("services:location-service:location-api")
 include("services:location-service:location-schema")

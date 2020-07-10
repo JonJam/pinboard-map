@@ -17,12 +17,15 @@ public class ConfigurationLoader<T> {
     }
 
     public T readConfig() {
+        // Hostname config override e.g. local development
         final String hostname = getEnvironmentVariable(HOSTNAME);
         final Config hostnameConfig = ConfigFactory.load(hostname);
 
+        // Environment config override e.g dev, rc, prod
         final String environment = getEnvironmentVariable(ENVIRONMENT);
         final Config environmentConfig = ConfigFactory.load(environment);
 
+        // Common config
         final Config commonConfig = ConfigFactory.load(COMMON_CONFIGURATION_NAME);
 
         final Config mergedConfig = hostnameConfig.withFallback(environmentConfig)

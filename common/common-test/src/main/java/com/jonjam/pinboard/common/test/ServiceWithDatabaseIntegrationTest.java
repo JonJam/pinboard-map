@@ -10,8 +10,9 @@ public class ServiceWithDatabaseIntegrationTest implements BeforeAllCallback {
 
     @Override
     public void beforeAll(final ExtensionContext context) {
+        final String networkAlias = PostgresTestContainer.getNetworkAlias();
         final DatabaseInfo databaseInfo = PostgresTestContainer.getDatabaseInfo();
 
-        ServiceTestContainer.start(databaseInfo);
+        ServiceTestContainer.start(networkAlias, databaseInfo);
     }
 }

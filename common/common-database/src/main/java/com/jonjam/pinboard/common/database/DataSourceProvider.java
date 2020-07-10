@@ -3,14 +3,10 @@ package com.jonjam.pinboard.common.database;
 import javax.inject.Inject;
 import javax.inject.Provider;
 import javax.sql.DataSource;
-import java.sql.SQLException;
 
 import com.jonjam.pinboard.common.database.config.DatabaseInfo;
-import com.jonjam.pinboard.common.logging.StructuredLogger;
 import com.zaxxer.hikari.HikariConfig;
 import com.zaxxer.hikari.HikariDataSource;
-import org.jdbi.v3.core.statement.SqlLogger;
-import org.jdbi.v3.core.statement.StatementContext;
 
 public class DataSourceProvider implements Provider<DataSource> {
 
@@ -57,26 +53,5 @@ public class DataSourceProvider implements Provider<DataSource> {
         config.addDataSourceProperty("socketTimeout", databaseInfo.getSocketTimeout());
 
         return new HikariDataSource(config);
-    }
-
-    static class JdbiLogger implements SqlLogger {
-        private static final StructuredLogger LOGGER = StructuredLogger.getLogger(JdbiLogger.class);
-
-        @Override
-        public void logBeforeExecution(final StatementContext context) {
-            // TODO Populate
-        }
-
-        @Override
-        public void logAfterExecution(final StatementContext context) {
-            // TODO Populate
-        }
-
-        @Override
-        public void logException(final StatementContext context, final SQLException ex) {
-            // TODO Populate
-            LOGGER.error()
-                  .write(ex);
-        }
     }
 }

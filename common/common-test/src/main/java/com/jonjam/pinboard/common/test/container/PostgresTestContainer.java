@@ -21,14 +21,20 @@ public class PostgresTestContainer {
     // Creating singleton container as per: https://www.testcontainers.org/test_framework_integration/manual_lifecycle_control/#singleton-containers
     private static final PostgreSQLContainer<?> POSTGRES_CONTAINER;
 
+    private static final String POSTGRES_IMAGE = "postgres:11-alpine";
     private static final String CHANGELOG_FILE = "changelog.xml";
+    private static final String NETWORK_ALIAS = "postgres";
 
     private static DatabaseInfo databaseInfo;
     private static DataSource dataSource;
 
     static {
-        POSTGRES_CONTAINER = new PostgreSQLContainer<>();
+        POSTGRES_CONTAINER = new PostgreSQLContainer<>(POSTGRES_IMAGE)
+            .withNetwork(NetworkWrapper.getNetwork())
+            .withNetworkAliases(NETWORK_ALIAS);
+
         POSTGRES_CONTAINER.start();
+
         applyLiquibaseChangelog();
     }
 
@@ -59,6 +65,10 @@ public class PostgresTestContainer {
         }
 
         return dataSource;
+    }
+
+    public static String getNetworkAlias() {
+        return NETWORK_ALIAS;
     }
 
     private static void applyLiquibaseChangelog() {

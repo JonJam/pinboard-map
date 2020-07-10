@@ -16,15 +16,19 @@ public class ServiceTestContainer {
         SERVICE_CONTAINER = new GenericContainer(new ImageFromDockerfile()
             .withFileFromPath(".", Paths.get(".."))
             .withBuildArg("APP_ID", "99")
-            .withBuildArg("VERSION", "prod"))
+            .withBuildArg("VERSION", "dev"))
             // NOTE - last two digits map to TEST_APP_ID.
             .withExposedPorts(HTTP_PORT, 4099)
-            .withEnv("ENVIRONMENT", "test");
+            .withEnv("ENVIRONMENT", "test")
+            .withNetwork(NetworkWrapper.getNetwork());
     }
 
-    public static void start(final DatabaseInfo databaseInfo) {
+    public static void start(
+        final String databaseNetworkAlias,
+        final DatabaseInfo databaseInfo) {
+
         SERVICE_CONTAINER.addEnv("DATABASE_DRIVER_DATABASENAME", databaseInfo.getDatabaseName());
-        SERVICE_CONTAINER.addEnv("DATABASE_DRIVER_HOST", databaseInfo.getHost());
+        SERVICE_CONTAINER.addEnv("DATABASE_DRIVER_HOST", databaseNetworkAlias);
         SERVICE_CONTAINER.addEnv("DATABASE_DRIVER_USERNAME", databaseInfo.getUsername());
         SERVICE_CONTAINER.addEnv("DATABASE_DRIVER_PASSWORD", databaseInfo.getPassword());
 
@@ -34,4 +38,5 @@ public class ServiceTestContainer {
     public static String getUrl() {
         return "http://" + SERVICE_CONTAINER.getContainerIpAddress() + ":" + SERVICE_CONTAINER.getMappedPort(HTTP_PORT);
     }
+
 }

@@ -8,6 +8,8 @@ import com.jonjam.pinboard.common.database.config.DatabaseInfo;
 import com.zaxxer.hikari.HikariConfig;
 import com.zaxxer.hikari.HikariDataSource;
 
+// Guice recommends to avoid binding closeable resources: https://github.com/google/guice/wiki/Avoid-Injecting-Closable-Resources
+// however creating in own provider so can you use directly in test setup.
 public class DataSourceProvider implements Provider<DataSource> {
 
     private final DatabaseInfo databaseInfo;
@@ -17,8 +19,6 @@ public class DataSourceProvider implements Provider<DataSource> {
         this.databaseInfo = databaseInfo;
     }
 
-    // Originally thought to create this in its own provider class, however Guice
-    // recommends to avoid binding closeable resources: https://github.com/google/guice/wiki/Avoid-Injecting-Closable-Resources
     @Override
     public DataSource get() {
         // Other things that could setup are:

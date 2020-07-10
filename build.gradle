@@ -30,6 +30,7 @@ allprojects {
             failOnVersionConflict()
         }
 
+        // This pulls in JAXRS v1 which breaks services since they are using v2.
         exclude group: 'javax.ws.rs', module: 'jsr311-api'
     }
 

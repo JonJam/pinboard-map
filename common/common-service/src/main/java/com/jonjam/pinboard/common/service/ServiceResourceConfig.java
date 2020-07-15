@@ -43,6 +43,8 @@ public abstract class ServiceResourceConfig<T extends ServiceConfiguration> exte
 
   protected abstract Module getConfigurationModule(final T config);
 
+  protected abstract Module getMapperModule();
+
   protected abstract Module getServiceModule();
 
   protected boolean useDb() {
@@ -63,6 +65,7 @@ public abstract class ServiceResourceConfig<T extends ServiceConfiguration> exte
     final List<Module> modules = Lists.newArrayList(
         new ExceptionModule(),
         getConfigurationModule(config),
+        getMapperModule(),
         getServiceModule(),
         new ServiceServletModule());
 

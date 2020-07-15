@@ -2,15 +2,15 @@ dependencies {
     // Config
     implementation 'com.typesafe:config'
 
-    // Jersey
-    implementation 'org.glassfish.jersey.containers:jersey-container-servlet'
-    implementation 'org.glassfish.jersey.inject:jersey-hk2'
+    // Guice
+    implementation 'com.google.inject:guice'
 
     // Jackson
     implementation 'com.fasterxml.jackson.core:jackson-annotations'
 
-    // Guice
-    implementation 'com.google.inject:guice'
+    // Jersey
+    implementation 'org.glassfish.jersey.containers:jersey-container-servlet'
+    implementation 'org.glassfish.jersey.inject:jersey-hk2'
 
     // JDBC
     implementation 'org.jdbi:jdbi3-core'

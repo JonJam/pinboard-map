@@ -1,0 +1,5 @@
+dependencies {
+    // MapStruct
+    implementation "org.mapstruct:mapstruct"
+    implementation "org.mapstruct:mapstruct-processor"
+}

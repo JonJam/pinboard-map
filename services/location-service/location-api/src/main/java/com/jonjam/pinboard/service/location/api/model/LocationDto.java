@@ -10,6 +10,11 @@ public abstract class LocationDto {
 
   public abstract LocationStatusDto getStatus();
 
+  // Required for MapStruct
+  public static Builder builder() {
+    return new Builder();
+  }
+
   public static class Builder extends ImmutableLocationDto.Builder {
   }
 }

@@ -12,5 +12,10 @@ public abstract class Location {
 
     public abstract LocationStatus getLocationStatus();
 
+    // Required for MapStruct
+    public static Builder builder() {
+        return new Builder();
+    }
+
     public static class Builder extends ImmutableLocation.Builder { }
 }

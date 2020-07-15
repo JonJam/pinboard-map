@@ -62,6 +62,7 @@ def jnaVersion = project.property('net.java.dev.jna.version')
 def jdbiVersion = project.property('org.jdbi.version')
 def guiceVersion = project.property('com.google.inject.guice.version')
 def liquibaseVersion = project.property('org.liquibase.version')
+def mapstructVersion = project.property('org.mapstruct.version')
 
 // Java projects
 configure(subprojects.findAll { !it.name.endsWith('schema') }) {
@@ -164,6 +165,11 @@ configure(subprojects.findAll { !it.name.endsWith('schema') }) {
             // Liquibase
             implementation ("org.liquibase:liquibase-core:${liquibaseVersion}")
 
+            // MapStruct
+            implementation "org.mapstruct:mapstruct:${mapstructVersion}"
+            implementation "org.mapstruct:mapstruct-processor:${mapstructVersion}"
+            annotationProcessor "org.mapstruct:mapstruct-processor:${mapstructVersion}"
+
             // JUnit. See for setup: https://docs.gradle.org/current/userguide/java_testing.html#using_junit5
             testImplementation ("org.junit.jupiter:junit-jupiter-api:${junitVersion}") {
                 // Resolving conflict - this / testcontainers
@@ -234,10 +240,15 @@ configure(subprojects.findAll { it.name.endsWith('svc') }) {
         annotationProcessor 'org.immutables:value'
         compileOnly 'org.immutables:value-annotations'
 
+        // MapStruct
+        implementation "org.mapstruct:mapstruct"
+
         // Project dependencies
         implementation project(':common:common-configuration')
         implementation project(':common:common-feign')
         implementation project(':common:common-logging')
+        annotationProcessor project(':common:common-mapstruct')
+        implementation project(':common:common-mapstruct')
         // Used as annotation processor for Immutables custom annotation.
         annotationProcessor project(':common:common-objectmodel')
         implementation project(':common:common-objectmodel')

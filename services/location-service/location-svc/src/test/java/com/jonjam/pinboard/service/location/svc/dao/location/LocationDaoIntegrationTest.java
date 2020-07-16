@@ -17,6 +17,9 @@ import static org.hamcrest.Matchers.is;
 
 @ExtendWith(DatabaseIntegrationTest.class)
 class LocationDaoIntegrationTest {
+
+    private static final LocationDao.LocationDaoMapper MAPPER = new LocationDao.LocationDaoMapper();
+
     @Inject
     private HandleWrapper handleWrapper;
 
@@ -24,7 +27,7 @@ class LocationDaoIntegrationTest {
 
     @BeforeEach
     void setup() {
-        locationDao = new LocationDao(handleWrapper, new LocationDao.LocationMapper());
+        locationDao = new LocationDao(handleWrapper, MAPPER);
     }
 
     @Test

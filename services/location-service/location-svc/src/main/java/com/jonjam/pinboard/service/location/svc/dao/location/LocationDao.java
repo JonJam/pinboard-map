@@ -9,7 +9,6 @@ import com.jonjam.pinboard.common.database.HandleWrapper;
 import com.jonjam.pinboard.service.location.svc.dao.location.model.InsertLocationRequest;
 import com.jonjam.pinboard.service.location.svc.dao.location.model.Location;
 import com.jonjam.pinboard.service.location.svc.dao.location.model.LocationStatus;
-
 import org.jdbi.v3.core.mapper.RowMapper;
 import org.jdbi.v3.core.statement.StatementContext;
 
@@ -17,20 +16,20 @@ public class LocationDao {
 
     private final HandleWrapper handleWrapper;
 
-    private final LocationMapper locationMapper;
+    private final LocationDaoMapper locationDaoMapper;
 
     @Inject
     public LocationDao(
         final HandleWrapper handleWrapper,
-        final LocationMapper locationMapper) {
+        final LocationDaoMapper locationDaoMapper) {
         this.handleWrapper = handleWrapper;
-        this.locationMapper = locationMapper;
+        this.locationDaoMapper = locationDaoMapper;
     }
 
     public Optional<Location> getByCode(final long locationCode) {
         return handleWrapper.createQuery("SELECT location_id, location_code, location_status_id FROM location WHERE location_code = :locationCode")
                             .bind("locationCode", locationCode)
-                            .map(locationMapper)
+                            .map(locationDaoMapper)
                             .findOne();
     }
 
@@ -38,11 +37,11 @@ public class LocationDao {
         return handleWrapper.createUpdate("INSERT INTO location (location_status_id) VALUES (:locationStatusId)")
                             .bind("locationStatusId", request.getLocationStatus().getId())
                             .executeAndReturnGeneratedKeys()
-                            .map(locationMapper)
+                            .map(locationDaoMapper)
                             .one();
     }
 
-    public static class LocationMapper implements RowMapper<Location> {
+    public static class LocationDaoMapper implements RowMapper<Location> {
         @Override
         public Location map(final ResultSet rs, final StatementContext ctx) throws SQLException {
             final LocationStatus status = LocationStatus.fromDatabaseRepresentation(rs.getInt("location_status_id"));

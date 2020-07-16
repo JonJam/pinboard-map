@@ -12,6 +12,7 @@ import com.jonjam.pinboard.common.service.module.DatabaseModule;
 import com.jonjam.pinboard.common.service.module.ExceptionModule;
 import com.jonjam.pinboard.common.service.module.ServiceServletModule;
 import com.jonjam.pinboard.common.service.provider.JsonProvider;
+import com.jonjam.pinboard.common.service.provider.ReferenceParamConverterProvider;
 import org.glassfish.jersey.server.ResourceConfig;
 
 import java.util.List;
@@ -30,11 +31,18 @@ public abstract class ServiceResourceConfig<T extends ServiceConfiguration> exte
   public void postConstruct() {
     registerFeatures();
 
-    register(new JsonProvider());
+    registerProviders();
 
     packages(getServiceControllerPackageName());
 
     register(getExceptionMapper());
+  }
+
+  private void registerProviders() {
+    register(new JsonProvider());
+
+    // Param converter providers
+    register(ReferenceParamConverterProvider.class);
   }
 
   private Class<? extends AbstractRemoteExceptionMapper> getExceptionMapper() {

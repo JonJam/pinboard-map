@@ -12,6 +12,7 @@ import java.util.Optional;
 
 import com.jonjam.pinboard.service.location.api.model.CreateLocationRequest;
 import com.jonjam.pinboard.service.location.api.model.LocationDto;
+import com.jonjam.pinboard.service.location.api.ref.LocationCode;
 
 @Path(LocationService.ROOT_PATH)
 @Consumes(MediaType.APPLICATION_JSON)
@@ -22,7 +23,7 @@ public interface LocationService {
 
   @GET
   @Path("/{locationCode}")
-  Optional<LocationDto> getLocation(@PathParam("locationCode") long locationCode);
+  Optional<LocationDto> getLocation(@PathParam("locationCode") LocationCode locationCode);
 
   @POST
   @Path("")

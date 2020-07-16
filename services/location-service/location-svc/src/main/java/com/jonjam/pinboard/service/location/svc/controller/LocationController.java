@@ -8,6 +8,7 @@ import java.util.Optional;
 import com.jonjam.pinboard.service.location.api.LocationService;
 import com.jonjam.pinboard.service.location.api.model.CreateLocationRequest;
 import com.jonjam.pinboard.service.location.api.model.LocationDto;
+import com.jonjam.pinboard.service.location.api.ref.LocationCode;
 import com.jonjam.pinboard.service.location.svc.dao.location.LocationDao;
 import com.jonjam.pinboard.service.location.svc.dao.location.model.InsertLocationRequest;
 import com.jonjam.pinboard.service.location.svc.dao.location.model.Location;
@@ -29,8 +30,7 @@ public class LocationController implements LocationService {
   }
 
   @Override
-  public Optional<LocationDto> getLocation(final long locationCode) {
-    // TODO Verify this gets converted to null in Json?
+  public Optional<LocationDto> getLocation(final LocationCode locationCode) {
     return locationDao.getByCode(locationCode)
                       .map(locationMapper::map);
   }

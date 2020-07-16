@@ -6,6 +6,7 @@ import java.sql.SQLException;
 import java.util.Optional;
 
 import com.jonjam.pinboard.common.database.HandleWrapper;
+import com.jonjam.pinboard.service.location.api.ref.LocationCode;
 import com.jonjam.pinboard.service.location.svc.dao.location.model.InsertLocationRequest;
 import com.jonjam.pinboard.service.location.svc.dao.location.model.Location;
 import com.jonjam.pinboard.service.location.svc.dao.location.model.LocationStatus;
@@ -26,9 +27,9 @@ public class LocationDao {
         this.locationDaoMapper = locationDaoMapper;
     }
 
-    public Optional<Location> getByCode(final long locationCode) {
+    public Optional<Location> getByCode(final LocationCode locationCode) {
         return handleWrapper.createQuery("SELECT location_id, location_code, location_status_id FROM location WHERE location_code = :locationCode")
-                            .bind("locationCode", locationCode)
+                            .bind("locationCode", Long.valueOf(locationCode.getValue()))
                             .map(locationDaoMapper)
                             .findOne();
     }
@@ -48,7 +49,7 @@ public class LocationDao {
 
             return new Location.Builder()
                 .withLocationId(rs.getLong("location_id"))
-                .withLocationCode(rs.getLong("location_code"))
+                .withLocationCode(LocationCode.valueOf(rs.getLong("location_code")))
                 .withLocationStatus(status)
                 .build();
         }

@@ -9,6 +9,7 @@ import com.jonjam.pinboard.service.location.api.LocationService;
 import com.jonjam.pinboard.service.location.api.model.CreateLocationRequest;
 import com.jonjam.pinboard.service.location.api.model.LocationDto;
 import com.jonjam.pinboard.service.location.api.model.LocationStatusDto;
+import com.jonjam.pinboard.service.location.api.ref.LocationCode;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -28,7 +29,7 @@ class LocationControllerIntegrationTest {
     @Test
     void getLocation_noLocation_returnsEmpty() {
         // ARRANGE
-        final long locationCode = 1;
+        final LocationCode locationCode = LocationCode.valueOf(1);
 
         // ACT
         final Optional<LocationDto> location = client.getLocation(locationCode);
@@ -45,7 +46,7 @@ class LocationControllerIntegrationTest {
             .withStatus(expectedStatus)
             .build();
 
-        final long locationCode = client.createLocation(request).getCode();
+        final LocationCode locationCode = client.createLocation(request).getCode();
 
         // ACT
         final Optional<LocationDto> location = client.getLocation(locationCode);

@@ -4,6 +4,7 @@ import java.util.Optional;
 
 import com.jonjam.pinboard.service.location.api.model.LocationDto;
 import com.jonjam.pinboard.service.location.api.model.LocationStatusDto;
+import com.jonjam.pinboard.service.location.api.ref.LocationCode;
 import com.jonjam.pinboard.service.location.svc.dao.location.LocationDao;
 import com.jonjam.pinboard.service.location.svc.dao.location.model.Location;
 import com.jonjam.pinboard.service.location.svc.dao.location.model.LocationStatus;
@@ -33,7 +34,7 @@ class LocationControllerTest {
   @Test
   void getLocation_existingLocation_returnsExpected() {
     // ARRANGE
-    final long locationCode = 1;
+    final LocationCode locationCode = LocationCode.valueOf(1);
     final Location locationFromDb = new Location.Builder()
         .withLocationCode(locationCode)
         .withLocationId(1)
@@ -44,6 +45,7 @@ class LocationControllerTest {
 
     when(locationMapper.map(any(Location.class))).thenAnswer(a -> {
       final Location loc = a.getArgument(0);
+
       return new LocationDto.Builder()
           .withCode(loc.getLocationCode())
           .withStatus(LocationStatusDto.valueOf(loc.getLocationStatus().name()))

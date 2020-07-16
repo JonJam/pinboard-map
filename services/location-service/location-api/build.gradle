@@ -1,4 +1,7 @@
 dependencies {
+    // Apache
+    implementation 'org.apache.commons:commons-lang3'
+
     // javax
     implementation 'javax.ws.rs:javax.ws.rs-api'
 

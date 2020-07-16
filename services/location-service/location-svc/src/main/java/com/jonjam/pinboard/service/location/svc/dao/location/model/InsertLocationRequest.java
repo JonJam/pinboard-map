@@ -7,5 +7,10 @@ public abstract class InsertLocationRequest {
 
     public abstract LocationStatus getLocationStatus();
 
+    // Required for MapStruct
+    public static Builder builder() {
+        return new Builder();
+    }
+
     public static class Builder extends ImmutableInsertLocationRequest.Builder { }
 }

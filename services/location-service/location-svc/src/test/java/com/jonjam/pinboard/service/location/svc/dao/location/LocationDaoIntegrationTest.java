@@ -5,6 +5,7 @@ import java.util.Optional;
 
 import com.jonjam.pinboard.common.database.HandleWrapper;
 import com.jonjam.pinboard.common.test.DatabaseIntegrationTest;
+import com.jonjam.pinboard.service.location.api.ref.LocationCode;
 import com.jonjam.pinboard.service.location.svc.dao.location.model.InsertLocationRequest;
 import com.jonjam.pinboard.service.location.svc.dao.location.model.Location;
 import com.jonjam.pinboard.service.location.svc.dao.location.model.LocationStatus;
@@ -17,6 +18,9 @@ import static org.hamcrest.Matchers.is;
 
 @ExtendWith(DatabaseIntegrationTest.class)
 class LocationDaoIntegrationTest {
+
+    private static final LocationDao.LocationDaoMapper MAPPER = new LocationDao.LocationDaoMapper();
+
     @Inject
     private HandleWrapper handleWrapper;
 
@@ -24,13 +28,13 @@ class LocationDaoIntegrationTest {
 
     @BeforeEach
     void setup() {
-        locationDao = new LocationDao(handleWrapper, new LocationDao.LocationMapper());
+        locationDao = new LocationDao(handleWrapper, MAPPER);
     }
 
     @Test
     void getByCode_noLocation_returnsEmpty() {
         // ARRANGE
-        final long locationCode = 1004L;
+        final LocationCode locationCode = LocationCode.valueOf(1004L);
 
         // ACT
         final Optional<Location> location = locationDao.getByCode(locationCode);

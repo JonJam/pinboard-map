@@ -233,11 +233,24 @@ configure(subprojects.findAll { it.name.endsWith('api') }) {
     }
 }
 
-// Service implementation projects
-configure(subprojects.findAll { it.name.endsWith('svc') }) {
+// Service implementation or web projects
+configure(subprojects.findAll { it.name.endsWith('svc') || it.name.endsWith('web') }) {
     apply plugin: 'war'
 
     dependencies {
+        // Config
+        implementation 'com.typesafe:config'
+
+        // Guice
+        implementation 'com.google.inject:guice'
+
+        // Jackson
+        implementation 'com.fasterxml.jackson.core:jackson-annotations'
+
+        // Jersey
+        implementation 'org.glassfish.jersey.containers:jersey-container-servlet'
+        implementation 'org.glassfish.jersey.inject:jersey-hk2'
+
         // Immutables
         annotationProcessor 'org.immutables:value'
         compileOnly 'org.immutables:value-annotations'
@@ -257,6 +270,17 @@ configure(subprojects.findAll { it.name.endsWith('svc') }) {
         implementation project(':common:common-service')
 
         testImplementation project(':common:common-test')
+
+        // JUnit
+        testImplementation 'org.junit.jupiter:junit-jupiter-api'
+        testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine'
+
+        // Hamcrest
+        testImplementation 'org.hamcrest:hamcrest-library'
+
+        // Mockito
+        testImplementation 'org.mockito:mockito-core'
+        testImplementation 'org.mockito:mockito-junit-jupiter'
     }
 
     tasks {

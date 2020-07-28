@@ -1,0 +1,9 @@
+dependencies {
+    // JDBC
+    implementation 'org.jdbi:jdbi3-core'
+
+    // Project dependencies
+    implementation project(':common:common-database')
+    implementation project(':services:business-services:location-service:location-api')
+    testImplementation project(':services:business-services:location-service:location-schema')
+}

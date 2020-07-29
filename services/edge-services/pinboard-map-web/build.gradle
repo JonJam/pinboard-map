@@ -3,7 +3,10 @@ dependencies {
     implementation project(':services:business-services:location-service:location-api')
 
     // Jackson
-//    implementation 'com.fasterxml.jackson.core:jackson-annotations'
     implementation "com.fasterxml.jackson.core:jackson-databind"
+
+    // Jersey
+    implementation 'org.glassfish.jersey.ext:jersey-mvc'
+    implementation 'org.glassfish.jersey.ext:jersey-mvc-bean-validation'
 }
 

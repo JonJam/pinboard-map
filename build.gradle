@@ -81,6 +81,8 @@ configure(subprojects.findAll { !it.name.endsWith('schema') }) {
             // Jersey
             implementation "org.glassfish.jersey.containers:jersey-container-servlet:${jerseyVersion}"
             implementation "org.glassfish.jersey.inject:jersey-hk2:${jerseyVersion}"
+            implementation "org.glassfish.jersey.ext:jersey-mvc:${jerseyVersion}"
+            implementation "org.glassfish.jersey.ext:jersey-mvc-bean-validation:${jerseyVersion}"
             // javax.xml.bind:jaxb-api and javax.activation:activation are needed to prevent errors. See https://www.jeffryhouser.com/index.cfm/2017/12/21/Why-wont-Jersey-work-on-JDK-9
             implementation "javax.xml.bind:jaxb-api:${jaxbApiVersion}"
             implementation 'javax.activation:activation:1.1+'

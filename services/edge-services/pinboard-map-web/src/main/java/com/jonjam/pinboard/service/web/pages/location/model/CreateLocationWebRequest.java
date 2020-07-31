@@ -1,6 +1,5 @@
 package com.jonjam.pinboard.service.web.pages.location.model;
 
-import javax.validation.Valid;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotEmpty;
 

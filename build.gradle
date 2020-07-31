@@ -82,10 +82,13 @@ configure(subprojects.findAll { !it.name.endsWith('schema') }) {
             implementation "org.glassfish.jersey.containers:jersey-container-servlet:${jerseyVersion}"
             implementation "org.glassfish.jersey.inject:jersey-hk2:${jerseyVersion}"
             implementation "org.glassfish.jersey.ext:jersey-mvc:${jerseyVersion}"
-            implementation "org.glassfish.jersey.ext:jersey-mvc-bean-validation:${jerseyVersion}"
             // javax.xml.bind:jaxb-api and javax.activation:activation are needed to prevent errors. See https://www.jeffryhouser.com/index.cfm/2017/12/21/Why-wont-Jersey-work-on-JDK-9
             implementation "javax.xml.bind:jaxb-api:${jaxbApiVersion}"
             implementation 'javax.activation:activation:1.1+'
+
+            // Validation
+            implementation "org.glassfish.jersey.ext:jersey-mvc-bean-validation:${jerseyVersion}"
+            annotationProcessor "org.hibernate.validator:hibernate-validator-annotation-processor:6.1.5.Final"
 
             // Jackson
             implementation "org.glassfish.jersey.media:jersey-media-json-jackson:${jerseyVersion}"
@@ -233,6 +236,13 @@ configure(subprojects.findAll { it.name.endsWith('api') }) {
         annotationProcessor project(':common:common-objectmodel')
         implementation project(':common:common-objectmodel')
     }
+
+    tasks {
+        compileJava {
+            // Immutables - Incremental processing (see https://github.com/immutables/immutables/issues/804)
+            options.compilerArgs.add("-Aimmutables.gradle.incremental")
+        }
+    }
 }
 
 // Service implementation or web projects
@@ -286,6 +296,11 @@ configure(subprojects.findAll { it.name.endsWith('svc') || it.name.endsWith('web
     }
 
     tasks {
+        compileJava {
+            // Immutables - Incremental processing (see https://github.com/immutables/immutables/issues/804)
+            options.compilerArgs.add("-Aimmutables.gradle.incremental")
+        }
+
         task explodedWar(type: Copy) {
             group = 'Custom'
             description = 'Copies contents of a WAR into a directory'

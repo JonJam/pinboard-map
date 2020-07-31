@@ -8,7 +8,6 @@ import com.jonjam.pinboard.service.web.module.WebServiceConfigurationModule;
 import com.jonjam.pinboard.service.web.module.WebServiceMapperModule;
 import com.jonjam.pinboard.service.web.module.WebServiceModule;
 import org.glassfish.jersey.server.ServerProperties;
-import org.glassfish.jersey.server.mvc.MvcFeature;
 import org.glassfish.jersey.server.mvc.beanvalidation.MvcBeanValidationFeature;
 
 public class WebServiceJAX extends ServiceResourceConfig<WebServiceConfiguration> {

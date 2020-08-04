@@ -37,7 +37,7 @@ public abstract class ServiceResourceConfig<T extends ServiceConfiguration> exte
 
     register(getExceptionMapper());
 
-    setServerProperties();
+    addToPostConstruct();
   }
 
   private void registerProviders() {
@@ -63,11 +63,7 @@ public abstract class ServiceResourceConfig<T extends ServiceConfiguration> exte
 
   protected abstract String getServiceControllerPackageName();
 
-  protected void registerAdditionalFeatures() {
-    // NO-OP
-  }
-
-  protected void setServerProperties() {
+  protected void addToPostConstruct() {
     // NO-OP
   }
 
@@ -77,8 +73,6 @@ public abstract class ServiceResourceConfig<T extends ServiceConfiguration> exte
     if (useDb()) {
       register(AutoDatabaseTransactionFeature.class);
     }
-
-    registerAdditionalFeatures();
   }
 
   private GuiceFeature createGuiceFeature() {

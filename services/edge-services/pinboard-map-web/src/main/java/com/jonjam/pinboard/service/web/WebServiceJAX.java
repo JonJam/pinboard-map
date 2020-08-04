@@ -38,13 +38,10 @@ public class WebServiceJAX extends ServiceResourceConfig<WebServiceConfiguration
   }
 
   @Override
-  protected void registerAdditionalFeatures() {
+  protected void addToPostConstruct() {
     // Register Jersey Mvc validation and Mvc features (See https://eclipse-ee4j.github.io/jersey.github.io/documentation/latest/mvc.html)
     register(MvcBeanValidationFeature.class);
-  }
 
-  @Override
-  protected void setServerProperties() {
     // Configuring validation messages to be returned to client (See https://eclipse-ee4j.github.io/jersey.github.io/documentation/latest/bean-validation.html)/
     property(ServerProperties.BV_SEND_ERROR_IN_RESPONSE, true);
   }

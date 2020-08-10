@@ -8,21 +8,21 @@ import com.typesafe.config.Config;
 public class WebServiceConfigurationFactory extends ConfigurationFactory<WebServiceConfiguration> {
 
     private final GuiceConfigurationFactory guiceConfigurationFactory;
-    private final ServiceMapConfigurationFactory serviceMapConfigurationFactory;
+    private final WebServiceClientConfigurationFactory serviceClientConfigurationFactory;
 
     public WebServiceConfigurationFactory() {
         guiceConfigurationFactory = new GuiceConfigurationFactory();
-        serviceMapConfigurationFactory = new ServiceMapConfigurationFactory();
+        serviceClientConfigurationFactory = new WebServiceClientConfigurationFactory();
     }
 
     @Override
     public WebServiceConfiguration getConfiguration(final Config config) {
         final GuiceConfiguration guiceConfiguration = guiceConfigurationFactory.getConfiguration(config);
-        final ServiceMapConfiguration serviceMapConfiguration = serviceMapConfigurationFactory.getConfiguration(config);
+        final WebServiceClientConfiguration serviceClientConfiguration = serviceClientConfigurationFactory.getConfiguration(config);
 
         return new WebServiceConfiguration.Builder()
             .withGuiceConfiguration(guiceConfiguration)
-            .withServiceMapConfiguration(serviceMapConfiguration)
+            .withServiceClientConfiguration(serviceClientConfiguration)
             .build();
     }
 }

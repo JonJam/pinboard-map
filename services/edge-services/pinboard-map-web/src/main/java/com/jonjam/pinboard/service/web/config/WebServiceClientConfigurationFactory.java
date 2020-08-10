@@ -3,14 +3,14 @@ package com.jonjam.pinboard.service.web.config;
 import com.jonjam.pinboard.common.configuration.ConfigurationFactory;
 import com.typesafe.config.Config;
 
-public class ServiceMapConfigurationFactory extends ConfigurationFactory<ServiceMapConfiguration> {
+public class WebServiceClientConfigurationFactory extends ConfigurationFactory<WebServiceClientConfiguration> {
 
     @Override
-    public ServiceMapConfiguration getConfiguration(final Config config) {
+    public WebServiceClientConfiguration getConfiguration(final Config config) {
 
         final String location = config.getString("serviceMap.location");
 
-        return new ServiceMapConfiguration.Builder()
+        return new WebServiceClientConfiguration.Builder()
             .withLocation(location)
             .build();
     }

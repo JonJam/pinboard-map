@@ -15,6 +15,7 @@ import org.glassfish.jersey.jackson.internal.jackson.jaxrs.json.JacksonJsonProvi
 public class JsonProvider extends JacksonJsonProvider {
     public JsonProvider() {
         final ObjectMapper objectMapper = ObjectMapperBuilder.build();
+
         setMapper(objectMapper);
     }
 }

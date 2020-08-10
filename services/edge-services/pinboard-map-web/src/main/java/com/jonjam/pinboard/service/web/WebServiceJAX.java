@@ -4,6 +4,7 @@ import com.google.inject.Module;
 import com.jonjam.pinboard.common.service.ServiceResourceConfig;
 import com.jonjam.pinboard.service.web.config.WebServiceConfiguration;
 import com.jonjam.pinboard.service.web.config.WebServiceConfigurationFactory;
+import com.jonjam.pinboard.service.web.module.WebServiceClientModule;
 import com.jonjam.pinboard.service.web.module.WebServiceConfigurationModule;
 import com.jonjam.pinboard.service.web.module.WebServiceMapperModule;
 import com.jonjam.pinboard.service.web.module.WebServiceModule;
@@ -33,6 +34,11 @@ public class WebServiceJAX extends ServiceResourceConfig<WebServiceConfiguration
   }
 
   @Override
+  protected Module getServiceClientModule(final WebServiceConfiguration config) {
+    return new WebServiceClientModule(config.getServiceClientConfiguration());
+  }
+
+  @Override
   protected String getServiceControllerPackageName() {
       return CONTROLLERS_PACKAGES;
   }
@@ -44,5 +50,10 @@ public class WebServiceJAX extends ServiceResourceConfig<WebServiceConfiguration
 
     // Configuring validation messages to be returned to client (See https://eclipse-ee4j.github.io/jersey.github.io/documentation/latest/bean-validation.html)/
     property(ServerProperties.BV_SEND_ERROR_IN_RESPONSE, true);
+  }
+
+  @Override
+  protected boolean useServiceClient() {
+    return true;
   }
 }

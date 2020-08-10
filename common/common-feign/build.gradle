@@ -1,10 +1,19 @@
 dependencies {
+    // Apache
+    implementation 'org.apache.commons:commons-lang3'
+    implementation 'commons-io:commons-io'
+
+    // javax
+    implementation 'javax.inject:javax.inject'
+    implementation 'javax.ws.rs:javax.ws.rs-api'
+
     // Feign
     implementation 'io.github.openfeign:feign-core'
     implementation 'io.github.openfeign:feign-jackson'
     implementation 'io.github.openfeign:feign-jaxrs'
     implementation 'io.github.openfeign:feign-slf4j'
 
-    // Project dependencies
-    implementation project(':common:common-objectmodel')
+    // Projects
+    implementation project(':common:common-exception')
+    implementation project(':common:common-logging')
 }

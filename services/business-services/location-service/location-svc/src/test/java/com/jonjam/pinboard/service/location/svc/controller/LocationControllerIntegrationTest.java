@@ -2,7 +2,7 @@ package com.jonjam.pinboard.service.location.svc.controller;
 
 import java.util.Optional;
 
-import com.jonjam.pinboard.common.feign.RestClientUtil;
+import com.jonjam.pinboard.common.test.util.RestClientUtil;
 import com.jonjam.pinboard.common.test.ServiceWithDatabaseIntegrationTest;
 import com.jonjam.pinboard.common.test.container.ServiceTestContainer;
 import com.jonjam.pinboard.service.location.api.LocationService;

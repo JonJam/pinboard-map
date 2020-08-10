@@ -1,6 +1,5 @@
 package com.jonjam.pinboard.common.exception;
 
-import javax.ws.rs.WebApplicationException;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.ext.ExceptionMapper;
@@ -26,11 +25,10 @@ public abstract class AbstractRemoteExceptionMapper implements ExceptionMapper<E
         Exception exceptionToReturn = e;
 
         int statusCode;
-        if (e instanceof WebApplicationException) {
-            statusCode = ((WebApplicationException)e).getResponse()
-                                                     .getStatus();
+        if (e instanceof StatusCodeException) {
+            statusCode = ((StatusCodeException) e).statusCode();
         } else if (e instanceof RuntimeException) {
-            exceptionToReturn = new WebApplicationException(e);
+            exceptionToReturn = new UncaughtServiceException(e);
             statusCode = Response.Status.INTERNAL_SERVER_ERROR.getStatusCode();
         } else {
             statusCode = Response.Status.BAD_REQUEST.getStatusCode();

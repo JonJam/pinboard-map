@@ -5,7 +5,7 @@ import com.jonjam.pinboard.common.service.config.ServiceConfiguration;
 
 @Immutable
 public abstract class WebServiceConfiguration extends ServiceConfiguration {
-    public abstract ServiceMapConfiguration getServiceMapConfiguration();
+    public abstract WebServiceClientConfiguration getServiceClientConfiguration();
 
     public static class Builder extends ImmutableWebServiceConfiguration.Builder { }
 }

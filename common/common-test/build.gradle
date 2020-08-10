@@ -5,6 +5,9 @@ dependencies {
     // JDBC
     implementation 'org.jdbi:jdbi3-core'
 
+    // Jackson
+    implementation 'com.fasterxml.jackson.core:jackson-databind'
+
     // JUnit
     implementation 'org.junit.jupiter:junit-jupiter-api'
 
@@ -18,5 +21,7 @@ dependencies {
 
     // Project dependencies
     implementation project(':common:common-database')
+    implementation project(':common:common-feign')
     implementation project(':common:common-service')
+    implementation project(':common:common-objectmodel')
 }

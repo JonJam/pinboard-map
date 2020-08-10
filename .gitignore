@@ -16,3 +16,4 @@ docker-compose.override.yml
 
 # Ignoring individual engineer service configuration
 location-*.conf
+web-*.conf

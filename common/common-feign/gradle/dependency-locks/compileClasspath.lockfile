@@ -4,8 +4,12 @@
 com.fasterxml.jackson.core:jackson-annotations:2.9.8
 com.fasterxml.jackson.core:jackson-core:2.9.8
 com.fasterxml.jackson.core:jackson-databind:2.9.8
+commons-io:commons-io:2.7
 io.github.openfeign:feign-core:10.2.3
 io.github.openfeign:feign-jackson:10.2.3
 io.github.openfeign:feign-jaxrs:10.2.3
 io.github.openfeign:feign-slf4j:10.2.3
+javax.inject:javax.inject:1
+javax.ws.rs:javax.ws.rs-api:2.1.1
+org.apache.commons:commons-lang3:3.9
 org.slf4j:slf4j-api:1.7.26

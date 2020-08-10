@@ -74,6 +74,10 @@ configure(subprojects.findAll { !it.name.endsWith('schema') }) {
     // Use dependency constraints. See https://docs.gradle.org/current/userguide/declaring_dependencies.html#declaring_a_dependency_without_version
     dependencies {
         constraints {
+            // Apache
+            implementation 'org.apache.commons:commons-lang3:3.9'
+            implementation 'commons-io:commons-io:2.7'
+
             // javax
             implementation 'javax.ws.rs:javax.ws.rs-api:2.1.1'
             implementation 'javax.inject:javax.inject:1'
@@ -81,9 +85,14 @@ configure(subprojects.findAll { !it.name.endsWith('schema') }) {
             // Jersey
             implementation "org.glassfish.jersey.containers:jersey-container-servlet:${jerseyVersion}"
             implementation "org.glassfish.jersey.inject:jersey-hk2:${jerseyVersion}"
+            implementation "org.glassfish.jersey.ext:jersey-mvc:${jerseyVersion}"
             // javax.xml.bind:jaxb-api and javax.activation:activation are needed to prevent errors. See https://www.jeffryhouser.com/index.cfm/2017/12/21/Why-wont-Jersey-work-on-JDK-9
             implementation "javax.xml.bind:jaxb-api:${jaxbApiVersion}"
             implementation 'javax.activation:activation:1.1+'
+
+            // Validation
+            implementation "org.glassfish.jersey.ext:jersey-mvc-bean-validation:${jerseyVersion}"
+            annotationProcessor "org.hibernate.validator:hibernate-validator-annotation-processor:6.1.5.Final"
 
             // Jackson
             implementation "org.glassfish.jersey.media:jersey-media-json-jackson:${jerseyVersion}"
@@ -115,9 +124,7 @@ configure(subprojects.findAll { !it.name.endsWith('schema') }) {
             implementation 'com.lmax:disruptor:3.4.2'
             // Redirecting slf4j to log4j2: https://logging.apache.org/log4j/2.x/log4j-slf4j-impl/index.html
             implementation "org.apache.logging.log4j:log4j-slf4j-impl:${log4jVersion}"
-
-            implementation 'org.apache.commons:commons-lang3:3.9'
-
+            
             // Immutables. See for using apt plugin to set up: https://github.com/tbroyer/gradle-apt-plugin#usage-with-ides
             annotationProcessor "org.immutables:value:${immutablesVersion}"
             compileOnly "org.immutables:value-annotations:${immutablesVersion}"
@@ -231,13 +238,33 @@ configure(subprojects.findAll { it.name.endsWith('api') }) {
         annotationProcessor project(':common:common-objectmodel')
         implementation project(':common:common-objectmodel')
     }
+
+    tasks {
+        compileJava {
+            // Immutables - Incremental processing (see https://github.com/immutables/immutables/issues/804)
+            options.compilerArgs.add("-Aimmutables.gradle.incremental")
+        }
+    }
 }
 
-// Service implementation projects
-configure(subprojects.findAll { it.name.endsWith('svc') }) {
+// Service implementation or web projects
+configure(subprojects.findAll { it.name.endsWith('svc') || it.name.endsWith('web') }) {
     apply plugin: 'war'
 
     dependencies {
+        // Config
+        implementation 'com.typesafe:config'
+
+        // Guice
+        implementation 'com.google.inject:guice'
+
+        // Jackson
+        implementation 'com.fasterxml.jackson.core:jackson-annotations'
+
+        // Jersey
+        implementation 'org.glassfish.jersey.containers:jersey-container-servlet'
+        implementation 'org.glassfish.jersey.inject:jersey-hk2'
+
         // Immutables
         annotationProcessor 'org.immutables:value'
         compileOnly 'org.immutables:value-annotations'
@@ -247,7 +274,6 @@ configure(subprojects.findAll { it.name.endsWith('svc') }) {
 
         // Project dependencies
         implementation project(':common:common-configuration')
-        implementation project(':common:common-feign')
         implementation project(':common:common-logging')
         annotationProcessor project(':common:common-mapstruct')
         implementation project(':common:common-mapstruct')
@@ -257,9 +283,25 @@ configure(subprojects.findAll { it.name.endsWith('svc') }) {
         implementation project(':common:common-service')
 
         testImplementation project(':common:common-test')
+
+        // JUnit
+        testImplementation 'org.junit.jupiter:junit-jupiter-api'
+        testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine'
+
+        // Hamcrest
+        testImplementation 'org.hamcrest:hamcrest-library'
+
+        // Mockito
+        testImplementation 'org.mockito:mockito-core'
+        testImplementation 'org.mockito:mockito-junit-jupiter'
     }
 
     tasks {
+        compileJava {
+            // Immutables - Incremental processing (see https://github.com/immutables/immutables/issues/804)
+            options.compilerArgs.add("-Aimmutables.gradle.incremental")
+        }
+
         task explodedWar(type: Copy) {
             group = 'Custom'
             description = 'Copies contents of a WAR into a directory'

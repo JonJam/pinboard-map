@@ -1,0 +1,30 @@
+version: '3'
+services:
+  web:
+    build:
+      context: ..
+      args:
+        VERSION: dev
+
+    container_name: web-$USER
+    hostname: web-$USER
+
+    image: jonjam/pinboard-map-web:master
+
+    ports:
+      - "8032:8032" # HTTP
+      - "8432:8432" # HTTPS
+      - "7032:7032" # JMX
+      - "4032:4032" # DEBUG
+
+    volumes:
+      - ../build/exploded:/usr/local/tomcat/webapps/ROOT
+
+    environment:
+      # Used to determine which environment configuration to load.
+      - ENVIRONMENT=dev
+
+      - SUSPEND_STARTUP=n
+
+      # log4j2: Use dev logging i.e. console.
+      - LOG4J_CONFIGURATION_FILE=log4j2-dev.xml

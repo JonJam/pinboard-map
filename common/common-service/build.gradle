@@ -5,6 +5,9 @@ dependencies {
     // Config
     implementation 'com.typesafe:config'
 
+    // Feign
+    implementation 'io.github.openfeign:feign-core'
+
     // Guice
     implementation 'com.google.inject.extensions:guice-servlet'
     implementation 'org.glassfish.hk2:guice-bridge'
@@ -29,6 +32,7 @@ dependencies {
     // Project dependencies
     implementation project(':common:common-configuration')
     implementation project(':common:common-database')
+    implementation project(':common:common-feign')
     implementation project(':common:common-exception')
     // Used as annotation processor for Immutables custom annotation.
     annotationProcessor project(':common:common-objectmodel')

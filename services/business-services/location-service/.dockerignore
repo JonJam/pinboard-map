@@ -1,0 +1,3 @@
+# Use .dockerignore file to minimise context size (https://docs.docker.com/develop/develop-images/dockerfile_best-practices/#exclude-with-dockerignore)
+*
+!location-svc/build/libs

@@ -10,6 +10,8 @@ import com.jonjam.pinboard.common.service.feature.GuiceFeature;
 import com.jonjam.pinboard.common.service.feature.AutoDatabaseTransactionFeature;
 import com.jonjam.pinboard.common.service.module.DatabaseModule;
 import com.jonjam.pinboard.common.service.module.ExceptionModule;
+import com.jonjam.pinboard.common.service.module.JsonModule;
+import com.jonjam.pinboard.common.service.module.NoOpModule;
 import com.jonjam.pinboard.common.service.module.ServiceServletModule;
 import com.jonjam.pinboard.common.service.provider.JsonProvider;
 import com.jonjam.pinboard.common.service.provider.ReferenceParamConverterProvider;
@@ -36,6 +38,8 @@ public abstract class ServiceResourceConfig<T extends ServiceConfiguration> exte
     packages(getServiceControllerPackageName());
 
     register(getExceptionMapper());
+
+    addToPostConstruct();
   }
 
   private void registerProviders() {
@@ -55,11 +59,23 @@ public abstract class ServiceResourceConfig<T extends ServiceConfiguration> exte
 
   protected abstract Module getServiceModule();
 
+  protected Module getServiceClientModule(final T config) {
+    return NoOpModule.get();
+  }
+
   protected boolean useDb() {
     return false;
   }
 
+  protected boolean useServiceClient() {
+    return false;
+  }
+
   protected abstract String getServiceControllerPackageName();
+
+  protected void addToPostConstruct() {
+    // NO-OP
+  }
 
   private void registerFeatures() {
     register(createGuiceFeature());
@@ -74,11 +90,16 @@ public abstract class ServiceResourceConfig<T extends ServiceConfiguration> exte
         new ExceptionModule(),
         getConfigurationModule(config),
         getMapperModule(),
+        new JsonModule(),
         getServiceModule(),
         new ServiceServletModule());
 
     if (useDb()) {
       modules.add(new DatabaseModule());
+    }
+
+    if (useServiceClient()) {
+      modules.add(getServiceClientModule(config));
     }
 
     return new GuiceFeature(

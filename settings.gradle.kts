@@ -12,7 +12,8 @@ include("common:common-objectmodel")
 include("common:common-service")
 include("common:common-test")
 
-include("services:location-service:location-api")
-include("services:location-service:location-schema")
-include("services:location-service:location-svc")
-include("services:pinboard-map-web")
+include("services:business-services:location-service:location-api")
+include("services:business-services:location-service:location-schema")
+include("services:business-services:location-service:location-svc")
+
+include("services:edge-services:pinboard-map-web")

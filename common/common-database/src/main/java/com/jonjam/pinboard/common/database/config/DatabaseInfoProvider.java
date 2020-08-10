@@ -43,7 +43,6 @@ public class DatabaseInfoProvider implements Provider<DatabaseInfo> {
             builder.withUsername(databaseConfiguration.getDriverConfiguration().getUsername().get());
             builder.withPassword(databaseConfiguration.getDriverConfiguration().getPassword().get());
         } else {
-            // TODO Implement vault support for credentials.
             throw new IllegalStateException("No database username and password specified.");
         }
 

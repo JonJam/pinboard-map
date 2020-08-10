@@ -4,6 +4,9 @@
 aopalliance:aopalliance:1.0
 ch.qos.logback:logback-classic:1.2.3
 ch.qos.logback:logback-core:1.2.3
+com.fasterxml.jackson.core:jackson-annotations:2.9.8
+com.fasterxml.jackson.core:jackson-core:2.9.8
+com.fasterxml.jackson.core:jackson-databind:2.9.8
 com.github.ben-manes.caffeine:caffeine:2.8.0
 com.google.code.findbugs:jsr305:3.0.2
 com.google.errorprone:error_prone_annotations:2.3.3
